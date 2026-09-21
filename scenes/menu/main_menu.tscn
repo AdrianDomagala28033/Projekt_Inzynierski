@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://uictrs5xu00s" path="res://scripts/MainMenu.cs" id="1_nl8w3"]
 [ext_resource type="PackedScene" uid="uid://b2x50axurbyqv" path="res://scenes/menu/PlayerInfo.tscn" id="2_3rkf3"]
 
-[node name="MainMenu" type="Control" unique_id=852103682 node_paths=PackedStringArray("playerContainer", "MenuButtons", "MenuView", "Lobby", "JoinPanel", "CreatePanel", "CreateGameMenuButton", "JoinGameMenuButton", "QuitGameMenuButton", "PlayerName", "HostName", "LobbyCode", "Join", "Create")]
+[node name="MainMenu" type="Control" unique_id=852103682 node_paths=PackedStringArray("playerContainer", "MenuButtons", "MenuView", "Lobby", "JoinPanel", "CreatePanel", "CreateGameMenuButton", "JoinGameMenuButton", "QuitGameMenuButton", "PlayerName", "HostName", "LobbyCode", "Join", "Create", "ReadyButton", "StartGame")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -26,6 +26,8 @@ HostName = NodePath("HBoxContainer/MenuView/CreateRequest/VBoxContainer/HostName
 LobbyCode = NodePath("HBoxContainer/MenuView/JoinRequest/VBoxContainer/LobbyCodeLineEdit")
 Join = NodePath("HBoxContainer/MenuView/JoinRequest/VBoxContainer/Button")
 Create = NodePath("HBoxContainer/MenuView/CreateRequest/VBoxContainer/Button")
+ReadyButton = NodePath("HBoxContainer/MenuView/Lobby/HBoxContainer/Ready")
+StartGame = NodePath("HBoxContainer/MenuView/Lobby/HBoxContainer/StartGame")
 
 [node name="Background" type="ColorRect" parent="." unique_id=1765236085]
 layout_mode = 1
@@ -90,6 +92,26 @@ grow_vertical = 2
 size_flags_horizontal = 3
 size_flags_vertical = 0
 alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer/MenuView/Lobby" unique_id=163016728]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -116.0
+offset_top = -40.0
+grow_horizontal = 0
+grow_vertical = 0
+
+[node name="Ready" type="Button" parent="HBoxContainer/MenuView/Lobby/HBoxContainer" unique_id=1881229666]
+layout_mode = 2
+text = "Ready"
+
+[node name="StartGame" type="Button" parent="HBoxContainer/MenuView/Lobby/HBoxContainer" unique_id=559306279]
+layout_mode = 2
+text = "Start game"
 
 [node name="JoinRequest" type="Panel" parent="HBoxContainer/MenuView" unique_id=159974430]
 layout_mode = 1

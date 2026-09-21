@@ -31,12 +31,15 @@ public partial class WorldMap : Node2D
 	private float minZoom = 0.5f;
 	private float maxZoom = 3.0f;
 	private FastNoiseLite noise;
+	private Random rng;
 	public override void _Ready()
 	{
+		var connectionManager = GetNode<ConnectionManager>("/root/ConnectionManager");
+		int globalSeed = connectionManager.GlobalMapSeed;
 		noise = new FastNoiseLite();
-		Random rng = new Random();
+		rng = new Random(globalSeed);
 		noise.NoiseType = FastNoiseLite.NoiseTypeEnum.SimplexSmooth;
-		noise.Seed = rng.Next();
+		noise.Seed = globalSeed;
 		noise.Frequency = 0.05f;
 
 		worldMap = new Tiles[worldWidth, worldHeight];
@@ -79,7 +82,6 @@ public partial class WorldMap : Node2D
 
 	private void DrawGround()
 	{
-		Random rng = new Random();
 		for (int x = 0; x < worldWidth; x++)
 		{
 			for (int y = 0; y < worldHeight; y++)
@@ -149,7 +151,6 @@ public partial class WorldMap : Node2D
 	private void GeneratePath(int maxSteps, Vector2I position)
 	{
 		Vector2I direction = new Vector2I(0,1);
-		Random random = new Random();
 		Vector2I[] directions = {new Vector2I(1,0), new Vector2I(-1,0), new Vector2I(0,1), new Vector2I(0, -1)};
 		for (int i = 0; i < maxSteps; i++)
 		{
@@ -164,13 +165,13 @@ public partial class WorldMap : Node2D
 							worldMap[x, y] = 0; //0 oznacza trawe
 				}
 			}
-			float decision = random.Next(0, 101);
+			float decision = rng.Next(0, 101);
 			if(decision <= 25)
-				direction = directions[random.Next(0, directions.Length)];
+				direction = directions[rng.Next(0, directions.Length)];
 			if ((position + direction).X < worldWidth && (position + direction).Y < worldHeight && (position + direction).X >= 0 && (position + direction).Y >= 0)
 				position += direction;
 			else
-				direction = directions[random.Next(0, directions.Length)];
+				direction = directions[rng.Next(0, directions.Length)];
 		}
 	}
 
@@ -238,7 +239,6 @@ public partial class WorldMap : Node2D
 	private void GenerateResources()
 	{
 		bool[,] occupied = new bool[worldWidth, worldHeight];
-		Random rng = new Random();
 		FastNoiseLite biomeNoise = new FastNoiseLite();
 		biomeNoise.NoiseType = FastNoiseLite.NoiseTypeEnum.SimplexSmooth;
 		biomeNoise.Frequency = 0.02f;

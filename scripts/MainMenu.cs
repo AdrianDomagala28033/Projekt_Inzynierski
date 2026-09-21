@@ -1,5 +1,6 @@
 using Godot;
 using System;
+using System.Linq;
 
 public partial class MainMenu : Control
 {
@@ -18,6 +19,8 @@ public partial class MainMenu : Control
 	[Export] public LineEdit LobbyCode;
 	[Export] public Button Join;
 	[Export] public Button Create;
+	[Export] public Button ReadyButton;
+	[Export] public Button StartGame;
 	public ConnectionManager connectionManager;
 	
 
@@ -27,11 +30,34 @@ public partial class MainMenu : Control
 		Lobby.Visible = false;
 		JoinPanel.Visible = false;
 		CreatePanel.Visible = false;
-		CreateGameMenuButton.Pressed += OpenCrateGamePanel;
+		CreateGameMenuButton.Pressed += OpenCreateGamePanel;
 		JoinGameMenuButton.Pressed += OpenJoinGamePanel;
 		Join.Pressed += JoinToLobby;
 		Create.Pressed += CreateLobby;
+		ReadyButton.Pressed += SetPlayerReady;
+		StartGame.Pressed += CreateGame;
 		connectionManager.OnPlayerListChanged += RefreshLobby;
+	}
+
+	private void CreateGame()
+	{
+		bool canStart = false;
+		if (Multiplayer.IsServer())
+		{
+			int mapSeed = new Random().Next();
+			foreach (var player in connectionManager.PlayerList)
+			{
+				if(connectionManager.PlayerList.FirstOrDefault(p => p.IsReady) != null)
+					canStart = true;
+				player.IsReady = false;
+			}
+			connectionManager.Rpc(nameof(connectionManager.LoadMap), "res://scenes/World/WorldMap.tscn", mapSeed);
+		}
+	}
+
+	private void SetPlayerReady()
+	{
+		connectionManager.SetAsReady();
 	}
 
 	private void RefreshLobby()
@@ -53,7 +79,16 @@ public partial class MainMenu : Control
 			namePlayerLabel.Text = player.Name;
 			statusPlayerLabel.Text = player.IsReady ? "READY" : "WAITING...";
 			playerContainer.AddChild(newElement);
+
+			if(player.Id == Multiplayer.GetUniqueId())
+				ReadyButton.Text = player.IsReady ? "NOT READY" : "READY";
 		}
+		
+
+		if(connectionManager.PlayerList.Count > 0 && Multiplayer.IsServer())
+			StartGame.Disabled = false;
+		else
+			StartGame.Disabled = true;
 	}
 
 	private void CreateLobby()
@@ -89,7 +124,7 @@ public partial class MainMenu : Control
 	}
 
 
-	private void OpenCrateGamePanel()
+	private void OpenCreateGamePanel()
 	{
 		Lobby.Visible = false;
 		CreatePanel.Visible = true;
