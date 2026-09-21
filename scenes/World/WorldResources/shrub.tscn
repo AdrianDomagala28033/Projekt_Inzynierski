@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://qcn71lcb1icy"]
+
+[ext_resource type="Texture2D" uid="uid://ewpuvjgu2w0y" path="res://assets/shrub.png" id="1_klgsr"]
+
+[node name="Tree" type="Node2D" unique_id=1944336178]
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=2052767900]
+texture = ExtResource("1_klgsr")

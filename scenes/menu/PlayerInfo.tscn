@@ -1,0 +1,28 @@
+[gd_scene format=3 uid="uid://b2x50axurbyqv"]
+
+[node name="PlayerInfo" type="Panel" unique_id=1740806082]
+modulate = Color(0.84263474, 3.5616756e-06, 4.813075e-07, 1)
+custom_minimum_size = Vector2(0, 75)
+offset_right = 800.0
+offset_bottom = 75.0
+
+[node name="PlayerName" type="Label" parent="." unique_id=935300995]
+layout_mode = 1
+anchors_preset = 9
+anchor_bottom = 1.0
+offset_right = 1.0
+grow_vertical = 2
+text = "     Player name"
+vertical_alignment = 1
+
+[node name="PlayerStatus" type="Label" parent="." unique_id=696602583]
+layout_mode = 1
+anchors_preset = 11
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -1.0
+grow_horizontal = 0
+grow_vertical = 2
+text = "Ready     "
+vertical_alignment = 1

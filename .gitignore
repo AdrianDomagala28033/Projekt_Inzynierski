@@ -1,0 +1,12 @@
+# Godot 4
+.godot/
+
+# C# / .NET
+.mono/
+bin/
+obj/
+*.csproj.user
+
+# Eksporty gry
+Export/
+export_presets.cfg

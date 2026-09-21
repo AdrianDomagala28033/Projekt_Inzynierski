@@ -1,0 +1,148 @@
+[gd_scene format=3 uid="uid://bjflko6rbkvw6"]
+
+[ext_resource type="Script" uid="uid://uictrs5xu00s" path="res://scripts/MainMenu.cs" id="1_nl8w3"]
+[ext_resource type="PackedScene" uid="uid://b2x50axurbyqv" path="res://scenes/menu/PlayerInfo.tscn" id="2_3rkf3"]
+
+[node name="MainMenu" type="Control" unique_id=852103682 node_paths=PackedStringArray("playerContainer", "MenuButtons", "MenuView", "Lobby", "JoinPanel", "CreatePanel", "CreateGameMenuButton", "JoinGameMenuButton", "QuitGameMenuButton", "PlayerName", "HostName", "LobbyCode", "Join", "Create")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_nl8w3")
+PlayerTag = ExtResource("2_3rkf3")
+playerContainer = NodePath("HBoxContainer/MenuView/Lobby/PlayerContainer")
+MenuButtons = NodePath("HBoxContainer/MenuButtons")
+MenuView = NodePath("HBoxContainer/MenuView")
+Lobby = NodePath("HBoxContainer/MenuView/Lobby")
+JoinPanel = NodePath("HBoxContainer/MenuView/JoinRequest")
+CreatePanel = NodePath("HBoxContainer/MenuView/CreateRequest")
+CreateGameMenuButton = NodePath("HBoxContainer/MenuButtons/VBoxContainer/CreateGame")
+JoinGameMenuButton = NodePath("HBoxContainer/MenuButtons/VBoxContainer/JoinGame")
+QuitGameMenuButton = NodePath("HBoxContainer/MenuButtons/VBoxContainer/QuitGame")
+PlayerName = NodePath("HBoxContainer/MenuView/JoinRequest/VBoxContainer/PlayerNameLineEdit")
+HostName = NodePath("HBoxContainer/MenuView/CreateRequest/VBoxContainer/HostNameLineEdit")
+LobbyCode = NodePath("HBoxContainer/MenuView/JoinRequest/VBoxContainer/LobbyCodeLineEdit")
+Join = NodePath("HBoxContainer/MenuView/JoinRequest/VBoxContainer/Button")
+Create = NodePath("HBoxContainer/MenuView/CreateRequest/VBoxContainer/Button")
+
+[node name="Background" type="ColorRect" parent="." unique_id=1765236085]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.05490196, 0.05490196, 0.05490196, 1)
+
+[node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=2144863408]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MenuButtons" type="Panel" parent="HBoxContainer" unique_id=614941839]
+layout_mode = 2
+size_flags_horizontal = 0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/MenuButtons" unique_id=1390569632]
+layout_mode = 0
+offset_right = 109.0
+offset_bottom = 648.0
+alignment = 1
+
+[node name="CreateGame" type="Button" parent="HBoxContainer/MenuButtons/VBoxContainer" unique_id=1818435013]
+layout_mode = 2
+text = "Create Game"
+
+[node name="JoinGame" type="Button" parent="HBoxContainer/MenuButtons/VBoxContainer" unique_id=1822061934]
+layout_mode = 2
+text = "Join Game"
+
+[node name="QuitGame" type="Button" parent="HBoxContainer/MenuButtons/VBoxContainer" unique_id=884637160]
+layout_mode = 2
+text = "Quit"
+
+[node name="MenuView" type="Panel" parent="HBoxContainer" unique_id=216784496]
+custom_minimum_size = Vector2(600, 0)
+layout_mode = 2
+size_flags_horizontal = 6
+
+[node name="Lobby" type="Panel" parent="HBoxContainer/MenuView" unique_id=911283925]
+custom_minimum_size = Vector2(600, 0)
+layout_mode = 1
+anchors_preset = 9
+anchor_bottom = 1.0
+grow_vertical = 2
+size_flags_horizontal = 3
+
+[node name="PlayerContainer" type="VBoxContainer" parent="HBoxContainer/MenuView/Lobby" unique_id=960263202]
+custom_minimum_size = Vector2(600, 0)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
+alignment = 1
+
+[node name="JoinRequest" type="Panel" parent="HBoxContainer/MenuView" unique_id=159974430]
+layout_mode = 1
+anchors_preset = 11
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 0
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/MenuView/JoinRequest" unique_id=996918337]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Label" type="Label" parent="HBoxContainer/MenuView/JoinRequest/VBoxContainer" unique_id=1258317421]
+layout_mode = 2
+text = "Join Game"
+
+[node name="PlayerNameLineEdit" type="LineEdit" parent="HBoxContainer/MenuView/JoinRequest/VBoxContainer" unique_id=524579559]
+layout_mode = 2
+placeholder_text = "Your name"
+
+[node name="LobbyCodeLineEdit" type="LineEdit" parent="HBoxContainer/MenuView/JoinRequest/VBoxContainer" unique_id=710572644]
+layout_mode = 2
+placeholder_text = "Lobby code"
+
+[node name="Button" type="Button" parent="HBoxContainer/MenuView/JoinRequest/VBoxContainer" unique_id=447851092]
+layout_mode = 2
+text = "Join"
+
+[node name="CreateRequest" type="Panel" parent="HBoxContainer/MenuView" unique_id=794070757]
+layout_mode = 1
+anchors_preset = 11
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 0
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/MenuView/CreateRequest" unique_id=294415906]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Label" type="Label" parent="HBoxContainer/MenuView/CreateRequest/VBoxContainer" unique_id=1913164893]
+layout_mode = 2
+text = "Create Game"
+
+[node name="HostNameLineEdit" type="LineEdit" parent="HBoxContainer/MenuView/CreateRequest/VBoxContainer" unique_id=335958650]
+layout_mode = 2
+placeholder_text = "Your name"
+
+[node name="Button" type="Button" parent="HBoxContainer/MenuView/CreateRequest/VBoxContainer" unique_id=2011253835]
+layout_mode = 2
+text = "Create"

@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://b8h0e7dscmqjr"]
+
+[ext_resource type="Texture2D" uid="uid://dk3sfdlh1eowq" path="res://assets/berryShrub.png" id="1_imhsh"]
+
+[node name="Tree" type="Node2D" unique_id=1944336178]
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=2052767900]
+texture = ExtResource("1_imhsh")
