@@ -19,17 +19,12 @@ public partial class WorldMap : Node2D
 	[Export] public int brushSize = 5;
 	[Export] public TileMapLayer groundLayer;
 	[Export] public TileMapLayer resourcesLayer;
-	[Export] public Camera2D camera;
 
 	[Export] public PackedScene[] trees;
 	[Export] public PackedScene[] rocks;
 	[Export] public PackedScene[] shrubs;
 
 	private Tiles[,] worldMap;
-	private bool isDragging;
-	private float zoomSpeed = 0.1f;
-	private float minZoom = 0.5f;
-	private float maxZoom = 3.0f;
 	private FastNoiseLite noise;
 	private Random rng;
 	public override void _Ready()
@@ -50,35 +45,7 @@ public partial class WorldMap : Node2D
 		GenerateResources();
 		DrawGround();
 	}
-	public override void _UnhandledInput(InputEvent @event)
-	{
-		if (@event is InputEventMouseButton inputEvent)
-		{
-			if(inputEvent.ButtonIndex == MouseButton.WheelUp)
-				{
-					camera.Zoom += new Vector2(zoomSpeed, zoomSpeed);
-					camera.Zoom = new Vector2(Mathf.Clamp(camera.Zoom.X + zoomSpeed, minZoom, maxZoom), Mathf.Clamp(camera.Zoom.Y + zoomSpeed, minZoom, maxZoom));
-				}
-				if(inputEvent.ButtonIndex == MouseButton.WheelDown)
-				{
-					camera.Zoom -= new Vector2(zoomSpeed, zoomSpeed);
-					Mathf.Clamp(camera.Zoom.X, minZoom, maxZoom);
-					Mathf.Clamp(camera.Zoom.Y, minZoom, maxZoom);
-					//camera.Zoom = new Vector2(Mathf.Clamp(camera.Zoom.X - zoomSpeed, minZoom, maxZoom), Mathf.Clamp(camera.Zoom.Y - zoomSpeed, minZoom, maxZoom));
-				}
-			if(inputEvent.Pressed && inputEvent.ButtonIndex == MouseButton.Middle)
-				isDragging = true;
-				
-			else
-				isDragging = false;
-			
-		}
-		
-		if(@event is InputEventMouseMotion input && isDragging)
-		{
-			camera.Position -= input.Relative/camera.Zoom;
-		}
-	}
+	
 
 	private void DrawGround()
 	{

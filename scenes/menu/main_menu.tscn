@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://bjflko6rbkvw6"]
 
-[ext_resource type="Script" uid="uid://uictrs5xu00s" path="res://scripts/MainMenu.cs" id="1_nl8w3"]
+[ext_resource type="Script" uid="uid://b3pkri2yem41b" path="res://scripts/Menu/MainMenu.cs" id="1_3rkf3"]
 [ext_resource type="PackedScene" uid="uid://b2x50axurbyqv" path="res://scenes/menu/PlayerInfo.tscn" id="2_3rkf3"]
 
 [node name="MainMenu" type="Control" unique_id=852103682 node_paths=PackedStringArray("playerContainer", "MenuButtons", "MenuView", "Lobby", "JoinPanel", "CreatePanel", "CreateGameMenuButton", "JoinGameMenuButton", "QuitGameMenuButton", "PlayerName", "HostName", "LobbyCode", "Join", "Create", "ReadyButton", "StartGame")]
@@ -10,7 +10,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_nl8w3")
+script = ExtResource("1_3rkf3")
 PlayerTag = ExtResource("2_3rkf3")
 playerContainer = NodePath("HBoxContainer/MenuView/Lobby/PlayerContainer")
 MenuButtons = NodePath("HBoxContainer/MenuButtons")

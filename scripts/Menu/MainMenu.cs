@@ -47,8 +47,7 @@ public partial class MainMenu : Control
 			int mapSeed = new Random().Next();
 			foreach (var player in connectionManager.PlayerList)
 			{
-				if(connectionManager.PlayerList.FirstOrDefault(p => p.IsReady) != null)
-					canStart = true;
+				
 				player.IsReady = false;
 			}
 			connectionManager.Rpc(nameof(connectionManager.LoadMap), "res://scenes/World/WorldMap.tscn", mapSeed);

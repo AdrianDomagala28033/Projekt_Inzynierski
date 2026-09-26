@@ -21,8 +21,8 @@ config/icon="res://icon.svg"
 
 [autoload]
 
-ConnectionManager="*uid://dyc1ppu4m2uo7"
-Signaling="*uid://b3rxmctdn7bsf"
+ConnectionManager="*uid://du44vqkiyd1se"
+Signaling="*uid://mk16f6pmryp6"
 
 [dotnet]
 

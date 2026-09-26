@@ -1,12 +1,12 @@
 [gd_scene format=3 uid="uid://c7ihefuax76wn"]
 
 [ext_resource type="Texture2D" uid="uid://chbc8pjpfuu27" path="res://assets/spr_tileset_sunnysideworld_16px.png" id="1_ej7nn"]
-[ext_resource type="Script" uid="uid://bb12pv0nrfo04" path="res://scripts/WorldMap.cs" id="1_fgl0d"]
+[ext_resource type="Script" uid="uid://cilnjtwanmd6j" path="res://scripts/World/WorldMap.cs" id="1_v65lr"]
 [ext_resource type="PackedScene" uid="uid://cwkigi65q0yr3" path="res://scenes/World/WorldResources/tree2.tscn" id="2_0laof"]
 [ext_resource type="PackedScene" uid="uid://71cckw7hkbfs" path="res://scenes/World/WorldResources/tree.tscn" id="2_8rtnk"]
 [ext_resource type="PackedScene" uid="uid://biotqgtuns0y7" path="res://scenes/World/WorldResources/Rock.tscn" id="3_pj4xh"]
 [ext_resource type="PackedScene" uid="uid://b8h0e7dscmqjr" path="res://scenes/World/WorldResources/shrub1.tscn" id="5_dpebi"]
-[ext_resource type="PackedScene" uid="uid://cp6ovgw7qraru" path="res://scenes/World/WorldResources/shrub2.tscn" id="6_qqown"]
+[ext_resource type="Script" uid="uid://cswkax3k52yry" path="res://scenes/World/CameraController.cs" id="7_acudd"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_fgl0d"]
 texture = ExtResource("1_ej7nn")
@@ -1821,15 +1821,15 @@ terrain_set_0/terrain_0/color = Color(0.5, 0.34375, 0.25, 1)
 sources/0 = SubResource("TileSetAtlasSource_fgl0d")
 
 [node name="Node2D" type="Node2D" unique_id=416680859 node_paths=PackedStringArray("groundLayer", "resourcesLayer", "camera")]
-script = ExtResource("1_fgl0d")
-worldWidth = 500
-worldHeight = 700
+script = ExtResource("1_v65lr")
+worldWidth = 200
+worldHeight = 200
 groundLayer = NodePath("GroundLayer")
 resourcesLayer = NodePath("ResourceLayer")
 camera = NodePath("Camera2D")
 trees = Array[PackedScene]([ExtResource("2_0laof"), ExtResource("2_8rtnk")])
 rocks = Array[PackedScene]([ExtResource("3_pj4xh")])
-shrubs = Array[PackedScene]([ExtResource("5_dpebi"), ExtResource("6_qqown")])
+shrubs = Array[PackedScene]([ExtResource("5_dpebi")])
 
 [node name="GroundLayer" type="TileMapLayer" parent="." unique_id=1541644452]
 tile_set = SubResource("TileSet_8rtnk")
@@ -1839,3 +1839,4 @@ tile_set = SubResource("TileSet_8rtnk")
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1132167196]
 position = Vector2(577, 326)
+script = ExtResource("7_acudd")
