@@ -24,6 +24,8 @@ public partial class WorldMap : Node2D
 	[Export] public PackedScene[] rocks;
 	[Export] public PackedScene[] shrubs;
 
+	[Export] public PackedScene playerScene;
+
 	private Tiles[,] worldMap;
 	private FastNoiseLite noise;
 	private Random rng;
@@ -44,6 +46,18 @@ public partial class WorldMap : Node2D
 		GenerateBeach();
 		GenerateResources();
 		DrawGround();
+
+		if (Multiplayer.IsServer())
+		{
+			foreach (var player in connectionManager.PlayerList)
+			{
+				var playerInstance = playerScene.Instantiate<Player>();
+				playerInstance.Name = player.Id.ToString();
+				
+				playerInstance.Position = new Vector2(worldWidth/2*16, worldHeight/2*16);
+				GetNode("PlayersContainer").AddChild(playerInstance);
+			}
+		}
 	}
 	
 

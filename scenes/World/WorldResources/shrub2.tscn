@@ -1,8 +1,9 @@
 [gd_scene format=3 uid="uid://cp6ovgw7qraru"]
 
-[ext_resource type="Texture2D" uid="uid://cchi1yg5abml8" path="res://assets/orangeShrub.png" id="1_cbnis"]
+[ext_resource type="Texture2D" uid="uid://cchi1yg5abml8" path="res://assets/worldAssets/orangeShrub.png" id="1_cbnis"]
 
 [node name="Tree" type="Node2D" unique_id=1944336178]
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=2052767900]
+position = Vector2(0, -10)
 texture = ExtResource("1_cbnis")
