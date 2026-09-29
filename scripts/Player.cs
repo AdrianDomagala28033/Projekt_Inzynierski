@@ -9,6 +9,8 @@ public partial class Player : CharacterBody2D
     [Export] public float speed;
     public override void _Ready()
     {
+        AddToGroup("Players");
+        
         int id = int.Parse(Name);
         SetMultiplayerAuthority(id);
         sprite = GetNodeOrNull<AnimatedSprite2D>("AnimatedSprite2D");

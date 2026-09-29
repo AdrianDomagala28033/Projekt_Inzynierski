@@ -16,26 +16,18 @@ public enum Tiles
 
 public partial class WorldMap : Node2D
 {
-<<<<<<< HEAD:scripts/WorldMap.cs
     [Export] public int worldWidth;
     [Export] public int worldHeight;
     [Export] public int brushSize = 5;
     [Export] public TileMapLayer groundLayer;
     [Export] public TileMapLayer resourcesLayer;
     [Export] public Camera2D camera;
-=======
-	[Export] public int worldWidth;
-	[Export] public int worldHeight;
-	[Export] public int brushSize = 5;
-	[Export] public TileMapLayer groundLayer;
-	[Export] public TileMapLayer resourcesLayer;
->>>>>>> 30d23569a731c1f117e4aae49c048abb20b6f5aa:scripts/World/WorldMap.cs
+    [Export] public PackedScene playerScene;
 
     [Export] public PackedScene[] trees;
     [Export] public PackedScene[] rocks;
     [Export] public PackedScene[] shrubs;
 
-<<<<<<< HEAD:scripts/WorldMap.cs
     private Tiles[,] worldMap;
     public bool[,] OccupiedCells { get; private set; }
     private bool isDragging;
@@ -54,44 +46,6 @@ public partial class WorldMap : Node2D
         noise.NoiseType = FastNoiseLite.NoiseTypeEnum.SimplexSmooth;
         noise.Seed = globalSeed;
         noise.Frequency = 0.05f;
-=======
-	[Export] public PackedScene playerScene;
-
-	private Tiles[,] worldMap;
-	private FastNoiseLite noise;
-	private Random rng;
-	public override void _Ready()
-	{
-		var connectionManager = GetNode<ConnectionManager>("/root/ConnectionManager");
-		int globalSeed = connectionManager.GlobalMapSeed;
-		noise = new FastNoiseLite();
-		rng = new Random(globalSeed);
-		noise.NoiseType = FastNoiseLite.NoiseTypeEnum.SimplexSmooth;
-		noise.Seed = globalSeed;
-		noise.Frequency = 0.05f;
-
-		worldMap = new Tiles[worldWidth, worldHeight];
-		CleanMap();
-		GeneratePath((worldHeight*worldWidth)/2, new Vector2I((int)worldWidth/2, (int)worldHeight/2));
-		SmoothMap();
-		GenerateBeach();
-		GenerateResources();
-		DrawGround();
-
-		if (Multiplayer.IsServer())
-		{
-			foreach (var player in connectionManager.PlayerList)
-			{
-				var playerInstance = playerScene.Instantiate<Player>();
-				playerInstance.Name = player.Id.ToString();
-				
-				playerInstance.Position = new Vector2(worldWidth/2*16, worldHeight/2*16);
-				GetNode("PlayersContainer").AddChild(playerInstance);
-			}
-		}
-	}
-	
->>>>>>> 30d23569a731c1f117e4aae49c048abb20b6f5aa:scripts/World/WorldMap.cs
 
         worldMap = new Tiles[worldWidth, worldHeight];
         OccupiedCells = new bool[worldWidth, worldHeight];
@@ -103,8 +57,20 @@ public partial class WorldMap : Node2D
         GenerateResources();
         DrawGround();
 
-		var aiManager = GetNode<AiGridManager>("AiGridManager");
-		aiManager.Initialize(this);
+        var aiManager = GetNode<AiGridManager>("AiGridManager");
+        aiManager.Initialize(this);
+
+        if (Multiplayer.IsServer())
+        {
+            foreach (var player in connectionManager.PlayerList)
+            {
+                var playerInstance = playerScene.Instantiate<Player>();
+                playerInstance.Name = player.Id.ToString();
+                
+                playerInstance.Position = new Vector2(worldWidth/2*16, worldHeight/2*16);
+                GetNode("PlayersContainer").AddChild(playerInstance);
+            }
+        }
     }
 
     public override void _UnhandledInput(InputEvent @event)
@@ -112,23 +78,20 @@ public partial class WorldMap : Node2D
         if (@event is InputEventMouseButton inputEvent)
         {
             if(inputEvent.ButtonIndex == MouseButton.WheelUp)
-                {
-                    camera.Zoom += new Vector2(zoomSpeed, zoomSpeed);
-                    camera.Zoom = new Vector2(Mathf.Clamp(camera.Zoom.X + zoomSpeed, minZoom, maxZoom), Mathf.Clamp(camera.Zoom.Y + zoomSpeed, minZoom, maxZoom));
-                }
-                if(inputEvent.ButtonIndex == MouseButton.WheelDown)
-                {
-                    camera.Zoom -= new Vector2(zoomSpeed, zoomSpeed);
-                    Mathf.Clamp(camera.Zoom.X, minZoom, maxZoom);
-                    Mathf.Clamp(camera.Zoom.Y, minZoom, maxZoom);
-                    //camera.Zoom = new Vector2(Mathf.Clamp(camera.Zoom.X - zoomSpeed, minZoom, maxZoom), Mathf.Clamp(camera.Zoom.Y - zoomSpeed, minZoom, maxZoom));
-                }
+            {
+                camera.Zoom += new Vector2(zoomSpeed, zoomSpeed);
+                camera.Zoom = new Vector2(Mathf.Clamp(camera.Zoom.X + zoomSpeed, minZoom, maxZoom), Mathf.Clamp(camera.Zoom.Y + zoomSpeed, minZoom, maxZoom));
+            }
+            if(inputEvent.ButtonIndex == MouseButton.WheelDown)
+            {
+                camera.Zoom -= new Vector2(zoomSpeed, zoomSpeed);
+                Mathf.Clamp(camera.Zoom.X, minZoom, maxZoom);
+                Mathf.Clamp(camera.Zoom.Y, minZoom, maxZoom);
+            }
             if(inputEvent.Pressed && inputEvent.ButtonIndex == MouseButton.Middle)
                 isDragging = true;
-                
             else
                 isDragging = false;
-            
         }
         
         if(@event is InputEventMouseMotion input && isDragging)
