@@ -23,6 +23,7 @@ config/icon="res://icon.svg"
 
 ConnectionManager="*uid://du44vqkiyd1se"
 Signaling="*uid://mk16f6pmryp6"
+GameManager="*uid://cyyjfmlngicnw"
 
 [dotnet]
 

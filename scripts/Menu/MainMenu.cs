@@ -50,7 +50,7 @@ public partial class MainMenu : Control
 				
 				player.IsReady = false;
 			}
-			connectionManager.Rpc(nameof(connectionManager.LoadMap), "res://scenes/World/WorldMap.tscn", mapSeed);
+			connectionManager.Rpc(nameof(connectionManager.LoadMap), "res://scenes/Main.tscn", mapSeed);
 		}
 	}
 
