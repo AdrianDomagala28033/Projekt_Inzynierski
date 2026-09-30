@@ -24,8 +24,6 @@ public partial class WorldMap : Node2D
 	[Export] public PackedScene[] rocks;
 	[Export] public PackedScene[] shrubs;
 
-	[Export] public PackedScene playerScene;
-
 	private Tiles[,] worldMap;
 	private FastNoiseLite noise;
 	private Random rng;
@@ -44,20 +42,10 @@ public partial class WorldMap : Node2D
 		GeneratePath((worldHeight*worldWidth)/2, new Vector2I((int)worldWidth/2, (int)worldHeight/2));
 		SmoothMap();
 		GenerateBeach();
-		GenerateResources();
+		if(Multiplayer.IsServer())
+			GenerateResources();
 		DrawGround();
 
-		if (Multiplayer.IsServer())
-		{
-			foreach (var player in connectionManager.PlayerList)
-			{
-				var playerInstance = playerScene.Instantiate<Player>();
-				playerInstance.Name = player.Id.ToString();
-				
-				playerInstance.Position = new Vector2(worldWidth/2*16, worldHeight/2*16);
-				GetNode("PlayersContainer").AddChild(playerInstance);
-			}
-		}
 	}
 	
 
@@ -242,7 +230,7 @@ public partial class WorldMap : Node2D
 							{
 								var instance = trees[1].Instantiate<Node2D>();
 								instance.Position = resourcesLayer.MapToLocal(new Vector2I(x, y));
-								AddChild(instance);
+								GetNode("ResourcesManager/ResourcesContainer").AddChild(instance);
 								for (int i = x; i <= x+1; i++)
 									for (int j = y; j <= y+1; j++)
 										if(i < worldWidth && j < worldHeight)
@@ -260,7 +248,7 @@ public partial class WorldMap : Node2D
 							{
 								var instance = rocks[rng.Next(0, rocks.Length)].Instantiate<Node2D>();
 								instance.Position = resourcesLayer.MapToLocal(new Vector2I(x, y));
-								AddChild(instance);
+								GetNode("ResourcesManager/ResourcesContainer").AddChild(instance);
 								for (int i = x; i <= x+1; i++)
 									for (int j = y; j <= y+1; j++)
 										if(i < worldWidth && j < worldHeight)
