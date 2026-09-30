@@ -9,12 +9,14 @@ public partial class Enemy : CharacterBody2D
     private List<Vector2I> _currentPath;
     private int _currentPathIndex = 0;
 
+    private AnimatedSprite2D _animatedSprite;
+
     public override void _Ready()
     {
-        // Wróg szuka menedżera względem swojej pozycji w drzewie sceny
+        _animatedSprite = GetNode<AnimatedSprite2D>("AnimatedSprite2D");
+
         _aiManager = GetNodeOrNull<AiGridManager>("../../AiGridManager");
         
-        // Zabezpieczenie (fallback)
         if (_aiManager == null)
         {
             _aiManager = GetTree().Root.GetNodeOrNull<AiGridManager>("WorldMap/AiSystem/AiGridManager");
@@ -28,33 +30,46 @@ public partial class Enemy : CharacterBody2D
 
     public override void _PhysicsProcess(double delta)
     {
-        // Jeśli nie ma ścieżki lub dotarliśmy do końca, zatrzymaj się
         if (_currentPath == null || _currentPathIndex >= _currentPath.Count)
         {
             Velocity = Vector2.Zero;
+
+            if (_animatedSprite != null)
+            {
+                _animatedSprite.Stop();
+            }
+
             return; 
         }
 
         float tileSize = 16.0f; 
         
-        // Pobierz aktualny punkt docelowy ze ścieżki i zamień na piksele (+ środek kafelka)
         Vector2I currentTargetGridPos = _currentPath[_currentPathIndex];
         Vector2 targetPixelPos = new Vector2(currentTargetGridPos.X * tileSize, currentTargetGridPos.Y * tileSize) + new Vector2(tileSize / 2, tileSize / 2);
 
-        // Oblicz dystans
         float distanceToTarget = GlobalPosition.DistanceTo(targetPixelPos);
 
-        // Jeśli jesteśmy blisko środka kratki, przejdź do następnego punktu ścieżki
         if (distanceToTarget < 2.0f)
         {
             _currentPathIndex++;
         }
         else
         {
-            // W przeciwnym razie idź prosto do celu
             Vector2 direction = (targetPixelPos - GlobalPosition).Normalized();
             Velocity = direction * Speed;
             MoveAndSlide();
+
+            _animatedSprite.Play("run");
+
+  
+            if (direction.X < -0.1f)
+            {
+                _animatedSprite.FlipH = true;
+            }
+            else if (direction.X > 0.1f)
+            {
+                _animatedSprite.FlipH = false;
+            }
         }
     }
 

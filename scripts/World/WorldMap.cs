@@ -29,10 +29,6 @@ public partial class WorldMap : Node2D
 	[Export] public PackedScene[] shrubs;
 
     private Tiles[,] worldMap;
-    private bool isDragging;
-    private float zoomSpeed = 0.1f;
-    private float minZoom = 0.5f;
-    private float maxZoom = 3.0f;
     private FastNoiseLite noise;
     private Random rng;
 

@@ -130,4 +130,8 @@ public partial class MainMenu : Control
 		JoinPanel.Visible = false;
 	}
 
+public void _on_poligon_game_pressed()
+{
+    GetTree().ChangeSceneToFile("res://scenes/AI/AiTestGround.tscn");
+}
 }

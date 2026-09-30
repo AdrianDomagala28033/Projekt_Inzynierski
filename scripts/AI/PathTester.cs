@@ -11,7 +11,6 @@ public partial class PathTester : Node2D
     
     private const int TileSize = 16;
 
-    // NOWE ZMIENNE DLA WROGA
     private PackedScene _enemyScene;
     private Enemy _currentTestEnemy;
 
@@ -19,7 +18,6 @@ public partial class PathTester : Node2D
     {
         _aiManager = GetNode<AiGridManager>("../AiGridManager");
         
-        // Ładowanie sceny przeciwnika (upewnij się, że ścieżka do pliku jest poprawna)
         _enemyScene = GD.Load<PackedScene>("res://scenes/AI/Enemy.tscn");
     }
 
@@ -53,7 +51,6 @@ public partial class PathTester : Node2D
 
             QueueRedraw();
 
-            // Jeśli ścieżka istnieje, spawniemy wroga
             if (_currentPath != null && _currentPath.Count > 0)
             {
                 SpawnAndMoveEnemy();
@@ -63,23 +60,18 @@ public partial class PathTester : Node2D
 
     private void SpawnAndMoveEnemy()
     {
-        // Jeśli na mapie jest już jakiś testowy przeciwnik, usuwamy go
         if (_currentTestEnemy != null && IsInstanceValid(_currentTestEnemy))
         {
             _currentTestEnemy.QueueFree();
         }
 
-        // Tworzymy nowego przeciwnika z załadowanej sceny
         _currentTestEnemy = _enemyScene.Instantiate<Enemy>();
         
-        // Ustawiamy go na pozycji startowej (zielone kółko, przeliczone na piksele)
         Vector2 startPixelPos = new Vector2(_startPos.X * TileSize + (TileSize / 2f), _startPos.Y * TileSize + (TileSize / 2f));
         _currentTestEnemy.GlobalPosition = startPixelPos;
 
-        // Dodajemy go do drzewa sceny, żeby zaczął żyć
         AddChild(_currentTestEnemy);
 
-        // Wysyłamy go do celu
         _currentTestEnemy.MoveToTarget(_startPos, _targetPos);
     }
 

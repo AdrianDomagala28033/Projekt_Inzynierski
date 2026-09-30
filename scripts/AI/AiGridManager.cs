@@ -11,6 +11,10 @@ public partial class AiGridManager : Node
     private int _width;
     private int _height;
 
+    private bool _isTestMode = false;
+    private bool[,] _testObstacles;
+
+    // --- INICJALIZACJA GŁÓWNEJ GRY ---
     public void Initialize(WorldMap map)
     {
         _worldMap = map;
@@ -18,14 +22,31 @@ public partial class AiGridManager : Node
         _height = map.worldHeight;
 
         Heatmap = new int[_width, _height];
-        OccupiedCells = new bool[_width, _height]; // Inicjalizacja tablicy
+        OccupiedCells = new bool[_width, _height];
         GD.Print($"[AI] AIGridManager gotowy! Wymiary siatki: {_width}x{_height}");    
+    }
+
+    // --- INICJALIZACJA POLIGONU TESTOWEGO ---
+    public void InitializeTestMode(int width, int height, bool[,] obstacles)
+    {
+        _width = width;
+        _height = height;
+        _testObstacles = obstacles;
+        _isTestMode = true;
+        
+        Heatmap = new int[_width, _height];
+        OccupiedCells = new bool[_width, _height];
     }
 
     public bool IsCellWalkable(int x, int y)
     {
         if (x < 0 || x >= _width || y < 0 || y >= _height)
             return false;
+
+        if (_isTestMode)
+        {
+            return !_testObstacles[x, y];
+        }
 
         if (_worldMap.GetTile(x, y) == Tiles.water)
             return false;
@@ -99,7 +120,10 @@ public partial class AiGridManager : Node
                 return RetracePath(startNode, currentNode);
             }
 
-            Vector2I[] directions = { new Vector2I(0, 1), new Vector2I(0, -1), new Vector2I(1, 0), new Vector2I(-1, 0) };
+            Vector2I[] directions = { 
+                new Vector2I(0, 1), new Vector2I(0, -1), new Vector2I(1, 0), new Vector2I(-1, 0),
+                new Vector2I(1, 1), new Vector2I(1, -1), new Vector2I(-1, 1), new Vector2I(-1, -1) 
+            };
             
             foreach (var dir in directions)
             {
@@ -110,8 +134,19 @@ public partial class AiGridManager : Node
                     continue;
                 }
 
+                if (dir.X != 0 && dir.Y != 0)
+                {
+                    if (!IsCellWalkable(currentNode.Position.X + dir.X, currentNode.Position.Y) || 
+                        !IsCellWalkable(currentNode.Position.X, currentNode.Position.Y + dir.Y))
+                    {
+                        continue; 
+                    }
+                }
+
                 int heatPenalty = Heatmap[neighborPos.X, neighborPos.Y];
-                int newMovementCostToNeighbor = currentNode.GCost + 10 + heatPenalty;
+                
+                int moveCost = (dir.X != 0 && dir.Y != 0) ? 14 : 10;
+                int newMovementCostToNeighbor = currentNode.GCost + moveCost + heatPenalty;
 
                 PathNode neighborNode = null;
                 foreach (var node in openList)
