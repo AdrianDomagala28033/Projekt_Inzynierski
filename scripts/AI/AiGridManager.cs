@@ -6,6 +6,7 @@ public partial class AiGridManager : Node
 {
     private WorldMap _worldMap;
     public int[,] Heatmap { get; private set; }
+    public bool[,] OccupiedCells { get; private set; } 
 
     private int _width;
     private int _height;
@@ -17,7 +18,9 @@ public partial class AiGridManager : Node
         _height = map.worldHeight;
 
         Heatmap = new int[_width, _height];
-        GD.Print($"[AI] AIGridManager gotowy! Wymiary siatki: {_width}x{_height}");    }
+        OccupiedCells = new bool[_width, _height]; // Inicjalizacja tablicy
+        GD.Print($"[AI] AIGridManager gotowy! Wymiary siatki: {_width}x{_height}");    
+    }
 
     public bool IsCellWalkable(int x, int y)
     {
@@ -27,7 +30,7 @@ public partial class AiGridManager : Node
         if (_worldMap.GetTile(x, y) == Tiles.water)
             return false;
 
-        if (_worldMap.OccupiedCells[x, y])
+        if (OccupiedCells[x, y])
             return false;
 
         return true;

@@ -29,7 +29,6 @@ public partial class WorldMap : Node2D
     [Export] public PackedScene[] shrubs;
 
     private Tiles[,] worldMap;
-    public bool[,] OccupiedCells { get; private set; }
     private bool isDragging;
     private float zoomSpeed = 0.1f;
     private float minZoom = 0.5f;
@@ -48,7 +47,6 @@ public partial class WorldMap : Node2D
         noise.Frequency = 0.05f;
 
         worldMap = new Tiles[worldWidth, worldHeight];
-        OccupiedCells = new bool[worldWidth, worldHeight];
 
         CleanMap();
         GeneratePath((worldHeight*worldWidth)/2, new Vector2I((int)worldWidth/2, (int)worldHeight/2));
@@ -56,9 +54,6 @@ public partial class WorldMap : Node2D
         GenerateBeach();
         GenerateResources();
         DrawGround();
-
-        var aiManager = GetNode<AiGridManager>("AiGridManager");
-        aiManager.Initialize(this);
 
         if (Multiplayer.IsServer())
         {
@@ -70,6 +65,12 @@ public partial class WorldMap : Node2D
                 playerInstance.Position = new Vector2(worldWidth/2*16, worldHeight/2*16);
                 GetNode("PlayersContainer").AddChild(playerInstance);
             }
+        }
+
+        var aiGridManager = GetNode<AiGridManager>("AiSystem/AiGridManager");
+        if (aiGridManager != null)
+        {
+            aiGridManager.Initialize(this);
         }
     }
 
@@ -109,9 +110,9 @@ public partial class WorldMap : Node2D
                 if(worldMap[x, y] == Tiles.grass)
                 {
                     float value = noise.GetNoise2D(x, y);
-                    if(value >= -0.4 && value <= 0.4) //grass
+                    if(value >= -0.4 && value <= 0.4)
                         groundLayer.SetCell(new Vector2I(x, y), 0, new Vector2I(0,3));
-                    else if(value < -0.4) //darkGrass
+                    else if(value < -0.4)
                     {
                         List<Vector2I> darkGrass = new List<Vector2I>();
                         darkGrass.Add(new Vector2I(4,2));
@@ -119,7 +120,7 @@ public partial class WorldMap : Node2D
                         darkGrass.Add(new Vector2I(6,2));
                         groundLayer.SetCell(new Vector2I(x, y), 0, darkGrass[rng.Next(0, 3)]);
                     }
-                    else if(value > 0.4) //lightGrass
+                    else if(value > 0.4)
                     {
                         List<Vector2I> darkGrass = new List<Vector2I>();
                         darkGrass.Add(new Vector2I(1,2));
@@ -131,7 +132,6 @@ public partial class WorldMap : Node2D
                         darkGrass.Add(new Vector2I(2,4));
                         groundLayer.SetCell(new Vector2I(x, y), 0, darkGrass[rng.Next(0, 7)]);
                     }
-                        
                 }
                 else if(worldMap[x, y] == Tiles.water)
                 {
@@ -159,13 +159,8 @@ public partial class WorldMap : Node2D
                         groundLayer.SetCell(new Vector2I(x, y), 0, darkGrass[rng.Next(0, 2)]);
                     }
                 }
-                
             }
         }
-    }
-    private void DrawResources()
-    {
-        
     }
 
     private void GeneratePath(int maxSteps, Vector2I position)
@@ -182,7 +177,7 @@ public partial class WorldMap : Node2D
                     int dy = y - position.Y;
                     if(x < worldWidth && x >= 0 && y < worldHeight && y >= 0)
                         if((dx*dx) + (dy*dy) <= (brushSize*brushSize))
-                            worldMap[x, y] = 0; //0 oznacza trawe
+                            worldMap[x, y] = 0;
                 }
             }
             float decision = rng.Next(0, 101);
@@ -202,10 +197,10 @@ public partial class WorldMap : Node2D
             for (int y = 0; y < worldHeight; y++)
             {
                 worldMap[x, y] = Tiles.water;
-
             }
         }
     }
+
     public void SmoothMap()
     {
         Tiles[,] tempMap = (Tiles[,])worldMap.Clone();
@@ -224,11 +219,12 @@ public partial class WorldMap : Node2D
                 }
                 if(tempMap[x, y] == Tiles.water && blocksAround >= 3)
                     worldMap[x,y] = Tiles.grass;
-                if(tempMap[x, y] == Tiles.grass && blocksAround <3)
+                if(tempMap[x, y] == Tiles.grass && blocksAround < 3)
                     worldMap[x,y] = Tiles.water;
             }
         }
     }
+
     private void GenerateBeach()
     {
         Tiles[,] tempMap = (Tiles[,])worldMap.Clone();
@@ -250,12 +246,12 @@ public partial class WorldMap : Node2D
                                     if(tempMap[dx,dy] == Tiles.grass)
                                         worldMap[dx, dy] = Tiles.sand;
                         }
-                        
                     }
                 }
             }
         }
     }
+
     private void GenerateResources()
     {
         FastNoiseLite biomeNoise = new FastNoiseLite();
@@ -276,17 +272,9 @@ public partial class WorldMap : Node2D
                         int chance = rng.Next(1, 100);
                         if (chance <= 70)
                         {
-                            if (!OccupiedCells[x, y])
-                            {
-                                var instance = trees[1].Instantiate<Node2D>();
-                                instance.Position = resourcesLayer.MapToLocal(new Vector2I(x, y));
-                                AddChild(instance);
-                                for (int i = x; i <= x+1; i++)
-                                    for (int j = y; j <= y+1; j++)
-                                        if(i < worldWidth && j < worldHeight)
-                                            OccupiedCells[i,j] = true;
-                            }
-                            
+                            var instance = trees[1].Instantiate<Node2D>();
+                            instance.Position = resourcesLayer.MapToLocal(new Vector2I(x, y));
+                            AddChild(instance);
                         }
                     }
                     if(value < -0.45f)
@@ -294,20 +282,10 @@ public partial class WorldMap : Node2D
                         int chance = rng.Next(1, 100);
                         if (chance <= 30)
                         {
-                            if (!OccupiedCells[x, y])
-                            {
-                                var instance = rocks[rng.Next(0, rocks.Length)].Instantiate<Node2D>();
-                                instance.Position = resourcesLayer.MapToLocal(new Vector2I(x, y));
-                                AddChild(instance);
-                                for (int i = x; i <= x+1; i++)
-                                    for (int j = y; j <= y+1; j++)
-                                        if(i < worldWidth && j < worldHeight)
-                                            OccupiedCells[i,j] = true;
-                                
-                            }
-                            
+                            var instance = rocks[rng.Next(0, rocks.Length)].Instantiate<Node2D>();
+                            instance.Position = resourcesLayer.MapToLocal(new Vector2I(x, y));
+                            AddChild(instance);
                         }
-                        
                     }
                 }
             }
