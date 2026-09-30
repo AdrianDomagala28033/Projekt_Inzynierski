@@ -1,0 +1,9 @@
+[gd_scene format=3 uid="uid://dc3kngfu8i0he"]
+
+[node name="ResourcesManager" type="Node2D" unique_id=1746399927]
+
+[node name="ResourcesContainer" type="Node2D" parent="." unique_id=2119292786]
+y_sort_enabled = true
+
+[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="." unique_id=1628686367]
+spawn_path = NodePath("../ResourcesContainer")

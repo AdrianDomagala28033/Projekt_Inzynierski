@@ -1,0 +1,15 @@
+[gd_scene format=3 uid="uid://byvlls4ws0ytv"]
+
+[ext_resource type="Script" uid="uid://dud7pkip86wy0" path="res://scripts/Player/PlayersManager.cs" id="1_t6krt"]
+[ext_resource type="PackedScene" uid="uid://biaowwtu320lu" path="res://scenes/player/player.tscn" id="2_6cnty"]
+
+[node name="PlayersManager" type="Node2D" unique_id=1839558317]
+y_sort_enabled = true
+script = ExtResource("1_t6krt")
+playerScene = ExtResource("2_6cnty")
+
+[node name="PlayersContainer" type="Node2D" parent="." unique_id=1626082542]
+y_sort_enabled = true
+
+[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="." unique_id=1927722855]
+spawn_path = NodePath("../PlayersContainer")

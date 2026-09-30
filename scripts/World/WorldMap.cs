@@ -24,9 +24,9 @@ public partial class WorldMap : Node2D
     [Export] public Camera2D camera;
     [Export] public PackedScene playerScene;
 
-    [Export] public PackedScene[] trees;
-    [Export] public PackedScene[] rocks;
-    [Export] public PackedScene[] shrubs;
+	[Export] public PackedScene[] trees;
+	[Export] public PackedScene[] rocks;
+	[Export] public PackedScene[] shrubs;
 
     private Tiles[,] worldMap;
     private bool isDragging;
@@ -46,60 +46,17 @@ public partial class WorldMap : Node2D
         noise.Seed = globalSeed;
         noise.Frequency = 0.05f;
 
-        worldMap = new Tiles[worldWidth, worldHeight];
+		worldMap = new Tiles[worldWidth, worldHeight];
+		CleanMap();
+		GeneratePath((worldHeight*worldWidth)/2, new Vector2I((int)worldWidth/2, (int)worldHeight/2));
+		SmoothMap();
+		GenerateBeach();
+		if(Multiplayer.IsServer())
+			GenerateResources();
+		DrawGround();
 
-        CleanMap();
-        GeneratePath((worldHeight*worldWidth)/2, new Vector2I((int)worldWidth/2, (int)worldHeight/2));
-        SmoothMap();
-        GenerateBeach();
-        GenerateResources();
-        DrawGround();
-
-        if (Multiplayer.IsServer())
-        {
-            foreach (var player in connectionManager.PlayerList)
-            {
-                var playerInstance = playerScene.Instantiate<Player>();
-                playerInstance.Name = player.Id.ToString();
-                
-                playerInstance.Position = new Vector2(worldWidth/2*16, worldHeight/2*16);
-                GetNode("PlayersContainer").AddChild(playerInstance);
-            }
-        }
-
-        var aiGridManager = GetNode<AiGridManager>("AiSystem/AiGridManager");
-        if (aiGridManager != null)
-        {
-            aiGridManager.Initialize(this);
-        }
-    }
-
-    public override void _UnhandledInput(InputEvent @event)
-    {
-        if (@event is InputEventMouseButton inputEvent)
-        {
-            if(inputEvent.ButtonIndex == MouseButton.WheelUp)
-            {
-                camera.Zoom += new Vector2(zoomSpeed, zoomSpeed);
-                camera.Zoom = new Vector2(Mathf.Clamp(camera.Zoom.X + zoomSpeed, minZoom, maxZoom), Mathf.Clamp(camera.Zoom.Y + zoomSpeed, minZoom, maxZoom));
-            }
-            if(inputEvent.ButtonIndex == MouseButton.WheelDown)
-            {
-                camera.Zoom -= new Vector2(zoomSpeed, zoomSpeed);
-                Mathf.Clamp(camera.Zoom.X, minZoom, maxZoom);
-                Mathf.Clamp(camera.Zoom.Y, minZoom, maxZoom);
-            }
-            if(inputEvent.Pressed && inputEvent.ButtonIndex == MouseButton.Middle)
-                isDragging = true;
-            else
-                isDragging = false;
-        }
-        
-        if(@event is InputEventMouseMotion input && isDragging)
-        {
-            camera.Position -= input.Relative/camera.Zoom;
-        }
-    }
+	}
+	
 
     private void DrawGround()
     {
@@ -190,113 +147,133 @@ public partial class WorldMap : Node2D
         }
     }
 
-    public void CleanMap()
-    {
-        for (int x = 0; x < worldWidth; x++)
-        {
-            for (int y = 0; y < worldHeight; y++)
-            {
-                worldMap[x, y] = Tiles.water;
-            }
-        }
-    }
+	public void CleanMap()
+	{
+		for (int x = 0; x < worldWidth; x++)
+		{
+			for (int y = 0; y < worldHeight; y++)
+			{
+				worldMap[x, y] = Tiles.water;
 
-    public void SmoothMap()
-    {
-        Tiles[,] tempMap = (Tiles[,])worldMap.Clone();
-        for (int x = 1; x < worldWidth - 1; x++)
-        {
-            for(int y = 1; y < worldHeight - 1; y++)
-            {
-                int blocksAround = 0;
-                for (int i = x - 1; i <= x+1; i++)
-                {
-                    for (int j = y-1; j <= y+1; j++)
-                    {
-                        if(tempMap[i,j] == Tiles.grass)
-                            blocksAround++;
-                    }
-                }
-                if(tempMap[x, y] == Tiles.water && blocksAround >= 3)
-                    worldMap[x,y] = Tiles.grass;
-                if(tempMap[x, y] == Tiles.grass && blocksAround < 3)
-                    worldMap[x,y] = Tiles.water;
-            }
-        }
-    }
+			}
+		}
+	}
+	public void SmoothMap()
+	{
+		Tiles[,] tempMap = (Tiles[,])worldMap.Clone();
+		for (int x = 1; x < worldWidth - 1; x++)
+		{
+			for(int y = 1; y < worldHeight - 1; y++)
+			{
+				int blocksAround = 0;
+				for (int i = x - 1; i <= x+1; i++)
+				{
+					for (int j = y-1; j <= y+1; j++)
+					{
+						if(tempMap[i,j] == Tiles.grass)
+							blocksAround++;
+					}
+				}
+				if(tempMap[x, y] == Tiles.water && blocksAround >= 3)
+					worldMap[x,y] = Tiles.grass;
+				if(tempMap[x, y] == Tiles.grass && blocksAround <3)
+					worldMap[x,y] = Tiles.water;
+			}
+		}
+	}
+	private void GenerateBeach()
+	{
+		Tiles[,] tempMap = (Tiles[,])worldMap.Clone();
+		int beachBrushSize = 3;
+		for (int x = 1; x < worldWidth - 1; x++)
+		{
+			for(int y = 1; y < worldHeight - 1; y++)
+			{
+				if (tempMap[x,y] == Tiles.grass && (tempMap[x-1,y] == Tiles.water || tempMap[x+1,y] == Tiles.water || tempMap[x,y-1] == Tiles.water || tempMap[x,y+1] == Tiles.water))
+				{
+					for (int i = -beachBrushSize; i <= beachBrushSize; i++)
+					{
+						for (int j = -beachBrushSize; j <= beachBrushSize; j++)
+						{
+							int dx = x + i;
+							int dy = y + j;
+							if(dx < worldWidth && dx >= 0 && dy < worldHeight && dy >= 0)
+								if((i*i) + (j*j) <= (beachBrushSize*beachBrushSize))
+									if(tempMap[dx,dy] == Tiles.grass)
+										worldMap[dx, dy] = Tiles.sand;
+						}
+						
+					}
+				}
+			}
+		}
+	}
+	private void GenerateResources()
+	{
+		bool[,] occupied = new bool[worldWidth, worldHeight];
+		FastNoiseLite biomeNoise = new FastNoiseLite();
+		biomeNoise.NoiseType = FastNoiseLite.NoiseTypeEnum.SimplexSmooth;
+		biomeNoise.Frequency = 0.02f;
+		biomeNoise.Seed = rng.Next();
+		for (int x = 0; x < worldWidth; x++)
+		{
+			for (int y = 0; y < worldHeight; y++)
+			{
+				if(worldMap[x,y] == Tiles.water)
+					continue;
+				if(worldMap[x,y] == Tiles.grass)
+				{
+					float value = biomeNoise.GetNoise2D(x, y);
+					if(value > 0.2f)
+					{
+						int chance = rng.Next(1, 100);
+						if (chance <= 70)
+						{
+							if (!occupied[x, y])
+							{
+								var instance = trees[1].Instantiate<Node2D>();
+								instance.Position = resourcesLayer.MapToLocal(new Vector2I(x, y));
+								GetNode("ResourcesManager/ResourcesContainer").AddChild(instance);
+								for (int i = x; i <= x+1; i++)
+									for (int j = y; j <= y+1; j++)
+										if(i < worldWidth && j < worldHeight)
+											occupied[i,j] = true;
+							}
+							
+						}
+					}
+					if(value < -0.45f)
+					{
+						int chance = rng.Next(1, 100);
+						if (chance <= 30)
+						{
+							if (!occupied[x, y])
+							{
+								var instance = rocks[rng.Next(0, rocks.Length)].Instantiate<Node2D>();
+								instance.Position = resourcesLayer.MapToLocal(new Vector2I(x, y));
+								GetNode("ResourcesManager/ResourcesContainer").AddChild(instance);
+								for (int i = x; i <= x+1; i++)
+									for (int j = y; j <= y+1; j++)
+										if(i < worldWidth && j < worldHeight)
+											occupied[i,j] = true;
+								
+							}
+							
+						}
+						
+					}
+				}
+			}
+		}
+	}
 
-    private void GenerateBeach()
-    {
-        Tiles[,] tempMap = (Tiles[,])worldMap.Clone();
-        int beachBrushSize = 3;
-        for (int x = 1; x < worldWidth - 1; x++)
-        {
-            for(int y = 1; y < worldHeight - 1; y++)
-            {
-                if (tempMap[x,y] == Tiles.grass && (tempMap[x-1,y] == Tiles.water || tempMap[x+1,y] == Tiles.water || tempMap[x,y-1] == Tiles.water || tempMap[x,y+1] == Tiles.water))
-                {
-                    for (int i = -beachBrushSize; i <= beachBrushSize; i++)
-                    {
-                        for (int j = -beachBrushSize; j <= beachBrushSize; j++)
-                        {
-                            int dx = x + i;
-                            int dy = y + j;
-                            if(dx < worldWidth && dx >= 0 && dy < worldHeight && dy >= 0)
-                                if((i*i) + (j*j) <= (beachBrushSize*beachBrushSize))
-                                    if(tempMap[dx,dy] == Tiles.grass)
-                                        worldMap[dx, dy] = Tiles.sand;
-                        }
-                    }
-                }
-            }
-        }
-    }
-
-    private void GenerateResources()
-    {
-        FastNoiseLite biomeNoise = new FastNoiseLite();
-        biomeNoise.NoiseType = FastNoiseLite.NoiseTypeEnum.SimplexSmooth;
-        biomeNoise.Frequency = 0.02f;
-        biomeNoise.Seed = rng.Next();
-        for (int x = 0; x < worldWidth; x++)
-        {
-            for (int y = 0; y < worldHeight; y++)
-            {
-                if(worldMap[x,y] == Tiles.water)
-                    continue;
-                if(worldMap[x,y] == Tiles.grass)
-                {
-                    float value = biomeNoise.GetNoise2D(x, y);
-                    if(value > 0.2f)
-                    {
-                        int chance = rng.Next(1, 100);
-                        if (chance <= 70)
-                        {
-                            var instance = trees[1].Instantiate<Node2D>();
-                            instance.Position = resourcesLayer.MapToLocal(new Vector2I(x, y));
-                            AddChild(instance);
-                        }
-                    }
-                    if(value < -0.45f)
-                    {
-                        int chance = rng.Next(1, 100);
-                        if (chance <= 30)
-                        {
-                            var instance = rocks[rng.Next(0, rocks.Length)].Instantiate<Node2D>();
-                            instance.Position = resourcesLayer.MapToLocal(new Vector2I(x, y));
-                            AddChild(instance);
-                        }
-                    }
-                }
-            }
-        }
-    }
-    
-    public Tiles GetTile(int x, int y)
+        public Tiles GetTile(int x, int y)
     {
         if (x >= 0 && x < worldWidth && y >= 0 && y < worldHeight)
             return worldMap[x, y];
             
         return Tiles.water;
     }
+	
+	
 }
