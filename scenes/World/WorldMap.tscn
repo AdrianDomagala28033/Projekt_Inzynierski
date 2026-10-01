@@ -6,8 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://71cckw7hkbfs" path="res://scenes/World/WorldResources/tree.tscn" id="2_8rtnk"]
 [ext_resource type="PackedScene" uid="uid://biotqgtuns0y7" path="res://scenes/World/WorldResources/Rock.tscn" id="3_pj4xh"]
 [ext_resource type="PackedScene" uid="uid://b8h0e7dscmqjr" path="res://scenes/World/WorldResources/shrub1.tscn" id="5_dpebi"]
-[ext_resource type="PackedScene" uid="uid://biaowwtu320lu" path="res://scenes/player.tscn" id="6_t2fgq"]
-[ext_resource type="Script" uid="uid://cswkax3k52yry" path="res://scripts/World/CameraController.cs" id="7_acudd"]
+[ext_resource type="PackedScene" uid="uid://dc3kngfu8i0he" path="res://scenes/World/resources_manager.tscn" id="7_acudd"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_fgl0d"]
 texture = ExtResource("1_ej7nn")
@@ -1845,7 +1844,6 @@ worldWidth = 200
 worldHeight = 200
 groundLayer = NodePath("GroundLayer")
 resourcesLayer = NodePath("ResourceLayer")
-playerScene = ExtResource("6_t2fgq")
 trees = Array[PackedScene]([ExtResource("2_0laof"), ExtResource("2_8rtnk")])
 rocks = Array[PackedScene]([ExtResource("3_pj4xh")])
 shrubs = Array[PackedScene]([ExtResource("5_dpebi")])
@@ -1858,17 +1856,5 @@ tile_set = SubResource("TileSet_8rtnk")
 y_sort_enabled = true
 tile_set = SubResource("TileSet_8rtnk")
 
-[node name="Camera2D" type="Camera2D" parent="." unique_id=1132167196]
-position = Vector2(577, 326)
-enabled = false
-zoom = Vector2(2, 2)
-script = ExtResource("7_acudd")
-worldHeight = 200
-worldWidth = 200
-
-[node name="PlayersContainer" type="Node2D" parent="." unique_id=1335818120]
+[node name="ResourcesManager" parent="." unique_id=1746399927 instance=ExtResource("7_acudd")]
 y_sort_enabled = true
-
-[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="." unique_id=2101869783]
-_spawnable_scenes = PackedStringArray("uid://biaowwtu320lu")
-spawn_path = NodePath("../PlayersContainer")
