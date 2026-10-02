@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://sl8qkwn8g6q7"
-path="res://.godot/imported/spr_idle_strip9.png-5d47b96c384cd72b3ab10b77a0d6a15c.ctex"
+uid="uid://bn2vegadcewpn"
+path="res://.godot/imported/goblin_hurt_strip.png-3b9a1ce7717e3aeda05ea940a2d4be54.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/testAI/spr_idle_strip9.png"
-dest_files=["res://.godot/imported/spr_idle_strip9.png-5d47b96c384cd72b3ab10b77a0d6a15c.ctex"]
+source_file="res://assets/testAI/Goblin/goblin_hurt_strip.png"
+dest_files=["res://.godot/imported/goblin_hurt_strip.png-3b9a1ce7717e3aeda05ea940a2d4be54.ctex"]
 
 [params]
 
