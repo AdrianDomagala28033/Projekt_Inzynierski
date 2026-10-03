@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cahislialbxfo"
-path="res://.godot/imported/3be2aa9b-d727-4261-8d25-80e846d3189c.png-063a16414459a15636e0c67c221323c3.ctex"
+uid="uid://cg1dkdfvci1su"
+path="res://.godot/imported/lt_box_9slice_c.png-658e5238290f5c8da6f2bf57ed6dc131.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/worldAssets/3be2aa9b-d727-4261-8d25-80e846d3189c.png"
-dest_files=["res://.godot/imported/3be2aa9b-d727-4261-8d25-80e846d3189c.png-063a16414459a15636e0c67c221323c3.ctex"]
+source_file="res://assets/UI/9slice_box_white/lt_box_9slice_c.png"
+dest_files=["res://.godot/imported/lt_box_9slice_c.png-658e5238290f5c8da6f2bf57ed6dc131.ctex"]
 
 [params]
 

@@ -6,4 +6,5 @@
 y_sort_enabled = true
 
 [node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="." unique_id=1628686367]
+_spawnable_scenes = PackedStringArray("uid://71cckw7hkbfs", "uid://biotqgtuns0y7")
 spawn_path = NodePath("../ResourcesContainer")

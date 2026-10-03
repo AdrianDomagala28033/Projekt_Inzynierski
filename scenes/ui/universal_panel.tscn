@@ -1,0 +1,73 @@
+[gd_scene format=3 uid="uid://bb0a1df7f2soc"]
+
+[ext_resource type="Texture2D" uid="uid://kywbv27808mq" path="res://assets/UI/9slice_box_white/dt_box_9slice_tl.png" id="1_er5v0"]
+[ext_resource type="Texture2D" uid="uid://bv8bfoqrlmmuj" path="res://assets/UI/9slice_box_white/dt_box_9slice_tc.png" id="2_mc30a"]
+[ext_resource type="Texture2D" uid="uid://d0sg2fvl8nfdd" path="res://assets/UI/9slice_box_white/dt_box_9slice_tr.png" id="3_7km03"]
+[ext_resource type="Texture2D" uid="uid://bpusveu0khvl5" path="res://assets/UI/9slice_box_white/dt_box_9slice_lc.png" id="4_kcxuh"]
+[ext_resource type="Texture2D" uid="uid://du5vc58oivtue" path="res://assets/UI/9slice_box_white/dt_box_9slice_c.png" id="5_60gl8"]
+[ext_resource type="Texture2D" uid="uid://bladww180sqa3" path="res://assets/UI/9slice_box_white/dt_box_9slice_rc.png" id="6_s6w7e"]
+[ext_resource type="Texture2D" uid="uid://bn63dwdb3liks" path="res://assets/UI/9slice_box_white/dt_box_9slice_bl.png" id="7_gmo2y"]
+[ext_resource type="Texture2D" uid="uid://uicxdurac5dr" path="res://assets/UI/9slice_box_white/dt_box_9slice_bc.png" id="8_aj8i3"]
+[ext_resource type="Texture2D" uid="uid://ois6dq3ylw1m" path="res://assets/UI/9slice_box_white/dt_box_9slice_br.png" id="9_vswi0"]
+
+[node name="UniversalPanel" type="MarginContainer" unique_id=539582501]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="GridContainer" type="GridContainer" parent="." unique_id=2123935117]
+layout_mode = 2
+theme_override_constants/h_separation = 0
+theme_override_constants/v_separation = 0
+columns = 3
+
+[node name="TL" type="TextureRect" parent="GridContainer" unique_id=549662677]
+layout_mode = 2
+texture = ExtResource("1_er5v0")
+
+[node name="TC" type="TextureRect" parent="GridContainer" unique_id=8926237]
+layout_mode = 2
+size_flags_horizontal = 3
+texture = ExtResource("2_mc30a")
+
+[node name="TR" type="TextureRect" parent="GridContainer" unique_id=62213438]
+layout_mode = 2
+texture = ExtResource("3_7km03")
+
+[node name="LC" type="TextureRect" parent="GridContainer" unique_id=1335717178]
+layout_mode = 2
+size_flags_vertical = 3
+texture = ExtResource("4_kcxuh")
+
+[node name="C" type="TextureRect" parent="GridContainer" unique_id=1564352704]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture = ExtResource("5_60gl8")
+
+[node name="RC" type="TextureRect" parent="GridContainer" unique_id=173387054]
+layout_mode = 2
+size_flags_vertical = 3
+texture = ExtResource("6_s6w7e")
+
+[node name="BL" type="TextureRect" parent="GridContainer" unique_id=2041138427]
+layout_mode = 2
+texture = ExtResource("7_gmo2y")
+
+[node name="BC" type="TextureRect" parent="GridContainer" unique_id=1688528330]
+layout_mode = 2
+size_flags_horizontal = 3
+texture = ExtResource("8_aj8i3")
+
+[node name="BR" type="TextureRect" parent="GridContainer" unique_id=1981638420]
+layout_mode = 2
+texture = ExtResource("9_vswi0")
+
+[node name="ContentArea" type="MarginContainer" parent="." unique_id=315561503]
+layout_mode = 2
+theme_override_constants/margin_left = 15
+theme_override_constants/margin_top = 15
+theme_override_constants/margin_right = 15
+theme_override_constants/margin_bottom = 15

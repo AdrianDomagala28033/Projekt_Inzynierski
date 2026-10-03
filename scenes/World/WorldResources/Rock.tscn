@@ -1,9 +1,33 @@
 [gd_scene format=3 uid="uid://biotqgtuns0y7"]
 
+[ext_resource type="Script" uid="uid://bnvytvfoxxayh" path="res://scripts/DestructibleEntity.cs" id="1_ixb1v"]
 [ext_resource type="Texture2D" uid="uid://chd6vkd5w15kj" path="res://assets/worldAssets/rock.png" id="1_sswam"]
 
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_sswam"]
+properties/0/path = NodePath(".:position")
+properties/0/spawn = true
+properties/0/replication_mode = 0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_sswam"]
+height = 28.0
+
 [node name="Rock" type="Node2D" unique_id=1306324067]
+script = ExtResource("1_ixb1v")
+materialType = 1
+dropQuantity = 10
+maxHealth = 150
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=367047795]
-position = Vector2(0, -12)
+position = Vector2(0, -15)
 texture = ExtResource("1_sswam")
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="." unique_id=533997818]
+replication_config = SubResource("SceneReplicationConfig_sswam")
+
+[node name="Area2D" type="Area2D" parent="." unique_id=1183838410]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=1381104996]
+position = Vector2(0, -16)
+shape = SubResource("CapsuleShape2D_sswam")
+
+[connection signal="input_event" from="Area2D" to="." method="_on_area_2d_input_event"]

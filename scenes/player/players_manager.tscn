@@ -12,4 +12,5 @@ playerScene = ExtResource("2_6cnty")
 y_sort_enabled = true
 
 [node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="." unique_id=1927722855]
+_spawnable_scenes = PackedStringArray("uid://biaowwtu320lu")
 spawn_path = NodePath("../PlayersContainer")

@@ -1,0 +1,78 @@
+[gd_scene format=3 uid="uid://cn01ilyqiik87"]
+
+[ext_resource type="PackedScene" uid="uid://dw0c58loaub24" path="res://scenes/ui/toolSlot.tscn" id="1_3m1m4"]
+[ext_resource type="Script" uid="uid://djn6csqnyg7tw" path="res://scripts/UI/ToolSelector.cs" id="1_qbnlv"]
+[ext_resource type="Texture2D" uid="uid://n57hx7qd7xgb" path="res://assets/UI/pickaxe.png" id="2_qbnlv"]
+[ext_resource type="Texture2D" uid="uid://djlsejb6g4kjj" path="res://assets/UI/sword.png" id="3_wjvce"]
+[ext_resource type="Texture2D" uid="uid://nyd48l0oquum" path="res://assets/UI/hammer.png" id="4_ykytr"]
+
+[node name="ToolSelector" type="VBoxContainer" unique_id=1773280794 node_paths=PackedStringArray("axe", "pickaxe", "sword", "hammer", "timer")]
+alignment = 2
+script = ExtResource("1_qbnlv")
+axe = NodePath("ToolSlotAxe")
+pickaxe = NodePath("ToolSlotPickaxe")
+sword = NodePath("ToolSlotSword")
+hammer = NodePath("ToolSlotHammer")
+timer = NodePath("HideTimer")
+
+[node name="ToolSlotAxe" parent="." unique_id=1537237500 instance=ExtResource("1_3m1m4")]
+layout_mode = 2
+
+[node name="CustomLabel" parent="ToolSlotAxe/LabelMask" parent_id_path=PackedInt32Array(1537237500, 1973561972) index="0" unique_id=705885460]
+grow_horizontal = 1
+
+[node name="ToolSlotPickaxe" parent="." unique_id=790933736 instance=ExtResource("1_3m1m4")]
+layout_mode = 2
+
+[node name="CustomLabel" parent="ToolSlotPickaxe/LabelMask" parent_id_path=PackedInt32Array(790933736, 1973561972) index="0" unique_id=705885460]
+custom_minimum_size = Vector2(100, 0)
+offset_left = -100.0
+grow_horizontal = 1
+
+[node name="Label" parent="ToolSlotPickaxe/LabelMask/CustomLabel/MarginContainer" parent_id_path=PackedInt32Array(790933736, 705885460, 1811931095) index="0" unique_id=89738334]
+text = "Pickaxe"
+
+[node name="TextureRect2" parent="ToolSlotPickaxe/IconWrapper/TextureRect" parent_id_path=PackedInt32Array(790933736, 826092765) index="0" unique_id=1683052530]
+texture = ExtResource("2_qbnlv")
+
+[node name="ToolSlotSword" parent="." unique_id=1609818959 instance=ExtResource("1_3m1m4")]
+layout_mode = 2
+
+[node name="CustomLabel" parent="ToolSlotSword/LabelMask" parent_id_path=PackedInt32Array(1609818959, 1973561972) index="0" unique_id=705885460]
+custom_minimum_size = Vector2(90, 0)
+offset_left = -90.0
+grow_horizontal = 1
+
+[node name="Label" parent="ToolSlotSword/LabelMask/CustomLabel/MarginContainer" parent_id_path=PackedInt32Array(1609818959, 705885460, 1811931095) index="0" unique_id=89738334]
+text = "Sword"
+
+[node name="TextureRect2" parent="ToolSlotSword/IconWrapper/TextureRect" parent_id_path=PackedInt32Array(1609818959, 826092765) index="0" unique_id=1683052530]
+offset_top = 8.0
+offset_right = 41.0
+texture = ExtResource("3_wjvce")
+
+[node name="ToolSlotHammer" parent="." unique_id=1782201217 instance=ExtResource("1_3m1m4")]
+layout_mode = 2
+
+[node name="CustomLabel" parent="ToolSlotHammer/LabelMask" parent_id_path=PackedInt32Array(1782201217, 1973561972) index="0" unique_id=705885460]
+custom_minimum_size = Vector2(110, 0)
+offset_left = -110.0
+grow_horizontal = 1
+
+[node name="Label" parent="ToolSlotHammer/LabelMask/CustomLabel/MarginContainer" parent_id_path=PackedInt32Array(1782201217, 705885460, 1811931095) index="0" unique_id=89738334]
+text = "Hammer"
+
+[node name="TextureRect2" parent="ToolSlotHammer/IconWrapper/TextureRect" parent_id_path=PackedInt32Array(1782201217, 826092765) index="0" unique_id=1683052530]
+texture = ExtResource("4_ykytr")
+
+[node name="HideTimer" type="Timer" parent="." unique_id=1469338804]
+one_shot = true
+
+[editable path="ToolSlotAxe"]
+[editable path="ToolSlotAxe/LabelMask/CustomLabel"]
+[editable path="ToolSlotPickaxe"]
+[editable path="ToolSlotPickaxe/LabelMask/CustomLabel"]
+[editable path="ToolSlotSword"]
+[editable path="ToolSlotSword/LabelMask/CustomLabel"]
+[editable path="ToolSlotHammer"]
+[editable path="ToolSlotHammer/LabelMask/CustomLabel"]

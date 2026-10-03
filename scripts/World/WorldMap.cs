@@ -229,7 +229,7 @@ public partial class WorldMap : Node2D
 							{
 								var instance = trees[1].Instantiate<Node2D>();
 								instance.Position = resourcesLayer.MapToLocal(new Vector2I(x, y));
-								GetNode("ResourcesManager/ResourcesContainer").AddChild(instance);
+								GetNode("ResourcesManager/ResourcesContainer").AddChild(instance, forceReadableName: true);
 								for (int i = x; i <= x+1; i++)
 									for (int j = y; j <= y+1; j++)
 										if(i < worldWidth && j < worldHeight)
@@ -247,7 +247,7 @@ public partial class WorldMap : Node2D
 							{
 								var instance = rocks[rng.Next(0, rocks.Length)].Instantiate<Node2D>();
 								instance.Position = resourcesLayer.MapToLocal(new Vector2I(x, y));
-								GetNode("ResourcesManager/ResourcesContainer").AddChild(instance);
+								GetNode("ResourcesManager/ResourcesContainer").AddChild(instance, forceReadableName: true);
 								for (int i = x; i <= x+1; i++)
 									for (int j = y; j <= y+1; j++)
 										if(i < worldWidth && j < worldHeight)
