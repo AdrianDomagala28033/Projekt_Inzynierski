@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://7nxictfdghwd"
-path="res://.godot/imported/goblin_death_strip.png-5dd6f7c20076eb30e5f39ab95abd86d2.ctex"
+uid="uid://0p7bu8vc65om"
+path="res://.godot/imported/goblin_hurt_strip.png-b53c3fbb771425c74262cbd87025b105.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/testAI/Goblin/goblin_death_strip.png"
-dest_files=["res://.godot/imported/goblin_death_strip.png-5dd6f7c20076eb30e5f39ab95abd86d2.ctex"]
+source_file="res://assets/enemiesAssets/Goblin/goblin_hurt_strip.png"
+dest_files=["res://.godot/imported/goblin_hurt_strip.png-b53c3fbb771425c74262cbd87025b105.ctex"]
 
 [params]
 

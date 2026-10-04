@@ -1,7 +1,7 @@
 using Godot;
 using System.Collections.Generic;
 
-public partial class Enemy : CharacterBody2D
+public partial class Goblin : CharacterBody2D
 {
     [Export] public float Speed = 100f;
     [Export] public Node2D TargetPlayer; 
@@ -60,7 +60,7 @@ public partial class Enemy : CharacterBody2D
             CalculatePathToPlayer();
         }
 
-        float distanceToFinalTarget = GlobalPosition.DistanceTo(TargetPlayer.GlobalPosition);
+      float distanceToFinalTarget = GlobalPosition.DistanceTo(TargetPlayer.GlobalPosition);
         
         if (distanceToFinalTarget <= AttackRange)
         {
@@ -71,11 +71,8 @@ public partial class Enemy : CharacterBody2D
                 PerformAttackOn(TargetPlayer);
                 _attackTimer = 0;
             }
-            else if (!_isAttacking && _animatedSprite != null)
-            {
-                _animatedSprite.Play("idle");
-            }
-            return; 
+            return;
+        
         }
 
         if (IsInstanceValid(_targetedObstacle))
@@ -87,11 +84,7 @@ public partial class Enemy : CharacterBody2D
                 PerformAttackOn(_targetedObstacle);
                 _attackTimer = 0;
             }
-            else if (!_isAttacking && _animatedSprite != null)
-            {
-                _animatedSprite.Play("idle");
-            }
-            return; 
+            return;
         }
         else
         {
@@ -127,14 +120,14 @@ public partial class Enemy : CharacterBody2D
                 else if (direction.X > 0.1f) _animatedSprite.FlipH = false;
             }
 
-            if (!IsInstanceValid(_targetedObstacle))
+           if (!IsInstanceValid(_targetedObstacle))
             {
                 for (int i = 0; i < GetSlideCollisionCount(); i++)
                 {
                     KinematicCollision2D collision = GetSlideCollision(i);
                     Node2D collider = collision.GetCollider() as Node2D; 
 
-                    if (collider != null && collider.IsInGroup("buildings"))
+                    if (collider != null && collider.IsInGroup("walls"))
                     {
                         Vector2I wallGridPos = new Vector2I(
                             Mathf.FloorToInt(collider.GlobalPosition.X / TileSize), 
@@ -155,11 +148,11 @@ public partial class Enemy : CharacterBody2D
         }
     }
 
-    private async void PerformAttackOn(Node target)
+   private async void PerformAttackOn(Node target)
     {
         _isAttacking = true;
         
-        if (_animatedSprite != null)
+        if (_animatedSprite != null && _animatedSprite.SpriteFrames.HasAnimation("attack"))
         {
             _animatedSprite.Play("attack"); 
         }
@@ -169,7 +162,7 @@ public partial class Enemy : CharacterBody2D
             target.Call("TakeDamage", AttackDamage);
         }
 
-        await ToSignal(_animatedSprite, AnimatedSprite2D.SignalName.AnimationFinished);
+        await ToSignal(GetTree().CreateTimer(AttackCooldown), SceneTreeTimer.SignalName.Timeout);
         _isAttacking = false;
     }
 
@@ -215,9 +208,8 @@ public partial class Enemy : CharacterBody2D
             {
                 int newPathPenalty = GetPathPenalty(newPath);
                 
-                if (newPathPenalty < 300)
+                if (newPathPenalty == 0)
                 {
-                    GD.Print("[Enemy] Wykryto wyłom! Zmieniam cel.");
                     _targetedObstacle = null;
                     CurrentPath = newPath;
                     _currentPathIndex = 0;

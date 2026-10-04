@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b1bi5qaibxfr0"
-path="res://.godot/imported/goblin_idle_strip.png-b7400964f6d027bd4d5e3274165bfec7.ctex"
+uid="uid://dvcmqrld5lwou"
+path="res://.godot/imported/wooden_wall_strip.png-d60d847245442489968908fea08d7801.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/testAI/Goblin/goblin_idle_strip.png"
-dest_files=["res://.godot/imported/goblin_idle_strip.png-b7400964f6d027bd4d5e3274165bfec7.ctex"]
+source_file="res://assets/buildingsAssets/Walls/wooden_wall_strip.png"
+dest_files=["res://.godot/imported/wooden_wall_strip.png-d60d847245442489968908fea08d7801.ctex"]
 
 [params]
 

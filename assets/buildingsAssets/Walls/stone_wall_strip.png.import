@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bigphn08ix021"
-path="res://.godot/imported/goblin_attack_strip.png-e346942c9ba0a6213b12fe78173ddd29.ctex"
+uid="uid://dx273j3rfnx3q"
+path="res://.godot/imported/stone_wall_strip.png-2ee5f84b7409654d98fb85bca7584896.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/testAI/Goblin/goblin_attack_strip.png"
-dest_files=["res://.godot/imported/goblin_attack_strip.png-e346942c9ba0a6213b12fe78173ddd29.ctex"]
+source_file="res://assets/buildingsAssets/Walls/stone_wall_strip.png"
+dest_files=["res://.godot/imported/stone_wall_strip.png-2ee5f84b7409654d98fb85bca7584896.ctex"]
 
 [params]
 

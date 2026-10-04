@@ -1,11 +1,11 @@
 [gd_scene format=3 uid="uid://dt7ocplt4ll0q"]
 
-[ext_resource type="Script" uid="uid://dbiu24hsbls13" path="res://scripts/AI/Characters/Enemy.cs" id="1_iwce4"]
-[ext_resource type="Texture2D" uid="uid://bigphn08ix021" path="res://assets/testAI/Goblin/goblin_attack_strip.png" id="2_dxlmx"]
-[ext_resource type="Texture2D" uid="uid://c5awt03pi2et1" path="res://assets/testAI/Goblin/goblin_run_strip.png" id="2_tjb6x"]
-[ext_resource type="Texture2D" uid="uid://7nxictfdghwd" path="res://assets/testAI/Goblin/goblin_death_strip.png" id="3_1musb"]
-[ext_resource type="Texture2D" uid="uid://bn2vegadcewpn" path="res://assets/testAI/Goblin/goblin_hurt_strip.png" id="3_dxlmx"]
-[ext_resource type="Texture2D" uid="uid://b1bi5qaibxfr0" path="res://assets/testAI/Goblin/goblin_idle_strip.png" id="5_gjh0d"]
+[ext_resource type="Script" uid="uid://dbiu24hsbls13" path="res://scripts/Enemies/Goblin.cs" id="1_iwce4"]
+[ext_resource type="Texture2D" uid="uid://dn0i5q4rg7hqb" path="res://assets/enemiesAssets/Goblin/goblin_attack_strip.png" id="2_dxlmx"]
+[ext_resource type="Texture2D" uid="uid://cvc38qo11l1jg" path="res://assets/enemiesAssets/Goblin/goblin_run_strip.png" id="2_tjb6x"]
+[ext_resource type="Texture2D" uid="uid://ci10iqqcyjrxl" path="res://assets/enemiesAssets/Goblin/goblin_death_strip.png" id="3_1musb"]
+[ext_resource type="Texture2D" uid="uid://0p7bu8vc65om" path="res://assets/enemiesAssets/Goblin/goblin_hurt_strip.png" id="3_dxlmx"]
+[ext_resource type="Texture2D" uid="uid://sg26r52avc54" path="res://assets/enemiesAssets/Goblin/goblin_idle_strip.png" id="5_gjh0d"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_tjb6x"]
 atlas = ExtResource("2_dxlmx")
@@ -42,6 +42,10 @@ region = Rect2(672, 0, 96, 64)
 [sub_resource type="AtlasTexture" id="AtlasTexture_4abpk"]
 atlas = ExtResource("2_dxlmx")
 region = Rect2(768, 0, 96, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7d7n4"]
+atlas = ExtResource("2_dxlmx")
+region = Rect2(0, 0, 96, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_5hjkb"]
 atlas = ExtResource("3_1musb")
@@ -204,10 +208,13 @@ animations = [{
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_4abpk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7d7n4")
 }],
 "loop": 0,
 "name": &"attack",
-"speed": 10.0
+"speed": 15.0
 }, {
 "frames": [{
 "duration": 1.0,

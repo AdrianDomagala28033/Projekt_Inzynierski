@@ -5,7 +5,8 @@
 [ext_resource type="Script" uid="uid://3kp8iuvg5cmj" path="res://scripts/AI/TestCamera.cs" id="2_eb3v6"]
 [ext_resource type="PackedScene" uid="uid://b0x3oltn6etlv" path="res://scenes/AI/AiSystem.tscn" id="3_idrjk"]
 [ext_resource type="PackedScene" uid="uid://dwgwcmqy415g0" path="res://scenes/AI/Characters/DummyPlayer.tscn" id="5_q2tve"]
-[ext_resource type="PackedScene" uid="uid://bt51edna771ep" path="res://scenes/Buildings/Wall.tscn" id="6_leav0"]
+[ext_resource type="PackedScene" uid="uid://bt51edna771ep" path="res://scenes/Buildings/Walls/Wall_Wooden.tscn" id="6_rbo2e"]
+[ext_resource type="PackedScene" uid="uid://r21vq6ae43yq" path="res://scenes/Buildings/Walls/Wall_Stone.tscn" id="7_i6a8j"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_eb3v6"]
 texture = ExtResource("1_fohxq")
@@ -3685,85 +3686,49 @@ script = ExtResource("2_eb3v6")
 [node name="AiSystem" parent="." unique_id=80081562 instance=ExtResource("3_idrjk")]
 
 [node name="DummyPlayer" parent="." unique_id=2011542992 instance=ExtResource("5_q2tve")]
-position = Vector2(672, 384)
+position = Vector2(648, 392)
 
-[node name="Wall" parent="." unique_id=460904151 instance=ExtResource("6_leav0")]
-position = Vector2(648, 360)
+[node name="Wall_Stone" parent="." unique_id=1005349461 instance=ExtResource("7_i6a8j")]
+position = Vector2(648, 376)
 
-[node name="Wall2" parent="." unique_id=1277228078 instance=ExtResource("6_leav0")]
-position = Vector2(664, 360)
+[node name="Wall_Wooden" parent="." unique_id=460904151 instance=ExtResource("6_rbo2e")]
+position = Vector2(776, 424)
 
-[node name="Wall4" parent="." unique_id=1306959788 instance=ExtResource("6_leav0")]
-position = Vector2(920, 456)
+[node name="Wall_Wooden2" parent="." unique_id=1069849972 instance=ExtResource("6_rbo2e")]
+position = Vector2(776, 392)
 
-[node name="Wall5" parent="." unique_id=1918274071 instance=ExtResource("6_leav0")]
-position = Vector2(904, 376)
+[node name="Wall_Wooden3" parent="." unique_id=587427703 instance=ExtResource("6_rbo2e")]
+position = Vector2(776, 408)
 
-[node name="Wall6" parent="." unique_id=1708905123 instance=ExtResource("6_leav0")]
-position = Vector2(888, 376)
+[node name="Wall_Wooden4" parent="." unique_id=706799507 instance=ExtResource("6_rbo2e")]
+position = Vector2(680, 424)
 
-[node name="Wall7" parent="." unique_id=2055342940 instance=ExtResource("6_leav0")]
-position = Vector2(872, 456)
+[node name="Wall_Wooden5" parent="." unique_id=554149854 instance=ExtResource("6_rbo2e")]
+position = Vector2(712, 424)
 
-[node name="Wall17" parent="." unique_id=1153941153 instance=ExtResource("6_leav0")]
-position = Vector2(920, 440)
+[node name="Wall_Wooden6" parent="." unique_id=727788607 instance=ExtResource("6_rbo2e")]
+position = Vector2(696, 424)
 
-[node name="Wall27" parent="." unique_id=1859453049 instance=ExtResource("6_leav0")]
-position = Vector2(920, 472)
-
-[node name="Wall18" parent="." unique_id=1546844532 instance=ExtResource("6_leav0")]
-position = Vector2(872, 440)
-
-[node name="Wall19" parent="." unique_id=832784250 instance=ExtResource("6_leav0")]
-position = Vector2(920, 424)
-
-[node name="Wall20" parent="." unique_id=845010498 instance=ExtResource("6_leav0")]
-position = Vector2(920, 408)
-
-[node name="Wall21" parent="." unique_id=702381145 instance=ExtResource("6_leav0")]
-position = Vector2(920, 392)
-
-[node name="Wall22" parent="." unique_id=927743873 instance=ExtResource("6_leav0")]
-position = Vector2(872, 424)
-
-[node name="Wall23" parent="." unique_id=701047435 instance=ExtResource("6_leav0")]
-position = Vector2(872, 408)
-
-[node name="Wall24" parent="." unique_id=1157655099 instance=ExtResource("6_leav0")]
-position = Vector2(872, 392)
-
-[node name="Wall25" parent="." unique_id=169515806 instance=ExtResource("6_leav0")]
-position = Vector2(920, 376)
-
-[node name="Wall26" parent="." unique_id=1137081073 instance=ExtResource("6_leav0")]
-position = Vector2(872, 376)
-
-[node name="Wall8" parent="." unique_id=1360942635 instance=ExtResource("6_leav0")]
-position = Vector2(680, 408)
-
-[node name="Wall9" parent="." unique_id=560930915 instance=ExtResource("6_leav0")]
+[node name="Wall_Wooden7" parent="." unique_id=1831911556 instance=ExtResource("6_rbo2e")]
 position = Vector2(712, 408)
 
-[node name="Wall10" parent="." unique_id=1915896167 instance=ExtResource("6_leav0")]
+[node name="Wall_Wooden8" parent="." unique_id=573711197 instance=ExtResource("6_rbo2e")]
 position = Vector2(712, 392)
 
-[node name="Wall11" parent="." unique_id=1252255692 instance=ExtResource("6_leav0")]
+[node name="Wall_Wooden9" parent="." unique_id=2005322942 instance=ExtResource("6_rbo2e")]
+position = Vector2(664, 424)
+
+[node name="Wall_Wooden10" parent="." unique_id=1505537703 instance=ExtResource("6_rbo2e")]
+position = Vector2(648, 424)
+
+[node name="Wall_Wooden11" parent="." unique_id=921333940 instance=ExtResource("6_rbo2e")]
 position = Vector2(712, 376)
 
-[node name="Wall12" parent="." unique_id=1559749497 instance=ExtResource("6_leav0")]
-position = Vector2(712, 360)
+[node name="Wall_Wooden12" parent="." unique_id=2127762258 instance=ExtResource("6_rbo2e")]
+position = Vector2(696, 376)
 
-[node name="Wall13" parent="." unique_id=614827540 instance=ExtResource("6_leav0")]
-position = Vector2(696, 360)
+[node name="Wall_Wooden13" parent="." unique_id=1646652562 instance=ExtResource("6_rbo2e")]
+position = Vector2(680, 376)
 
-[node name="Wall14" parent="." unique_id=1089023874 instance=ExtResource("6_leav0")]
-position = Vector2(664, 408)
-
-[node name="Wall15" parent="." unique_id=1073183907 instance=ExtResource("6_leav0")]
-position = Vector2(648, 408)
-
-[node name="Wall16" parent="." unique_id=939075554 instance=ExtResource("6_leav0")]
-position = Vector2(696, 408)
-
-[node name="Wall3" parent="." unique_id=620819317 instance=ExtResource("6_leav0")]
-position = Vector2(680, 360)
+[node name="Wall_Wooden14" parent="." unique_id=1372540509 instance=ExtResource("6_rbo2e")]
+position = Vector2(664, 376)

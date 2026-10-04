@@ -4,15 +4,14 @@ public partial class PathTester : Node2D
 {
     private AiGridManager _aiManager;
     private PackedScene _enemyScene;
-    private Enemy _currentTestEnemy;
+    private Goblin _currentTestEnemy; 
     private Node2D _playerNode;
     
     private const int TileSize = 16;
-
     public override void _Ready()
     {
         _aiManager = GetNode<AiGridManager>("../AiGridManager");
-        _enemyScene = GD.Load<PackedScene>("res://scenes/AI/Characters/Enemy.tscn");
+        _enemyScene = GD.Load<PackedScene>("res://scenes/AI/Characters/Enemies/Goblin.tscn");
         
         _playerNode = GetNodeOrNull<Node2D>("../../DummyPlayer");
         
@@ -52,7 +51,7 @@ public partial class PathTester : Node2D
             _currentTestEnemy.QueueFree();
         }
 
-        _currentTestEnemy = _enemyScene.Instantiate<Enemy>();
+        _currentTestEnemy = _enemyScene.Instantiate<Goblin>();
         _currentTestEnemy.GlobalPosition = spawnPos;
 
         _currentTestEnemy.GridManager = _aiManager;
