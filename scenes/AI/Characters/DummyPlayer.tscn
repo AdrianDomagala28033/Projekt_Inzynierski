@@ -1,0 +1,20 @@
+[gd_scene format=3 uid="uid://dwgwcmqy415g0"]
+
+[ext_resource type="Texture2D" uid="uid://d3i3crisfgjvb" path="res://assets/characterAssets/Human/RUN/base_run_strip8.png" id="1_h717e"]
+[ext_resource type="Script" uid="uid://dgrm3p5277n3w" path="res://scripts/AI/Characters/DummyPlayer.cs" id="1_i7vt8"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_6xkuk"]
+radius = 2.0
+
+[node name="DummyPlayer" type="CharacterBody2D" unique_id=2011542992]
+script = ExtResource("1_i7vt8")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=770617441]
+position = Vector2(0, 0.5)
+scale = Vector2(1, 0.984375)
+texture = ExtResource("1_h717e")
+hframes = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1073262716]
+position = Vector2(0, 5)
+shape = SubResource("CircleShape2D_6xkuk")

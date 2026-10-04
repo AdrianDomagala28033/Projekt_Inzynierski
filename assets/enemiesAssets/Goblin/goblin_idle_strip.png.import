@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://sl8qkwn8g6q7"
-path="res://.godot/imported/spr_idle_strip9.png-5d47b96c384cd72b3ab10b77a0d6a15c.ctex"
+uid="uid://sg26r52avc54"
+path="res://.godot/imported/goblin_idle_strip.png-e42f50ee13b9d3ecc5e72a53846fa0ac.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/testAI/spr_idle_strip9.png"
-dest_files=["res://.godot/imported/spr_idle_strip9.png-5d47b96c384cd72b3ab10b77a0d6a15c.ctex"]
+source_file="res://assets/enemiesAssets/Goblin/goblin_idle_strip.png"
+dest_files=["res://.godot/imported/goblin_idle_strip.png-e42f50ee13b9d3ecc5e72a53846fa0ac.ctex"]
 
 [params]
 

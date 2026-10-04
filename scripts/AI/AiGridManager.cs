@@ -7,6 +7,7 @@ public partial class AiGridManager : Node
     private WorldMap _worldMap;
     public int[,] Heatmap { get; private set; }
     public bool[,] OccupiedCells { get; private set; } 
+    public int[,] ObstaclePenalties { get; private set; }
 
     private int _width;
     private int _height;
@@ -14,7 +15,6 @@ public partial class AiGridManager : Node
     private bool _isTestMode = false;
     private bool[,] _testObstacles;
 
-    // --- INICJALIZACJA GŁÓWNEJ GRY ---
     public void Initialize(WorldMap map)
     {
         _worldMap = map;
@@ -23,10 +23,10 @@ public partial class AiGridManager : Node
 
         Heatmap = new int[_width, _height];
         OccupiedCells = new bool[_width, _height];
+        ObstaclePenalties = new int[_width, _height];
         GD.Print($"[AI] AIGridManager gotowy! Wymiary siatki: {_width}x{_height}");    
     }
 
-    // --- INICJALIZACJA POLIGONU TESTOWEGO ---
     public void InitializeTestMode(int width, int height, bool[,] obstacles)
     {
         _width = width;
@@ -36,6 +36,15 @@ public partial class AiGridManager : Node
         
         Heatmap = new int[_width, _height];
         OccupiedCells = new bool[_width, _height];
+        ObstaclePenalties = new int[_width, _height];
+    }
+
+    public void SetObstaclePenalty(Vector2I gridPos, int penalty)
+    {
+        if (gridPos.X >= 0 && gridPos.X < _width && gridPos.Y >= 0 && gridPos.Y < _height)
+        {
+            ObstaclePenalties[gridPos.X, gridPos.Y] = penalty;
+        }
     }
 
     public bool IsCellWalkable(int x, int y)
@@ -72,7 +81,6 @@ public partial class AiGridManager : Node
     }
 
     // ---  ALGORYTM A* ---
-
     public class PathNode
     {
         public Vector2I Position;
@@ -89,7 +97,7 @@ public partial class AiGridManager : Node
 
     public List<Vector2I> FindPath(Vector2I startPos, Vector2I targetPos)
     {
-        if (!IsCellWalkable(targetPos.X, targetPos.Y))
+        if (targetPos.X < 0 || targetPos.X >= _width || targetPos.Y < 0 || targetPos.Y >= _height)
         {
             return null;
         }
@@ -106,7 +114,7 @@ public partial class AiGridManager : Node
             for (int i = 1; i < openList.Count; i++)
             {
                 if (openList[i].FCost < currentNode.FCost || 
-                   (openList[i].FCost == currentNode.FCost && openList[i].HCost < currentNode.HCost))
+                (openList[i].FCost == currentNode.FCost && openList[i].HCost < currentNode.HCost))
                 {
                     currentNode = openList[i];
                 }
@@ -129,24 +137,29 @@ public partial class AiGridManager : Node
             {
                 Vector2I neighborPos = currentNode.Position + dir;
 
-                if (!IsCellWalkable(neighborPos.X, neighborPos.Y) || closedList.Contains(neighborPos))
+                bool isTarget = (neighborPos == targetPos);
+
+                if ((!IsCellWalkable(neighborPos.X, neighborPos.Y) && !isTarget) || closedList.Contains(neighborPos))
                 {
                     continue;
                 }
 
                 if (dir.X != 0 && dir.Y != 0)
                 {
-                    if (!IsCellWalkable(currentNode.Position.X + dir.X, currentNode.Position.Y) || 
-                        !IsCellWalkable(currentNode.Position.X, currentNode.Position.Y + dir.Y))
+                    bool corner1Valid = IsCellWalkable(currentNode.Position.X + dir.X, currentNode.Position.Y) || (new Vector2I(currentNode.Position.X + dir.X, currentNode.Position.Y) == targetPos);
+                    bool corner2Valid = IsCellWalkable(currentNode.Position.X, currentNode.Position.Y + dir.Y) || (new Vector2I(currentNode.Position.X, currentNode.Position.Y + dir.Y) == targetPos);
+
+                    if (!corner1Valid || !corner2Valid)
                     {
                         continue; 
                     }
                 }
 
                 int heatPenalty = Heatmap[neighborPos.X, neighborPos.Y];
+                int obstaclePenalty = ObstaclePenalties[neighborPos.X, neighborPos.Y]; // POBIERANIE KARY MURU
                 
                 int moveCost = (dir.X != 0 && dir.Y != 0) ? 14 : 10;
-                int newMovementCostToNeighbor = currentNode.GCost + moveCost + heatPenalty;
+                int newMovementCostToNeighbor = currentNode.GCost + moveCost + heatPenalty + obstaclePenalty; // DODANIE KARY DO KOSZTU
 
                 PathNode neighborNode = null;
                 foreach (var node in openList)

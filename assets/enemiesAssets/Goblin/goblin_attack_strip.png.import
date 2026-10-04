@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c5awt03pi2et1"
-path="res://.godot/imported/spr_run_strip8.png-856087e8d9bb0f17658dbedef8692a5b.ctex"
+uid="uid://dn0i5q4rg7hqb"
+path="res://.godot/imported/goblin_attack_strip.png-98a6dba13f83b76596db18d1b237e04e.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/testAI/spr_run_strip8.png"
-dest_files=["res://.godot/imported/spr_run_strip8.png-856087e8d9bb0f17658dbedef8692a5b.ctex"]
+source_file="res://assets/enemiesAssets/Goblin/goblin_attack_strip.png"
+dest_files=["res://.godot/imported/goblin_attack_strip.png-98a6dba13f83b76596db18d1b237e04e.ctex"]
 
 [params]
 
