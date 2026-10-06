@@ -44,6 +44,15 @@ public partial class AiGridManager : Node
         if (gridPos.X >= 0 && gridPos.X < _width && gridPos.Y >= 0 && gridPos.Y < _height)
         {
             ObstaclePenalties[gridPos.X, gridPos.Y] = penalty;
+            
+            if (penalty > 0)
+            {
+                OccupiedCells[gridPos.X, gridPos.Y] = false;
+                if (_isTestMode && _testObstacles != null)
+                {
+                    _testObstacles[gridPos.X, gridPos.Y] = false;
+                }
+            }
         }
     }
 
@@ -54,11 +63,16 @@ public partial class AiGridManager : Node
 
         if (_isTestMode)
         {
+            if (ObstaclePenalties[x, y] > 0) return true;
+            
             return !_testObstacles[x, y];
         }
 
-        if (_worldMap.GetTile(x, y) == Tiles.water)
+        if (_worldMap != null && _worldMap.GetTile(x, y) == Tiles.water)
             return false;
+
+        if (ObstaclePenalties[x, y] > 0)
+            return true;
 
         if (OccupiedCells[x, y])
             return false;
@@ -156,10 +170,10 @@ public partial class AiGridManager : Node
                 }
 
                 int heatPenalty = Heatmap[neighborPos.X, neighborPos.Y];
-                int obstaclePenalty = ObstaclePenalties[neighborPos.X, neighborPos.Y]; // POBIERANIE KARY MURU
+                int obstaclePenalty = ObstaclePenalties[neighborPos.X, neighborPos.Y]; // Kara muru jest pobierana
                 
                 int moveCost = (dir.X != 0 && dir.Y != 0) ? 14 : 10;
-                int newMovementCostToNeighbor = currentNode.GCost + moveCost + heatPenalty + obstaclePenalty; // DODANIE KARY DO KOSZTU
+                int newMovementCostToNeighbor = currentNode.GCost + moveCost + heatPenalty + obstaclePenalty; // Kara dodawana do kosztu G
 
                 PathNode neighborNode = null;
                 foreach (var node in openList)

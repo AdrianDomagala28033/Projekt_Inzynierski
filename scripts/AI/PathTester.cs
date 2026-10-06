@@ -4,20 +4,43 @@ public partial class PathTester : Node2D
 {
     private AiGridManager _aiManager;
     private PackedScene _enemyScene;
-    private Goblin _currentTestEnemy; 
+    private EnemyBase _currentTestEnemy;
     private Node2D _playerNode;
     
     private const int TileSize = 16;
+    
     public override void _Ready()
     {
         _aiManager = GetNode<AiGridManager>("../AiGridManager");
-        _enemyScene = GD.Load<PackedScene>("res://scenes/AI/Characters/Enemies/Goblin.tscn");
+
+        _enemyScene = GD.Load<PackedScene>("res://scenes/AI/Characters/Enemies/Goblins/Goblin_Archer.tscn");
+        //_enemyScene = GD.Load<PackedScene>("res://scenes/AI/Characters/Enemies/Goblins/Goblin_Maceman.tscn");
         
         _playerNode = GetNodeOrNull<Node2D>("../../DummyPlayer");
         
         if (_playerNode == null)
         {
             GD.PrintErr("[PathTester] UWAGA: Nie znaleziono DummyPlayer przy starcie!");
+        }
+
+        CallDeferred(nameof(RegisterWalls));
+    }
+
+    private void RegisterWalls()
+    {
+        var walls = GetTree().GetNodesInGroup("walls");
+        foreach (Node node in walls)
+        {
+            if (node is Wall wall)
+            {
+                Vector2I gridPos = new Vector2I(
+                    Mathf.FloorToInt(wall.GlobalPosition.X / TileSize),
+                    Mathf.FloorToInt(wall.GlobalPosition.Y / TileSize)
+                );
+                
+                _aiManager.SetObstaclePenalty(gridPos, wall.MaxHealth);
+                GD.Print($"[PathTester] Zarejestrowano mur na siatce {gridPos} z karą {wall.MaxHealth}");
+            }
         }
     }
 
@@ -51,7 +74,7 @@ public partial class PathTester : Node2D
             _currentTestEnemy.QueueFree();
         }
 
-        _currentTestEnemy = _enemyScene.Instantiate<Goblin>();
+        _currentTestEnemy = _enemyScene.Instantiate<EnemyBase>();
         _currentTestEnemy.GlobalPosition = spawnPos;
 
         _currentTestEnemy.GridManager = _aiManager;
