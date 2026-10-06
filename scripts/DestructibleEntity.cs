@@ -27,6 +27,7 @@ public partial class DestructibleEntity : Node2D
         var player = GetNode<Player>($"/root/Main/PlayersManager/PlayersContainer/{senderId}");
         float distance = GlobalPosition.DistanceTo(player.GlobalPosition);
         if(distance >= 30) return;
+        Rpc(nameof(PlayHitEffectRpc));
         switch (materialType)
         {
             case MaterialType.Wood:
@@ -48,13 +49,12 @@ public partial class DestructibleEntity : Node2D
                     damage = 40;
                 break;
         }
-        if(player.CanHoldResources(materialType, dropQuantity))
+        if(player.CanHoldResources(materialType))
         {
             currentHealth -= damage;
             if(currentHealth <= 0)
             {
                 player.AddResources(dropQuantity, materialType);
-                GD.Print($"Dodano +{dropQuantity} laczna ilosc {player.woodCount}");
                 QueueFree();   
             }
         }
@@ -75,5 +75,13 @@ public partial class DestructibleEntity : Node2D
             if(distance >= 30) return;
             Player.localPlayer.PerformToolAction(GlobalPosition, () => { RpcId(1, MethodName.RequestTakeDamage, (int)Player.localPlayer.activeTool); });
         }
+    }
+    [Rpc(MultiplayerApi.RpcMode.Authority, CallLocal = true)]
+    public void PlayHitEffectRpc()
+    {
+        var particles = GetNode<CpuParticles2D>("CPUParticles2D");
+        particles.Emitting = true;
+        var particles2 = GetNode<CpuParticles2D>("CPUParticles2D2");
+        particles2.Emitting = true;
     }
 }
