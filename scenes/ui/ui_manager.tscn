@@ -1,0 +1,72 @@
+[gd_scene format=3 uid="uid://bd4sqddmbapby"]
+
+[ext_resource type="Script" uid="uid://bpf7ukrr4mug3" path="res://scripts/UI/UiManager.cs" id="1_js4l8"]
+[ext_resource type="PackedScene" uid="uid://bb0a1df7f2soc" path="res://scenes/ui/universal_panel.tscn" id="1_qjbkm"]
+[ext_resource type="Texture2D" uid="uid://svqcdvyu7pq" path="res://assets/UI/wood.png" id="2_b2463"]
+[ext_resource type="Texture2D" uid="uid://crxagmfk4qanm" path="res://assets/UI/rock.png" id="3_js4l8"]
+[ext_resource type="PackedScene" uid="uid://cn01ilyqiik87" path="res://scenes/ui/ToolSelector.tscn" id="5_61ox6"]
+
+[node name="UIManager" type="CanvasLayer" unique_id=760827620 node_paths=PackedStringArray("woodCounter", "rockCounter")]
+script = ExtResource("1_js4l8")
+woodCounter = NodePath("Inventory/ContentArea/VBoxContainer/Wood/WoodLabel")
+rockCounter = NodePath("Inventory/ContentArea/VBoxContainer/Rock/RockLabel")
+
+[node name="Inventory" parent="." unique_id=539582501 instance=ExtResource("1_qjbkm")]
+offset_left = -2.5
+offset_right = -1088.5
+offset_bottom = -567.0
+
+[node name="ContentArea" parent="Inventory" index="1" unique_id=315561503]
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Inventory/ContentArea" index="0" unique_id=1745672366]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Inventory/ContentArea/VBoxContainer" unique_id=1842328587]
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+text = "Inventory"
+
+[node name="Wood" type="HBoxContainer" parent="Inventory/ContentArea/VBoxContainer" unique_id=227462548]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="Inventory/ContentArea/VBoxContainer/Wood" unique_id=1532053501]
+texture_filter = 1
+custom_minimum_size = Vector2(16, 16)
+layout_mode = 2
+texture = ExtResource("2_b2463")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="WoodLabel" type="Label" parent="Inventory/ContentArea/VBoxContainer/Wood" unique_id=112214357]
+layout_mode = 2
+
+[node name="Rock" type="HBoxContainer" parent="Inventory/ContentArea/VBoxContainer" unique_id=969577290]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="Inventory/ContentArea/VBoxContainer/Rock" unique_id=2079488835]
+texture_filter = 1
+custom_minimum_size = Vector2(16, 16)
+layout_mode = 2
+texture = ExtResource("3_js4l8")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="RockLabel" type="Label" parent="Inventory/ContentArea/VBoxContainer/Rock" unique_id=1489729606]
+layout_mode = 2
+
+[node name="ToolSelector" parent="." unique_id=1773280794 instance=ExtResource("5_61ox6")]
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -137.0
+offset_top = -212.0
+grow_horizontal = 0
+grow_vertical = 0
+
+[editable path="Inventory"]

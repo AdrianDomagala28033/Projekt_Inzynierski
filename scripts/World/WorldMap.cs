@@ -26,7 +26,6 @@ public partial class WorldMap : Node2D
 
 	[Export] public PackedScene[] trees;
 	[Export] public PackedScene[] rocks;
-	[Export] public PackedScene[] shrubs;
 
     private Tiles[,] worldMap;
     private FastNoiseLite noise;
@@ -56,62 +55,23 @@ public partial class WorldMap : Node2D
 
     private void DrawGround()
     {
+		int waterAtlasId = 5;
+		int sandAtlasId = 6;
+		int grassAtlasId = 7;
         for (int x = 0; x < worldWidth; x++)
         {
             for (int y = 0; y < worldHeight; y++)
             {
                 if(worldMap[x, y] == Tiles.grass)
-                {
-                    float value = noise.GetNoise2D(x, y);
-                    if(value >= -0.4 && value <= 0.4)
-                        groundLayer.SetCell(new Vector2I(x, y), 0, new Vector2I(0,3));
-                    else if(value < -0.4)
-                    {
-                        List<Vector2I> darkGrass = new List<Vector2I>();
-                        darkGrass.Add(new Vector2I(4,2));
-                        darkGrass.Add(new Vector2I(5,2));
-                        darkGrass.Add(new Vector2I(6,2));
-                        groundLayer.SetCell(new Vector2I(x, y), 0, darkGrass[rng.Next(0, 3)]);
-                    }
-                    else if(value > 0.4)
-                    {
-                        List<Vector2I> darkGrass = new List<Vector2I>();
-                        darkGrass.Add(new Vector2I(1,2));
-                        darkGrass.Add(new Vector2I(2,2));
-                        darkGrass.Add(new Vector2I(3,2));
-                        darkGrass.Add(new Vector2I(2,3));
-                        darkGrass.Add(new Vector2I(3,3));
-                        darkGrass.Add(new Vector2I(1,4));
-                        darkGrass.Add(new Vector2I(2,4));
-                        groundLayer.SetCell(new Vector2I(x, y), 0, darkGrass[rng.Next(0, 7)]);
-                    }
-                }
+					groundLayer.SetCell(new Vector2I(x, y), grassAtlasId, new Vector2I(0, 0));
                 else if(worldMap[x, y] == Tiles.water)
-                {
-                    int offsetX = x % 4;
-                    int offsetY = y % 4;
-                    groundLayer.SetCell(new Vector2I(x, y), 0, new Vector2I(11 + offsetX, 18 + offsetY));
-                }
+					groundLayer.SetCell(new Vector2I(x, y), waterAtlasId, new Vector2I(1, 1));
                 else if(worldMap[x, y] == Tiles.sand)
-                {
-                    float value = noise.GetNoise2D(x, y);
-                    if(value >= -0.4 && value <= 0.4)
-                        groundLayer.SetCell(new Vector2I(x, y), 0, new Vector2I(5, 1));
-                    else if(value < -0.4)
-                    {
-                        List<Vector2I> darkGrass = new List<Vector2I>();
-                        darkGrass.Add(new Vector2I(7,1));
-                        darkGrass.Add(new Vector2I(8,1));
-                        groundLayer.SetCell(new Vector2I(x, y), 0, darkGrass[rng.Next(0, 2)]);
-                    }
-                    else if(value > 0.4)
-                    {
-                        List<Vector2I> darkGrass = new List<Vector2I>();
-                        darkGrass.Add(new Vector2I(8,1));
-                        darkGrass.Add(new Vector2I(9,1));
-                        groundLayer.SetCell(new Vector2I(x, y), 0, darkGrass[rng.Next(0, 2)]);
-                    }
-                }
+				{
+					int offsetX = x % 2;
+                    int offsetY = y % 2;
+                    groundLayer.SetCell(new Vector2I(x, y), sandAtlasId, new Vector2I(offsetX, offsetY));
+				}
             }
         }
     }
@@ -227,9 +187,9 @@ public partial class WorldMap : Node2D
 						{
 							if (!occupied[x, y])
 							{
-								var instance = trees[1].Instantiate<Node2D>();
+								var instance = trees[0].Instantiate<Node2D>();
 								instance.Position = resourcesLayer.MapToLocal(new Vector2I(x, y));
-								GetNode("ResourcesManager/ResourcesContainer").AddChild(instance);
+								GetNode("ResourcesManager/ResourcesContainer").AddChild(instance, forceReadableName: true);
 								for (int i = x; i <= x+1; i++)
 									for (int j = y; j <= y+1; j++)
 										if(i < worldWidth && j < worldHeight)
@@ -247,7 +207,7 @@ public partial class WorldMap : Node2D
 							{
 								var instance = rocks[rng.Next(0, rocks.Length)].Instantiate<Node2D>();
 								instance.Position = resourcesLayer.MapToLocal(new Vector2I(x, y));
-								GetNode("ResourcesManager/ResourcesContainer").AddChild(instance);
+								GetNode("ResourcesManager/ResourcesContainer").AddChild(instance, forceReadableName: true);
 								for (int i = x; i <= x+1; i++)
 									for (int j = y; j <= y+1; j++)
 										if(i < worldWidth && j < worldHeight)
@@ -264,12 +224,12 @@ public partial class WorldMap : Node2D
 	}
 
         public Tiles GetTile(int x, int y)
-    {
-        if (x >= 0 && x < worldWidth && y >= 0 && y < worldHeight)
-            return worldMap[x, y];
-            
-        return Tiles.water;
-    }
+		{
+			if (x >= 0 && x < worldWidth && y >= 0 && y < worldHeight)
+				return worldMap[x, y];
+				
+			return Tiles.water;
+		}
 	
 	
 }

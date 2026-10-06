@@ -1,0 +1,55 @@
+[gd_scene format=3 uid="uid://dw0c58loaub24"]
+
+[ext_resource type="PackedScene" uid="uid://d4l4krkdyi2in" path="res://scenes/ui/CustomLabel.tscn" id="1_mhm73"]
+[ext_resource type="Texture2D" uid="uid://mxepq22qjtnn" path="res://assets/UI/itemdisc_01.png" id="2_rf20v"]
+[ext_resource type="Texture2D" uid="uid://dnva3atnrr4t8" path="res://assets/UI/axe.png" id="3_ccwnu"]
+
+[node name="ToolSlot" type="HBoxContainer" unique_id=1537237500]
+offset_right = 71.0
+offset_bottom = 43.0
+alignment = 2
+
+[node name="LabelMask" type="Control" parent="." unique_id=1973561972]
+clip_contents = true
+layout_mode = 2
+
+[node name="CustomLabel" parent="LabelMask" unique_id=705885460 instance=ExtResource("1_mhm73")]
+custom_minimum_size = Vector2(80, 0)
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_bottom = 0.0
+offset_left = -80.0
+offset_bottom = 50.0
+grow_horizontal = 0
+grow_vertical = 1
+
+[node name="MarginContainer" parent="LabelMask/CustomLabel" index="1" unique_id=1811931095]
+theme_override_constants/margin_left = 15
+theme_override_constants/margin_right = 20
+
+[node name="Label" parent="LabelMask/CustomLabel/MarginContainer" index="0" unique_id=89738334]
+text = "Axe"
+
+[node name="IconWrapper" type="Control" parent="." unique_id=582108736]
+custom_minimum_size = Vector2(30, 50)
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="IconWrapper" unique_id=826092765]
+texture_filter = 1
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 0
+offset_left = -22.0
+offset_right = 26.0
+offset_bottom = 50.0
+texture = ExtResource("2_rf20v")
+
+[node name="TextureRect2" type="TextureRect" parent="IconWrapper/TextureRect" unique_id=1683052530]
+layout_mode = 0
+offset_left = 9.0
+offset_top = 6.0
+offset_right = 44.0
+offset_bottom = 41.0
+texture = ExtResource("3_ccwnu")
+
+[editable path="LabelMask/CustomLabel"]
