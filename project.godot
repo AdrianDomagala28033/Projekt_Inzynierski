@@ -29,6 +29,10 @@ GameManager="*uid://cyyjfmlngicnw"
 
 project/assembly_name="inzynierka prototyp"
 
+[global_group]
+
+player=""
+
 [input]
 
 move_left={

@@ -1,0 +1,106 @@
+[gd_scene format=3 uid="uid://m5qibitmakr2"]
+
+[ext_resource type="Script" uid="uid://blca84csjif14" path="res://scripts/Buildings/Walls/Wall.cs" id="1_wihx0"]
+[ext_resource type="Texture2D" uid="uid://cj7njn2uv7ol4" path="res://assets/buildingsAssets/Walls/Volcano_Wall.png" id="2_wihx0"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qhwpi"]
+atlas = ExtResource("2_wihx0")
+region = Rect2(16, 48, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4no4r"]
+atlas = ExtResource("2_wihx0")
+region = Rect2(48, 48, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_aliyh"]
+atlas = ExtResource("2_wihx0")
+region = Rect2(16, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ap3br"]
+atlas = ExtResource("2_wihx0")
+region = Rect2(48, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ax6ea"]
+atlas = ExtResource("2_wihx0")
+region = Rect2(32, 48, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ntouj"]
+atlas = ExtResource("2_wihx0")
+region = Rect2(0, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tcg2n"]
+atlas = ExtResource("2_wihx0")
+region = Rect2(0, 16, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_wxvp1"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qhwpi")
+}],
+"loop": 1,
+"name": &"corner_bottom_left",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4no4r")
+}],
+"loop": 1,
+"name": &"corner_bottom_right",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_aliyh")
+}],
+"loop": 1,
+"name": &"corner_top_left",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ap3br")
+}],
+"loop": 1,
+"name": &"corner_top_right",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ax6ea")
+}],
+"loop": 1,
+"name": &"horizontal",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ntouj")
+}],
+"loop": 0,
+"name": &"vertical_left",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tcg2n")
+}],
+"loop": 0,
+"name": &"vertical_right",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mtxbc"]
+size = Vector2(16, 16)
+
+[node name="VolcanicWall" type="StaticBody2D" unique_id=1329918865]
+script = ExtResource("1_wihx0")
+MaxHealth = 150
+ReflectedDamage = 10
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1769233361]
+sprite_frames = SubResource("SpriteFrames_wxvp1")
+animation = &"vertical_right"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1083109595]
+shape = SubResource("RectangleShape2D_mtxbc")
