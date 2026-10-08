@@ -1,0 +1,79 @@
+[gd_scene format=3 uid="uid://1us7uo1ljkh0"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_yrx5q"]
+animations = [{
+"frames": [],
+"loop": 0,
+"name": &"attack_down",
+"speed": 5.0
+}, {
+"frames": [],
+"loop": 0,
+"name": &"attack_side",
+"speed": 5.0
+}, {
+"frames": [],
+"loop": 0,
+"name": &"attack_up",
+"speed": 5.0
+}, {
+"frames": [],
+"loop": 0,
+"name": &"death",
+"speed": 5.0
+}, {
+"frames": [],
+"loop": 0,
+"name": &"hurt_down",
+"speed": 5.0
+}, {
+"frames": [],
+"loop": 0,
+"name": &"hurt_side",
+"speed": 5.0
+}, {
+"frames": [],
+"loop": 0,
+"name": &"hurt_up",
+"speed": 5.0
+}, {
+"frames": [],
+"loop": 1,
+"name": &"idle_down",
+"speed": 5.0
+}, {
+"frames": [],
+"loop": 1,
+"name": &"idle_side",
+"speed": 5.0
+}, {
+"frames": [],
+"loop": 1,
+"name": &"idle_up",
+"speed": 5.0
+}, {
+"frames": [],
+"loop": 1,
+"name": &"run_down",
+"speed": 5.0
+}, {
+"frames": [],
+"loop": 1,
+"name": &"run_side",
+"speed": 5.0
+}, {
+"frames": [],
+"loop": 1,
+"name": &"run_up",
+"speed": 5.0
+}]
+
+[node name="SzablonPrzeciwnika" type="CharacterBody2D" unique_id=1906671376]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1444370035]
+y_sort_enabled = true
+position = Vector2(0, -8)
+sprite_frames = SubResource("SpriteFrames_yrx5q")
+animation = &"run_up"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1996015064]

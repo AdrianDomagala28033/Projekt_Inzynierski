@@ -19,17 +19,38 @@ public partial class Bolt : Area2D
         GlobalPosition += Direction * Speed * (float)delta;
     }
 
+    public void Initialize(Node2D target, int damage)
+    {
+        Damage = damage;
+        
+        if (IsInstanceValid(target))
+        {
+            Direction = (target.GlobalPosition - GlobalPosition).Normalized();
+            
+            Rotation = Direction.Angle(); 
+        }
+    }
+
     private void OnBodyEntered(Node2D body)
     {
+        if (body is EnemyBase enemy)
+        {
+            enemy.TakeDamage(Damage);
+            QueueFree();
+            return;
+        }
+
         if (body.IsInGroup("walls"))
         {
-            if (body is Wall hitWall)
+            if (body.HasMethod("TakeDamage"))
             {
-                hitWall.TakeDamage(Damage);
+                body.Call("TakeDamage", Damage);
             }
             QueueFree();
+            return;
         }
-        else if (body.IsInGroup("player"))
+        
+        if (body.IsInGroup("player"))
         {
             if (body.HasMethod("TakeDamage"))
             {

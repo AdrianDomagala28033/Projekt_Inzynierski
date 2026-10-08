@@ -95,10 +95,13 @@ size = Vector2(16, 16)
 
 [node name="WoodWall" type="StaticBody2D" unique_id=1329918865]
 script = ExtResource("1_xw4up")
+MaxHealth = 50
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1769233361]
+position = Vector2(-8, -8)
 sprite_frames = SubResource("SpriteFrames_wxvp1")
 animation = &"vertical_right"
+centered = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1083109595]
 shape = SubResource("RectangleShape2D_mtxbc")

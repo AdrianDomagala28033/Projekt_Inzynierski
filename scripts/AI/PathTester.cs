@@ -8,14 +8,18 @@ public partial class PathTester : Node2D
     private Node2D _playerNode;
     
     private const int TileSize = 16;
+    private const int PenaltyMultiplier = 10;
     
     public override void _Ready()
     {
         _aiManager = GetNode<AiGridManager>("../AiGridManager");
 
-        _enemyScene = GD.Load<PackedScene>("res://scenes/AI/Characters/Enemies/Goblins/Goblin_Archer.tscn");
+        //_enemyScene = GD.Load<PackedScene>("res://scenes/AI/Characters/Enemies/Goblins/Goblin_Archer.tscn");
         //_enemyScene = GD.Load<PackedScene>("res://scenes/AI/Characters/Enemies/Goblins/Goblin_Maceman.tscn");
-        
+        //_enemyScene = GD.Load<PackedScene>("res://scenes/AI/Characters/Enemies/Kamikaze_Mushroom.tscn");
+        _enemyScene = GD.Load<PackedScene>("res://scenes/AI/Characters/Enemies/Slimes/Blue/Slime_Big_Blue.tscn");
+
+
         _playerNode = GetNodeOrNull<Node2D>("../../DummyPlayer");
         
         if (_playerNode == null)
@@ -23,23 +27,42 @@ public partial class PathTester : Node2D
             GD.PrintErr("[PathTester] UWAGA: Nie znaleziono DummyPlayer przy starcie!");
         }
 
-        CallDeferred(nameof(RegisterWalls));
+        CallDeferred(nameof(RegisterAllStructures));
+        CallDeferred(nameof(RegisterWater));
     }
 
-    private void RegisterWalls()
+   private void RegisterAllStructures()
     {
-        var walls = GetTree().GetNodesInGroup("walls");
-        foreach (Node node in walls)
+        var allBuildings = GetTree().GetNodesInGroup("buildings");
+        
+        foreach (Node node in allBuildings)
         {
-            if (node is Wall wall)
+            if (node is Building building) 
             {
-                Vector2I gridPos = new Vector2I(
-                    Mathf.FloorToInt(wall.GlobalPosition.X / TileSize),
-                    Mathf.FloorToInt(wall.GlobalPosition.Y / TileSize)
-                );
+                building.GridManager = _aiManager;
+                int calculatedPenalty = Mathf.Max(0, building.MaxHealth) * PenaltyMultiplier;
                 
-                _aiManager.SetObstaclePenalty(gridPos, wall.MaxHealth);
-                GD.Print($"[PathTester] Zarejestrowano mur na siatce {gridPos} z karą {wall.MaxHealth}");
+                building.UpdateGridPenalties(calculatedPenalty);
+                
+                GD.Print($"[PathTester] Zarejestrowano strukturę {building.Name} z karą {calculatedPenalty}");
+            }
+        }
+    }
+
+    private void RegisterWater()
+    {
+        TileMapLayer groundLayer = GetNodeOrNull<TileMapLayer>("../../GroundLayer");
+        if (groundLayer == null) return;
+
+        var usedCells = groundLayer.GetUsedCells();
+        
+        foreach (Vector2I cell in usedCells)
+        {
+            int sourceId = groundLayer.GetCellSourceId(cell);
+            
+            if (sourceId == 5) 
+            {
+                _aiManager.BlockCell(cell);
             }
         }
     }
@@ -93,6 +116,21 @@ public partial class PathTester : Node2D
                 Vector2 p2 = new Vector2(_currentTestEnemy.CurrentPath[i+1].X * TileSize + (TileSize / 2f), _currentTestEnemy.CurrentPath[i+1].Y * TileSize + (TileSize / 2f));
                 
                 DrawLine(p1, p2, Colors.Red, 2.0f);
+            }
+        }
+
+        // WIZUALIZACJA KAR (Do usuniecia potem)
+        if (_aiManager != null && _aiManager.ObstaclePenalties != null)
+        {
+            for (int x = 0; x < _aiManager.ObstaclePenalties.GetLength(0); x++)
+            {
+                for (int y = 0; y < _aiManager.ObstaclePenalties.GetLength(1); y++)
+                {
+                    if (_aiManager.ObstaclePenalties[x, y] > 0)
+                    {
+                        DrawRect(new Rect2(x * TileSize, y * TileSize, TileSize, TileSize), new Color(1, 0, 0, 0.4f));
+                    }
+                }
             }
         }
     }

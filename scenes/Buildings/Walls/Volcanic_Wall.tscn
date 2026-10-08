@@ -95,8 +95,8 @@ size = Vector2(16, 16)
 
 [node name="VolcanicWall" type="StaticBody2D" unique_id=1329918865]
 script = ExtResource("1_wihx0")
-MaxHealth = 150
 ReflectedDamage = 10
+MaxHealth = 150
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1769233361]
 sprite_frames = SubResource("SpriteFrames_wxvp1")

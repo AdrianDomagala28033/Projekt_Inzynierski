@@ -1,12 +1,13 @@
 using Godot;
 using System.Collections.Generic;
 
-public partial class EnemyBase : CharacterBody2D
+public partial class EnemyBase : CharacterBody2D, IDamageable
 {
     [ExportGroup("Base Stats")]
     [Export] public int MaxHealth = 50;
     [Export] public float Speed = 100f;
     [Export] public bool IsFlying = false; 
+    public int PathObstacleWeight = 1;
 
     [ExportGroup("Navigation")]
     [Export] public Node2D TargetPlayer; 
@@ -68,7 +69,7 @@ public partial class EnemyBase : CharacterBody2D
         }
     }
 
-    public virtual async void TakeDamage(int amount)
+    public virtual async void TakeDamage(int amount, Node2D attacker = null)
     {
         if (_isDead) return;
 
@@ -83,6 +84,8 @@ public partial class EnemyBase : CharacterBody2D
                 _animatedSprite.Play("death");
             
             await ToSignal(_animatedSprite, AnimatedSprite2D.SignalName.AnimationFinished);
+            
+            OnDeath(); // <--- DODANY HAK NA ŚMIERĆ
             QueueFree(); 
         }
         else
@@ -90,7 +93,7 @@ public partial class EnemyBase : CharacterBody2D
             _isHurt = true;
             
             if (_animatedSprite != null) 
-                _animatedSprite.Play("hurt_" + _currentFacing); // Obrażenia pozostają kierunkowe
+                _animatedSprite.Play("hurt_" + _currentFacing); 
                 
             await ToSignal(_animatedSprite, AnimatedSprite2D.SignalName.AnimationFinished);
             _isHurt = false;
@@ -102,7 +105,7 @@ public partial class EnemyBase : CharacterBody2D
         Vector2I startGridPos = new Vector2I(Mathf.FloorToInt(GlobalPosition.X / TileSize), Mathf.FloorToInt(GlobalPosition.Y / TileSize));
         Vector2I targetGridPos = new Vector2I(Mathf.FloorToInt(TargetPlayer.GlobalPosition.X / TileSize), Mathf.FloorToInt(TargetPlayer.GlobalPosition.Y / TileSize));
 
-        List<Vector2I> newPath = GridManager.FindPath(startGridPos, targetGridPos);
+        List<Vector2I> newPath = GridManager.FindPath(startGridPos, targetGridPos, PathObstacleWeight);
         
         if (newPath != null)
         {
@@ -140,4 +143,7 @@ public partial class EnemyBase : CharacterBody2D
         }
         return totalPenalty;
     }
+
+        protected virtual void OnDeath(){}
+
 }
