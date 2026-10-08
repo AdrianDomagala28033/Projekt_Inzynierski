@@ -24,7 +24,7 @@ public partial class Building : StaticBody2D, IDamageable
 
         GD.Print($"[{Name}] Inspektor przekazał tablicę o rozmiarze: {OccupiedTilesOffsets.Length}");
 
-        OccupiedTilesOffsets = new Vector2[] { new Vector2(0, 0), new Vector2(-1, 0) };
+        //OccupiedTilesOffsets = new Vector2[] { new Vector2(0, 0), new Vector2(-1, 0) };
 
         if (GridManager != null)
         {

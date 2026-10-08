@@ -1,0 +1,84 @@
+[gd_scene format=3 uid="uid://cc1ccpvehcxfe"]
+
+[ext_resource type="Texture2D" uid="uid://buwrwnfjudimm" path="res://assets/enemiesAssets/Bolts/Magic_Projectile.png" id="1_oct2m"]
+[ext_resource type="Script" uid="uid://xf67pmia04ue" path="res://scripts/Enemies/Bolt.cs" id="1_wjkpv"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wjkpv"]
+atlas = ExtResource("1_oct2m")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qvm3f"]
+atlas = ExtResource("1_oct2m")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_y1tx1"]
+atlas = ExtResource("1_oct2m")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2bklp"]
+atlas = ExtResource("1_oct2m")
+region = Rect2(48, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_w762x"]
+atlas = ExtResource("1_oct2m")
+region = Rect2(64, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fucrn"]
+atlas = ExtResource("1_oct2m")
+region = Rect2(80, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_oetj3"]
+atlas = ExtResource("1_oct2m")
+region = Rect2(96, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_s47cd"]
+atlas = ExtResource("1_oct2m")
+region = Rect2(112, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_oct2m"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wjkpv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qvm3f")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_y1tx1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2bklp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_w762x")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fucrn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_oetj3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_s47cd")
+}],
+"loop": 1,
+"name": &"default",
+"speed": 10.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_381mk"]
+size = Vector2(13.500004, 5.0000014)
+
+[node name="MagicBolt" type="Area2D" unique_id=1408603465]
+script = ExtResource("1_wjkpv")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=2048925912]
+rotation = -1.5707964
+scale = Vector2(1.447, 1.5)
+sprite_frames = SubResource("SpriteFrames_oct2m")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1344804211]
+position = Vector2(1.25, -0.49999994)
+scale = Vector2(0.9999996, 0.9999996)
+shape = SubResource("RectangleShape2D_381mk")

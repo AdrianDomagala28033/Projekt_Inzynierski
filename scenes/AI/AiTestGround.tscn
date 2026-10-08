@@ -103,7 +103,7 @@ tile_map_data = PackedByteArray("AAAAAAAABQABAAEAAAAAAAEABQABAAEAAAAAAAIABQABAAE
 tile_set = SubResource("TileSet_6nlra")
 
 [node name="DummyPlayer" parent="." unique_id=2011542992 instance=ExtResource("5_q2tve")]
-position = Vector2(328, 472)
+position = Vector2(760, 408)
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1251328442]
 script = ExtResource("2_eb3v6")
@@ -283,7 +283,7 @@ animation = &"vertical_left"
 
 [node name="ArcherTower" parent="." unique_id=1476660522 instance=ExtResource("11_46v5p")]
 y_sort_enabled = true
-position = Vector2(336, 448)
+position = Vector2(304, 384)
 
 [editable path="StoneWall"]
 [editable path="StoneWall2"]

@@ -14,10 +14,12 @@ public partial class PathTester : Node2D
     {
         _aiManager = GetNode<AiGridManager>("../AiGridManager");
 
-        //_enemyScene = GD.Load<PackedScene>("res://scenes/AI/Characters/Enemies/Goblins/Goblin_Archer.tscn");
-        //_enemyScene = GD.Load<PackedScene>("res://scenes/AI/Characters/Enemies/Goblins/Goblin_Maceman.tscn");
-        //_enemyScene = GD.Load<PackedScene>("res://scenes/AI/Characters/Enemies/Kamikaze_Mushroom.tscn");
-        _enemyScene = GD.Load<PackedScene>("res://scenes/AI/Characters/Enemies/Slimes/Blue/Slime_Big_Blue.tscn");
+        //_enemyScene = GD.Load<PackedScene>("res://scenes/Goblins/Goblin_Archer.tscn");
+        //_enemyScene = GD.Load<PackedScene>("res://scenes/Enemies/Goblins/Goblin_Maceman.tscn");
+        //_enemyScene = GD.Load<PackedScene>("res://scenes/Enemies/Kamikaze_Mushroom.tscn");
+        //_enemyScene = GD.Load<PackedScene>("res://scenes/Enemies/Slimes/Blue/Slime_Big_Blue.tscn");
+        _enemyScene = GD.Load<PackedScene>("res://scenes/Enemies/Skeletons/Skeleton_Mage.tscn");
+        //_enemyScene = GD.Load<PackedScene>("res://scenes/Enemies/Skeletons/Skeleton_Bowman.tscn");
 
 
         _playerNode = GetNodeOrNull<Node2D>("../../DummyPlayer");

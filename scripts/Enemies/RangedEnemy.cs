@@ -90,6 +90,8 @@ public partial class RangedEnemy : EnemyBase
             projectile.GlobalPosition = this.GlobalPosition;
             projectile.Damage = AttackDamage;
             
+            projectile.IsPlayerProjectile = false;
+            
             projectile.Direction = (targetPosition - this.GlobalPosition).Normalized();
             projectile.Rotation = projectile.Direction.Angle();
             
