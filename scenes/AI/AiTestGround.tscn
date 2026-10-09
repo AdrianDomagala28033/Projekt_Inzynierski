@@ -11,6 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://dmqi1ct61s1fm" path="res://scenes/Buildings/Walls/Stone_Wall.tscn" id="7_rbo2e"]
 [ext_resource type="PackedScene" uid="uid://m5qibitmakr2" path="res://scenes/Buildings/Walls/Volcanic_Wall.tscn" id="8_i6a8j"]
 [ext_resource type="PackedScene" uid="uid://d2py1omgud5iy" path="res://scenes/Buildings/Turrets/ArcherTower.tscn" id="11_46v5p"]
+[ext_resource type="PackedScene" uid="uid://4wm2fsocowdy" path="res://scenes/Buildings/Turrets/WitchTower.tscn" id="12_c13po"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_u2spj"]
 texture = ExtResource("2_46v5p")
@@ -103,7 +104,7 @@ tile_map_data = PackedByteArray("AAAAAAAABQABAAEAAAAAAAEABQABAAEAAAAAAAIABQABAAE
 tile_set = SubResource("TileSet_6nlra")
 
 [node name="DummyPlayer" parent="." unique_id=2011542992 instance=ExtResource("5_q2tve")]
-position = Vector2(760, 408)
+position = Vector2(312, 232)
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1251328442]
 script = ExtResource("2_eb3v6")
@@ -283,7 +284,10 @@ animation = &"vertical_left"
 
 [node name="ArcherTower" parent="." unique_id=1476660522 instance=ExtResource("11_46v5p")]
 y_sort_enabled = true
-position = Vector2(304, 384)
+position = Vector2(272, 256)
+
+[node name="WitchTower" parent="." unique_id=474387470 instance=ExtResource("12_c13po")]
+position = Vector2(191, 560)
 
 [editable path="StoneWall"]
 [editable path="StoneWall2"]

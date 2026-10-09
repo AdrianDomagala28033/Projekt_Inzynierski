@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://rjh5hd1n5lpi"]
 
 [ext_resource type="Script" uid="uid://b4mici082u0le" path="res://scripts/Enemies/SlimeEnemy.cs" id="1_8kktc"]
-[ext_resource type="PackedScene" uid="uid://cq8epq4gjnk5" path="res://scenes/AI/Characters/Enemies/Slimes/Blue/Slime_Medium_Blue.tscn" id="2_fl5ek"]
+[ext_resource type="PackedScene" uid="uid://cq8epq4gjnk5" path="res://scenes/Enemies/Slimes/Blue/Slime_Medium_Blue.tscn" id="2_fl5ek"]
 [ext_resource type="Texture2D" uid="uid://c1n4yxu6ubsb" path="res://assets/enemiesAssets/Slime/Slime_Big/Slime_Big_Blue.png" id="2_xeec3"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_fl5ek"]
@@ -548,8 +548,8 @@ animations = [{
 "speed": 5.0
 }]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_ge6w4"]
-radius = 3.0
+[sub_resource type="CircleShape2D" id="CircleShape2D_fgkyo"]
+radius = 4.1231055
 
 [node name="Slime_Big_Blue" type="CharacterBody2D" unique_id=1423488484]
 script = ExtResource("1_8kktc")
@@ -560,7 +560,6 @@ position = Vector2(0, -8)
 sprite_frames = SubResource("SpriteFrames_glnnl")
 animation = &"run_up"
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=190574616]
-y_sort_enabled = true
-position = Vector2(0, -4)
-shape = SubResource("CircleShape2D_ge6w4")
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=322377913]
+position = Vector2(0, -5)
+shape = SubResource("CircleShape2D_fgkyo")

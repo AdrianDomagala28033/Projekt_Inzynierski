@@ -38,6 +38,11 @@ public partial class EnemyBase : CharacterBody2D, IDamageable
         {
             GridManager = GetNodeOrNull<AiGridManager>("../../AiGridManager");
         }
+
+        if (IsFlying)
+        {
+            this.CollisionMask = 0;
+        }
     }
 
     public override void _PhysicsProcess(double delta)
@@ -85,7 +90,7 @@ public partial class EnemyBase : CharacterBody2D, IDamageable
             
             await ToSignal(_animatedSprite, AnimatedSprite2D.SignalName.AnimationFinished);
             
-            OnDeath(); // <--- DODANY HAK NA ŚMIERĆ
+            OnDeath();
             QueueFree(); 
         }
         else
@@ -104,6 +109,14 @@ public partial class EnemyBase : CharacterBody2D, IDamageable
     {
         Vector2I startGridPos = new Vector2I(Mathf.FloorToInt(GlobalPosition.X / TileSize), Mathf.FloorToInt(GlobalPosition.Y / TileSize));
         Vector2I targetGridPos = new Vector2I(Mathf.FloorToInt(TargetPlayer.GlobalPosition.X / TileSize), Mathf.FloorToInt(TargetPlayer.GlobalPosition.Y / TileSize));
+
+        if (IsFlying)
+        {
+            CurrentPath = new List<Vector2I> { startGridPos, targetGridPos };
+            _currentPathIndex = 1;
+            _targetedObstacle = null; 
+            return; 
+        }
 
         List<Vector2I> newPath = GridManager.FindPath(startGridPos, targetGridPos, PathObstacleWeight);
         
@@ -144,6 +157,5 @@ public partial class EnemyBase : CharacterBody2D, IDamageable
         return totalPenalty;
     }
 
-        protected virtual void OnDeath(){}
-
+    protected virtual void OnDeath(){}
 }

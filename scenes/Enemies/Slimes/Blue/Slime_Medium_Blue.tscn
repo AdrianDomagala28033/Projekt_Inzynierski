@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://cq8epq4gjnk5"]
 
 [ext_resource type="Script" uid="uid://b4mici082u0le" path="res://scripts/Enemies/SlimeEnemy.cs" id="1_xwv2v"]
-[ext_resource type="PackedScene" uid="uid://dcggmqdn25ng8" path="res://scenes/AI/Characters/Enemies/Slimes/Blue/Slime_Small_Blue.tscn" id="2_il5rl"]
+[ext_resource type="PackedScene" uid="uid://dcggmqdn25ng8" path="res://scenes/Enemies/Slimes/Blue/Slime_Small_Blue.tscn" id="2_il5rl"]
 [ext_resource type="Texture2D" uid="uid://d2oqd8kpcf2b1" path="res://assets/enemiesAssets/Slime/Slime_Medium/Slime_Medium_Blue.png" id="2_smwng"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_il5rl"]
@@ -344,7 +344,7 @@ animations = [{
 "speed": 5.0
 }]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_xeec3"]
+[sub_resource type="CircleShape2D" id="CircleShape2D_mos4x"]
 radius = 2.0
 
 [node name="Slime_Medium_Blue" type="CharacterBody2D" unique_id=1766386179]
@@ -353,11 +353,10 @@ NextSlimeScene = ExtResource("2_il5rl")
 MaxHealth = 30
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1115946062]
-position = Vector2(0, -8)
+position = Vector2(0, -4)
 sprite_frames = SubResource("SpriteFrames_h4meb")
 animation = &"idle_up"
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=230403171]
-y_sort_enabled = true
-position = Vector2(0, -7)
-shape = SubResource("CircleShape2D_xeec3")
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=612288945]
+position = Vector2(0, -2)
+shape = SubResource("CircleShape2D_mos4x")

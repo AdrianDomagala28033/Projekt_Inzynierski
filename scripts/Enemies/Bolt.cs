@@ -20,10 +20,10 @@ public partial class Bolt : Area2D
         GlobalPosition += Direction * Speed * (float)delta;
     }
 
-    public void Initialize(Node2D target, int damage, bool isPlayerProjectile = true)
+    public void Initialize(Node2D target, int damage)
     {
         Damage = damage;
-        IsPlayerProjectile = isPlayerProjectile;
+        IsPlayerProjectile = true;
         
         if (IsInstanceValid(target))
         {
@@ -53,7 +53,6 @@ public partial class Bolt : Area2D
             
             if (body.IsInGroup("player"))
             {
-                
                 if (body.HasMethod("TakeDamage"))
                 {
                     body.Call("TakeDamage", Damage);

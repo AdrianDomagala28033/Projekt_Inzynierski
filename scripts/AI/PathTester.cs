@@ -17,9 +17,11 @@ public partial class PathTester : Node2D
         //_enemyScene = GD.Load<PackedScene>("res://scenes/Goblins/Goblin_Archer.tscn");
         //_enemyScene = GD.Load<PackedScene>("res://scenes/Enemies/Goblins/Goblin_Maceman.tscn");
         //_enemyScene = GD.Load<PackedScene>("res://scenes/Enemies/Kamikaze_Mushroom.tscn");
-        //_enemyScene = GD.Load<PackedScene>("res://scenes/Enemies/Slimes/Blue/Slime_Big_Blue.tscn");
-        _enemyScene = GD.Load<PackedScene>("res://scenes/Enemies/Skeletons/Skeleton_Mage.tscn");
+          _enemyScene = GD.Load<PackedScene>("res://scenes/Enemies/Slimes/Blue/Slime_Big_Blue.tscn");
+        //_enemyScene = GD.Load<PackedScene>("res://scenes/Enemies/Skeletons/Skeleton_Mage.tscn");
         //_enemyScene = GD.Load<PackedScene>("res://scenes/Enemies/Skeletons/Skeleton_Bowman.tscn");
+        //_enemyScene = GD.Load<PackedScene>("res://scenes/Enemies/Angels/Angel_Dark.tscn");
+
 
 
         _playerNode = GetNodeOrNull<Node2D>("../../DummyPlayer");
