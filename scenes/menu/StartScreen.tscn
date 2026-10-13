@@ -5,6 +5,30 @@
 [ext_resource type="PackedScene" uid="uid://dun2niw8n0v51" path="res://scenes/player/PlayerAvatar.tscn" id="2_0d3p2"]
 [ext_resource type="FontFile" uid="uid://dkjntnelb5d1" path="res://assets/fonts/CuteFantasy-5x9.ttf" id="3_2dqng"]
 
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_2dqng"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cidlu"]
+atlas = ExtResource("1_oqfnq")
+region = Rect2(394, 1593, 28, 30)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_2dqng"]
+texture = SubResource("AtlasTexture_cidlu")
+texture_margin_left = 7.0
+texture_margin_top = 7.0
+texture_margin_right = 7.0
+texture_margin_bottom = 7.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_teigk"]
+atlas = ExtResource("1_oqfnq")
+region = Rect2(106, 1593, 28, 30)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_pqvbo"]
+texture = SubResource("AtlasTexture_teigk")
+texture_margin_left = 7.0
+texture_margin_top = 7.0
+texture_margin_right = 7.0
+texture_margin_bottom = 7.0
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_kgtat"]
 atlas = ExtResource("1_oqfnq")
 region = Rect2(1632, 352, 48, 16)
@@ -41,82 +65,25 @@ region = Rect2(1728, 368, 48, 16)
 atlas = ExtResource("1_oqfnq")
 region = Rect2(1680, 368, 48, 16)
 
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_2dqng"]
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_cidlu"]
-atlas = ExtResource("1_oqfnq")
-region = Rect2(394, 1593, 28, 30)
-
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_2dqng"]
-texture = SubResource("AtlasTexture_cidlu")
-texture_margin_left = 7.0
-texture_margin_top = 7.0
-texture_margin_right = 7.0
-texture_margin_bottom = 7.0
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_teigk"]
-atlas = ExtResource("1_oqfnq")
-region = Rect2(106, 1593, 28, 30)
-
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_pqvbo"]
-texture = SubResource("AtlasTexture_teigk")
-texture_margin_left = 7.0
-texture_margin_top = 7.0
-texture_margin_right = 7.0
-texture_margin_bottom = 7.0
-
-[node name="StartScreen" type="Control" unique_id=21551675]
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
+[node name="StartScreen" type="CanvasLayer" unique_id=1097494954]
+scale = Vector2(4, 4)
+transform = Transform2D(4, 0, 0, 4, 0, 0)
 script = ExtResource("1_xe8rp")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=559864671]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -24.0
-offset_top = -27.0
-offset_right = 24.0
-offset_bottom = 27.0
-grow_horizontal = 2
-grow_vertical = 2
+[node name="UIRoot" type="Control" parent="." unique_id=980545359]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 320.0
+offset_bottom = 180.0
 
-[node name="Play" type="TextureButton" parent="VBoxContainer" unique_id=1671152744]
-layout_mode = 2
-texture_normal = SubResource("AtlasTexture_kgtat")
-texture_pressed = SubResource("AtlasTexture_0d3p2")
-texture_hover = SubResource("AtlasTexture_2dqng")
-stretch_mode = 0
-
-[node name="Options" type="TextureButton" parent="VBoxContainer" unique_id=1788947503]
-layout_mode = 2
-texture_normal = SubResource("AtlasTexture_xe8rp")
-texture_pressed = SubResource("AtlasTexture_pqvbo")
-texture_hover = SubResource("AtlasTexture_krmyf")
-stretch_mode = 0
-
-[node name="Quit" type="TextureButton" parent="VBoxContainer" unique_id=122540249]
-layout_mode = 2
-texture_normal = SubResource("AtlasTexture_06wji")
-texture_pressed = SubResource("AtlasTexture_e18a7")
-texture_hover = SubResource("AtlasTexture_s82qc")
-stretch_mode = 0
-
-[node name="MarginContainer" type="MarginContainer" parent="." unique_id=200489440]
+[node name="MarginContainer" type="MarginContainer" parent="UIRoot" unique_id=200489440]
 layout_mode = 1
 anchors_preset = 6
 anchor_left = 1.0
 anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
-offset_left = -91.0
+offset_left = -100.0
 offset_top = -40.0
 offset_bottom = 40.0
 grow_horizontal = 0
@@ -124,15 +91,15 @@ grow_vertical = 2
 theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 20
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer" unique_id=8628634]
+[node name="VBoxContainer" type="VBoxContainer" parent="UIRoot/MarginContainer" unique_id=8628634]
 layout_mode = 2
 theme_override_constants/separation = -15
 
-[node name="CharacterPreview" parent="MarginContainer/VBoxContainer" unique_id=1307479886 instance=ExtResource("2_0d3p2")]
+[node name="CharacterPreview" parent="UIRoot/MarginContainer/VBoxContainer" unique_id=1307479886 instance=ExtResource("2_0d3p2")]
 layout_mode = 2
 size_flags_horizontal = 4
 
-[node name="Button" type="Button" parent="MarginContainer/VBoxContainer/CharacterPreview" unique_id=854099303]
+[node name="Button" type="Button" parent="UIRoot/MarginContainer/VBoxContainer/CharacterPreview" unique_id=854099303]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = -0.031000001
@@ -147,12 +114,47 @@ theme_override_styles/normal = SubResource("StyleBoxEmpty_2dqng")
 theme_override_styles/pressed = SubResource("StyleBoxTexture_2dqng")
 theme_override_styles/hover = SubResource("StyleBoxTexture_pqvbo")
 
-[node name="Label" type="Label" parent="MarginContainer/VBoxContainer" unique_id=449015394]
+[node name="Label" type="Label" parent="UIRoot/MarginContainer/VBoxContainer" unique_id=449015394]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("3_2dqng")
 theme_override_font_sizes/font_size = 9
 text = "Create your character"
 horizontal_alignment = 1
 
-[connection signal="pressed" from="VBoxContainer/Play" to="." method="OnPlayButtonPressed"]
-[connection signal="pressed" from="MarginContainer/VBoxContainer/CharacterPreview/Button" to="." method="OnChangeAvatarButtonPressed"]
+[node name="VBoxContainer" type="VBoxContainer" parent="UIRoot" unique_id=559864671]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -24.0
+offset_top = -27.0
+offset_right = 24.0
+offset_bottom = 27.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Play" type="TextureButton" parent="UIRoot/VBoxContainer" unique_id=1671152744]
+layout_mode = 2
+texture_normal = SubResource("AtlasTexture_kgtat")
+texture_pressed = SubResource("AtlasTexture_0d3p2")
+texture_hover = SubResource("AtlasTexture_2dqng")
+stretch_mode = 0
+
+[node name="Options" type="TextureButton" parent="UIRoot/VBoxContainer" unique_id=1788947503]
+layout_mode = 2
+texture_normal = SubResource("AtlasTexture_xe8rp")
+texture_pressed = SubResource("AtlasTexture_pqvbo")
+texture_hover = SubResource("AtlasTexture_krmyf")
+stretch_mode = 0
+
+[node name="Quit" type="TextureButton" parent="UIRoot/VBoxContainer" unique_id=122540249]
+layout_mode = 2
+texture_normal = SubResource("AtlasTexture_06wji")
+texture_pressed = SubResource("AtlasTexture_e18a7")
+texture_hover = SubResource("AtlasTexture_s82qc")
+stretch_mode = 0
+
+[connection signal="pressed" from="UIRoot/MarginContainer/VBoxContainer/CharacterPreview/Button" to="." method="OnChangeAvatarButtonPressed"]
+[connection signal="pressed" from="UIRoot/VBoxContainer/Play" to="." method="OnPlayButtonPressed"]

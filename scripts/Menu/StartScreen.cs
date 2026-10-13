@@ -1,7 +1,7 @@
 using Godot;
 using System;
 
-public partial class StartScreen : Control
+public partial class StartScreen : CanvasLayer
 {
     public event Action OnPlayPressed;
     public event Action OnChangeAvatarPressed;

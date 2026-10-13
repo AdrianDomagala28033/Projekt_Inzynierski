@@ -28,13 +28,15 @@ LoadingScreen="*uid://dko267twi788f"
 
 [display]
 
-window/size/viewport_width=320
-window/size/viewport_height=180
+window/size/viewport_width=1280
+window/size/viewport_height=720
 window/size/mode=1
 window/size/window_width_override=1280
 window/size/window_height_override=720
 window/stretch/mode="viewport"
 window/main_scene="uid://bjflko6rbkvw6"
+window/snap/snap_2d_vertices_to_pixel=false
+window/snap/snap_2d_transforms_to_pixel=false
 
 [dotnet]
 

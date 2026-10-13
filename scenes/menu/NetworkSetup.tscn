@@ -48,32 +48,34 @@ region = Rect2(465, 595, 14, 12)
 atlas = ExtResource("1_eemi4")
 region = Rect2(449, 594, 14, 13)
 
-[node name="NetworkSetup" type="Control" unique_id=1963997322 node_paths=PackedStringArray("LobbyCode")]
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
+[node name="NetworkSetup" type="CanvasLayer" unique_id=719617099 node_paths=PackedStringArray("LobbyCode")]
+scale = Vector2(4, 4)
+transform = Transform2D(4, 0, 0, 4, 0, 0)
 script = ExtResource("1_w24gt")
-LobbyCode = NodePath("TextureRect/RightPage/VBoxContainer/HBoxContainer/LobbyCode")
+LobbyCode = NodePath("UIRoot/TextureRect/RightPage/VBoxContainer/HBoxContainer/LobbyCode")
 
-[node name="TextureRect" type="TextureRect" parent="." unique_id=1212600162]
+[node name="UIRoot" type="Control" parent="." unique_id=1642947456]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 320.0
+offset_bottom = 180.0
+
+[node name="TextureRect" type="TextureRect" parent="UIRoot" unique_id=1212600162]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -20.0
-offset_top = -20.0
-offset_right = 20.0
-offset_bottom = 20.0
+offset_left = -112.0
+offset_top = -66.5
+offset_right = 112.0
+offset_bottom = 66.5
 grow_horizontal = 2
 grow_vertical = 2
 texture = SubResource("AtlasTexture_abukt")
 
-[node name="LeftPage" type="MarginContainer" parent="TextureRect" unique_id=16986982]
+[node name="LeftPage" type="MarginContainer" parent="UIRoot/TextureRect" unique_id=16986982]
 layout_mode = 1
 anchors_preset = 9
 anchor_bottom = 1.0
@@ -83,25 +85,25 @@ offset_right = 104.0
 offset_bottom = -15.5
 grow_vertical = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="TextureRect/LeftPage" unique_id=764190122]
+[node name="VBoxContainer" type="VBoxContainer" parent="UIRoot/TextureRect/LeftPage" unique_id=764190122]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="TextureRect/LeftPage/VBoxContainer" unique_id=444334655]
+[node name="Label" type="Label" parent="UIRoot/TextureRect/LeftPage/VBoxContainer" unique_id=444334655]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("2_puy0h")
 theme_override_font_sizes/font_size = 15
 text = "Your character"
 
-[node name="Name" type="Label" parent="TextureRect/LeftPage/VBoxContainer" unique_id=1230057430]
+[node name="Name" type="Label" parent="UIRoot/TextureRect/LeftPage/VBoxContainer" unique_id=1230057430]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("2_puy0h")
 theme_override_font_sizes/font_size = 9
 text = "Your name:"
 
-[node name="CharacterPreview" parent="TextureRect/LeftPage/VBoxContainer" unique_id=1307479886 instance=ExtResource("3_b6yga")]
+[node name="CharacterPreview" parent="UIRoot/TextureRect/LeftPage/VBoxContainer" unique_id=1307479886 instance=ExtResource("3_b6yga")]
 layout_mode = 2
 
-[node name="RightPage" type="MarginContainer" parent="TextureRect" unique_id=190733737]
+[node name="RightPage" type="MarginContainer" parent="UIRoot/TextureRect" unique_id=190733737]
 layout_mode = 1
 anchors_preset = 6
 anchor_left = 1.0
@@ -115,11 +117,11 @@ offset_bottom = 50.0
 grow_horizontal = 0
 grow_vertical = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="TextureRect/RightPage" unique_id=1683181154]
+[node name="VBoxContainer" type="VBoxContainer" parent="UIRoot/TextureRect/RightPage" unique_id=1683181154]
 layout_mode = 2
 theme_override_constants/separation = 2
 
-[node name="Label2" type="Label" parent="TextureRect/RightPage/VBoxContainer" unique_id=1435463554]
+[node name="Label2" type="Label" parent="UIRoot/TextureRect/RightPage/VBoxContainer" unique_id=1435463554]
 layout_mode = 2
 offset_transform_scale = Vector2(2, 2)
 theme_override_fonts/font = ExtResource("2_puy0h")
@@ -127,14 +129,14 @@ theme_override_font_sizes/font_size = 15
 text = "Create game"
 horizontal_alignment = 1
 
-[node name="CreateButton" type="TextureButton" parent="TextureRect/RightPage/VBoxContainer" unique_id=1098267773]
+[node name="CreateButton" type="TextureButton" parent="UIRoot/TextureRect/RightPage/VBoxContainer" unique_id=1098267773]
 layout_mode = 2
 size_flags_horizontal = 8
 texture_normal = SubResource("AtlasTexture_x7o1g")
 texture_pressed = SubResource("AtlasTexture_b6yga")
 texture_hover = SubResource("AtlasTexture_w24gt")
 
-[node name="Label" type="Label" parent="TextureRect/RightPage/VBoxContainer/CreateButton" unique_id=364682127]
+[node name="Label" type="Label" parent="UIRoot/TextureRect/RightPage/VBoxContainer/CreateButton" unique_id=364682127]
 layout_mode = 0
 offset_left = 2.0
 offset_top = 2.0
@@ -146,7 +148,7 @@ theme_override_font_sizes/font_size = 9
 text = "Create"
 horizontal_alignment = 1
 
-[node name="Label" type="Label" parent="TextureRect/RightPage/VBoxContainer" unique_id=1968133422]
+[node name="Label" type="Label" parent="UIRoot/TextureRect/RightPage/VBoxContainer" unique_id=1968133422]
 layout_mode = 2
 offset_transform_scale = Vector2(2, 2)
 theme_override_fonts/font = ExtResource("2_puy0h")
@@ -154,10 +156,10 @@ theme_override_font_sizes/font_size = 18
 text = "Join game"
 horizontal_alignment = 1
 
-[node name="HBoxContainer" type="HBoxContainer" parent="TextureRect/RightPage/VBoxContainer" unique_id=17268088]
+[node name="HBoxContainer" type="HBoxContainer" parent="UIRoot/TextureRect/RightPage/VBoxContainer" unique_id=17268088]
 layout_mode = 2
 
-[node name="Label2" type="Label" parent="TextureRect/RightPage/VBoxContainer/HBoxContainer" unique_id=1143997038]
+[node name="Label2" type="Label" parent="UIRoot/TextureRect/RightPage/VBoxContainer/HBoxContainer" unique_id=1143997038]
 layout_mode = 2
 offset_transform_scale = Vector2(2, 2)
 theme_override_fonts/font = ExtResource("2_puy0h")
@@ -165,31 +167,31 @@ theme_override_font_sizes/font_size = 9
 text = "Lobby code"
 horizontal_alignment = 1
 
-[node name="LobbyCode" type="LineEdit" parent="TextureRect/RightPage/VBoxContainer/HBoxContainer" unique_id=376555640]
+[node name="LobbyCode" type="LineEdit" parent="UIRoot/TextureRect/RightPage/VBoxContainer/HBoxContainer" unique_id=376555640]
 custom_minimum_size = Vector2(50, 10)
 layout_mode = 2
 theme_override_fonts/font = ExtResource("2_puy0h")
 theme_override_font_sizes/font_size = 9
 theme_override_styles/normal = SubResource("StyleBoxTexture_b6yga")
 
-[node name="HBoxContainer2" type="HBoxContainer" parent="TextureRect/RightPage/VBoxContainer" unique_id=211009001]
+[node name="HBoxContainer2" type="HBoxContainer" parent="UIRoot/TextureRect/RightPage/VBoxContainer" unique_id=211009001]
 layout_mode = 2
 alignment = 2
 
-[node name="ExitButton" type="TextureButton" parent="TextureRect/RightPage/VBoxContainer/HBoxContainer2" unique_id=929367020]
+[node name="ExitButton" type="TextureButton" parent="UIRoot/TextureRect/RightPage/VBoxContainer/HBoxContainer2" unique_id=929367020]
 layout_mode = 2
 texture_normal = SubResource("AtlasTexture_0rjn7")
 texture_pressed = SubResource("AtlasTexture_8ud36")
 texture_hover = SubResource("AtlasTexture_dak64")
 
-[node name="JoinButton" type="TextureButton" parent="TextureRect/RightPage/VBoxContainer/HBoxContainer2" unique_id=1272558367]
+[node name="JoinButton" type="TextureButton" parent="UIRoot/TextureRect/RightPage/VBoxContainer/HBoxContainer2" unique_id=1272558367]
 layout_mode = 2
 size_flags_horizontal = 8
 texture_normal = SubResource("AtlasTexture_x7o1g")
 texture_pressed = SubResource("AtlasTexture_b6yga")
 texture_hover = SubResource("AtlasTexture_w24gt")
 
-[node name="Label" type="Label" parent="TextureRect/RightPage/VBoxContainer/HBoxContainer2/JoinButton" unique_id=647695636]
+[node name="Label" type="Label" parent="UIRoot/TextureRect/RightPage/VBoxContainer/HBoxContainer2/JoinButton" unique_id=647695636]
 layout_mode = 0
 offset_left = 2.0
 offset_top = 2.0
@@ -201,6 +203,6 @@ theme_override_font_sizes/font_size = 9
 text = "Join"
 horizontal_alignment = 1
 
-[connection signal="pressed" from="TextureRect/RightPage/VBoxContainer/CreateButton" to="." method="OnCreateButtonPressed"]
-[connection signal="pressed" from="TextureRect/RightPage/VBoxContainer/HBoxContainer2/ExitButton" to="." method="OnLeaveButtonPressed"]
-[connection signal="pressed" from="TextureRect/RightPage/VBoxContainer/HBoxContainer2/JoinButton" to="." method="OnJoinButtonPressed"]
+[connection signal="pressed" from="UIRoot/TextureRect/RightPage/VBoxContainer/CreateButton" to="." method="OnCreateButtonPressed"]
+[connection signal="pressed" from="UIRoot/TextureRect/RightPage/VBoxContainer/HBoxContainer2/ExitButton" to="." method="OnLeaveButtonPressed"]
+[connection signal="pressed" from="UIRoot/TextureRect/RightPage/VBoxContainer/HBoxContainer2/JoinButton" to="." method="OnJoinButtonPressed"]

@@ -2,8 +2,8 @@
 
 [ext_resource type="Script" uid="uid://bpf7ukrr4mug3" path="res://scripts/UI/UiManager.cs" id="1_js4l8"]
 [ext_resource type="PackedScene" uid="uid://bb0a1df7f2soc" path="res://scenes/ui/universal_panel.tscn" id="1_qjbkm"]
-[ext_resource type="Texture2D" uid="uid://svqcdvyu7pq" path="res://assets/UI/EQ/wood.png" id="2_b2463"]
-[ext_resource type="Texture2D" uid="uid://crxagmfk4qanm" path="res://assets/UI/EQ/rock.png" id="3_js4l8"]
+[ext_resource type="Texture2D" uid="uid://svqcdvyu7pq" path="res://assets/UI/wood.png" id="2_b2463"]
+[ext_resource type="Texture2D" uid="uid://bresytjqy0fl5" path="res://assets/UI/EQ/rock.png" id="3_js4l8"]
 [ext_resource type="PackedScene" uid="uid://cn01ilyqiik87" path="res://scenes/ui/ToolSelector.tscn" id="5_61ox6"]
 
 [node name="UIManager" type="CanvasLayer" unique_id=760827620 node_paths=PackedStringArray("woodCounter", "rockCounter")]
@@ -19,7 +19,6 @@ offset_right = 66.0
 offset_bottom = 81.0
 grow_horizontal = 1
 grow_vertical = 1
-scale = Vector2(0.5, 0.5)
 
 [node name="ContentArea" parent="Inventory" index="1" unique_id=315561503]
 theme_override_constants/margin_left = 5
@@ -64,9 +63,15 @@ stretch_mode = 5
 layout_mode = 2
 
 [node name="ToolSelector" parent="." unique_id=1773280794 instance=ExtResource("5_61ox6")]
-offset_left = -18.0
-offset_top = -44.0
-offset_bottom = 44.0
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -34.0
+offset_top = -212.0
+grow_horizontal = 0
+grow_vertical = 0
 pivot_offset = Vector2(34, 212)
 size_flags_horizontal = 8
 size_flags_vertical = 8

@@ -2,26 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-<<<<<<<< HEAD:assets/worldAssets/Tiles/Cave/Rails.png.import
-uid="uid://n4dp2x7wnm1b"
+uid="uid://bd483yy4ai6qi"
 path="res://.godot/imported/Rails.png-974c2e44892aa5f23b027beb3dab4d28.ctex"
-========
-uid="uid://nyd48l0oquum"
-path="res://.godot/imported/hammer.png-2b14e3960fb62d1da32f5cb3d7e59f90.ctex"
->>>>>>>> cc2540d38740adc7ace8031db043786d4bdfb923:assets/UI/hammer.png.import
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-<<<<<<<< HEAD:assets/worldAssets/Tiles/Cave/Rails.png.import
 source_file="res://assets/worldAssets/Tiles/Cave/Rails.png"
 dest_files=["res://.godot/imported/Rails.png-974c2e44892aa5f23b027beb3dab4d28.ctex"]
-========
-source_file="res://assets/UI/hammer.png"
-dest_files=["res://.godot/imported/hammer.png-2b14e3960fb62d1da32f5cb3d7e59f90.ctex"]
->>>>>>>> cc2540d38740adc7ace8031db043786d4bdfb923:assets/UI/hammer.png.import
 
 [params]
 

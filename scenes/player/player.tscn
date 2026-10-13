@@ -201,6 +201,7 @@ position = Vector2(0, 4)
 shape = SubResource("CapsuleShape2D_ixa1u")
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1845303378]
+zoom = Vector2(4, 4)
 
 [node name="Label" type="Label" parent="." unique_id=1881190810]
 offset_left = -15.999999

@@ -2,7 +2,7 @@ using Godot;
 using System;
 using System.Collections.Generic;
 
-public partial class CharacterCreator : Control
+public partial class CharacterCreator : CanvasLayer
 {
     [Export] public LineEdit UserNick;
     public List<string> CatalogNames = ["Chest", "Feet", "Head", "Legs"];

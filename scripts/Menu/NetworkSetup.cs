@@ -2,7 +2,7 @@ using Godot;
 using System;
 using System.Collections.Generic;
 
-public partial class NetworkSetup : Control
+public partial class NetworkSetup : CanvasLayer
 {
     [Export] public LineEdit LobbyCode;
     public event Action OnCreatePressed;

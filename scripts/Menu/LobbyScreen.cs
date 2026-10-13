@@ -2,7 +2,7 @@ using Godot;
 using System;
 using System.Linq;
 
-public partial class LobbyScreen : Control
+public partial class LobbyScreen : CanvasLayer
 {
     [Export] public PackedScene PlayerAvatarScene;
     [Export] Control AvatarContainer;
