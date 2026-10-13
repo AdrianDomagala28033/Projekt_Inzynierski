@@ -95,7 +95,6 @@ size = Vector2(16, 16)
 
 [node name="StoneWall" type="StaticBody2D" unique_id=1329918865]
 script = ExtResource("1_c088u")
-MaxHealth = 100
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1769233361]
 sprite_frames = SubResource("SpriteFrames_wxvp1")

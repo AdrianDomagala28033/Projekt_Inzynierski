@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://lw8dk3pt6hul"
-path="res://.godot/imported/Skeleton.png-6811a0a9a9bb127f3328fcfe92a83b44.ctex"
+uid="uid://n57hx7qd7xgb"
+path="res://.godot/imported/pickaxe.png-abee816b0115ea5245fba3443c53da92.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/enemiesAssets/Skeleton/Skeleton.png"
-dest_files=["res://.godot/imported/Skeleton.png-6811a0a9a9bb127f3328fcfe92a83b44.ctex"]
+source_file="res://assets/UI/pickaxe.png"
+dest_files=["res://.godot/imported/pickaxe.png-abee816b0115ea5245fba3443c53da92.ctex"]
 
 [params]
 

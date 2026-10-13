@@ -1,0 +1,50 @@
+[remap]
+
+importer="texture"
+type="CompressedTexture2D"
+<<<<<<<< HEAD:assets/UI/UI/Font.png.import
+uid="uid://cehi7pfhd8xt4"
+path="res://.godot/imported/Font.png-ccce2985a68df5919de36edab5416886.ctex"
+========
+uid="uid://dnva3atnrr4t8"
+path="res://.godot/imported/axe.png-837e4ac16761b0e23e254c9575177448.ctex"
+>>>>>>>> cc2540d38740adc7ace8031db043786d4bdfb923:assets/UI/axe.png.import
+metadata={
+"vram_texture": false
+}
+
+[deps]
+
+<<<<<<<< HEAD:assets/UI/UI/Font.png.import
+source_file="res://assets/UI/UI/Font.png"
+dest_files=["res://.godot/imported/Font.png-ccce2985a68df5919de36edab5416886.ctex"]
+========
+source_file="res://assets/UI/axe.png"
+dest_files=["res://.godot/imported/axe.png-837e4ac16761b0e23e254c9575177448.ctex"]
+>>>>>>>> cc2540d38740adc7ace8031db043786d4bdfb923:assets/UI/axe.png.import
+
+[params]
+
+compress/mode=0
+compress/high_quality=false
+compress/lossy_quality=0.7
+compress/uastc_level=0
+compress/rdo_quality_loss=0.0
+compress/hdr_compression=1
+compress/normal_map=0
+compress/channel_pack=0
+mipmaps/generate=false
+mipmaps/limit=-1
+roughness/mode=0
+roughness/src_normal=""
+process/channel_remap/red=0
+process/channel_remap/green=1
+process/channel_remap/blue=2
+process/channel_remap/alpha=3
+process/fix_alpha_border=true
+process/premult_alpha=false
+process/normal_map_invert_y=false
+process/hdr_as_srgb=false
+process/hdr_clamp_exposure=false
+process/size_limit=0
+detect_3d/compress_to=1

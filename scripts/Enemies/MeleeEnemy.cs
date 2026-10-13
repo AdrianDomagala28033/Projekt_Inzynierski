@@ -101,13 +101,22 @@ public partial class MeleeEnemy : EnemyBase
                             Mathf.FloorToInt(collider.GlobalPosition.Y / TileSize)
                         );
                         
-                        if (CurrentPath != null && CurrentPath.Contains(wallGridPos))
+                        Vector2I myGridPos = new Vector2I(
+                            Mathf.FloorToInt(GlobalPosition.X / TileSize),
+                            Mathf.FloorToInt(GlobalPosition.Y / TileSize)
+                        );
+
+                        if (CurrentPath != null && (CurrentPath.Contains(wallGridPos) || wallGridPos == myGridPos))
                         {
                             _targetedObstacle = collider;
                             Velocity = Vector2.Zero;
-                            UpdateFacingDirection(collider.GlobalPosition - GlobalPosition);
-                            PerformAttackOn(collider);
-                            _attackTimer = 0;
+                            
+                            if (_attackTimer >= AttackCooldown)
+                            {
+                                UpdateFacingDirection(collider.GlobalPosition - GlobalPosition);
+                                PerformAttackOn(collider);
+                                _attackTimer = 0;
+                            }
                             break; 
                         }
                     }
@@ -116,7 +125,7 @@ public partial class MeleeEnemy : EnemyBase
         }
     }
 
-    protected async void PerformAttackOn(Node target)
+    protected virtual async void PerformAttackOn(Node target)
 {
     _isAttacking = true;
     

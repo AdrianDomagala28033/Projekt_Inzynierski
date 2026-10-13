@@ -527,9 +527,10 @@ height = 6.0
 script = ExtResource("1_3geuw")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=2074318737]
+y_sort_enabled = true
 position = Vector2(0, -8)
 sprite_frames = SubResource("SpriteFrames_usgnq")
-animation = &"attack_down"
+animation = &"idle_down"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=123836596]
 position = Vector2(0, -5)

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bm6238xoucl3m"
-path="res://.godot/imported/Bolt.png-9d9998da27e462cb15d16976da707ecf.ctex"
+uid="uid://buwrwnfjudimm"
+path="res://.godot/imported/Magic_Projectile.png-3c59476a3e1338ca3b024c2f6ed18a3a.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/buildingsAssets/Turrets/Bolt.png"
-dest_files=["res://.godot/imported/Bolt.png-9d9998da27e462cb15d16976da707ecf.ctex"]
+source_file="res://assets/enemiesAssets/Bolts/Magic_Projectile.png"
+dest_files=["res://.godot/imported/Magic_Projectile.png-3c59476a3e1338ca3b024c2f6ed18a3a.ctex"]
 
 [params]
 

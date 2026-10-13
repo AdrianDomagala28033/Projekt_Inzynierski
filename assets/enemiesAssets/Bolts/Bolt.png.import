@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dprvftipc1ka5"
-path="res://.godot/imported/Witch_Projectile.png-932b0349a03b49e67a7bf3fab9f680fa.ctex"
+uid="uid://b3wb05tb5kk3w"
+path="res://.godot/imported/Bolt.png-d2a4ea5ec6f2fc56d72a12b38d79ba68.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/buildingsAssets/Turrets/Witch_Projectile.png"
-dest_files=["res://.godot/imported/Witch_Projectile.png-932b0349a03b49e67a7bf3fab9f680fa.ctex"]
+source_file="res://assets/enemiesAssets/Bolts/Bolt.png"
+dest_files=["res://.godot/imported/Bolt.png-d2a4ea5ec6f2fc56d72a12b38d79ba68.ctex"]
 
 [params]
 

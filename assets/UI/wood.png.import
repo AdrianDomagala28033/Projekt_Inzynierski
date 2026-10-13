@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ccp7opakxnpb3"
-path="res://.godot/imported/Archer_Lookout_Towers.png-40f13a55d8607e4bd575e9f4049cd132.ctex"
+uid="uid://svqcdvyu7pq"
+path="res://.godot/imported/wood.png-58813a4ec0cea50457bbbdab43b3ee72.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/buildingsAssets/Turrets/Archer_Lookout_Towers.png"
-dest_files=["res://.godot/imported/Archer_Lookout_Towers.png-40f13a55d8607e4bd575e9f4049cd132.ctex"]
+source_file="res://assets/UI/wood.png"
+dest_files=["res://.godot/imported/wood.png-58813a4ec0cea50457bbbdab43b3ee72.ctex"]
 
 [params]
 

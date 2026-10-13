@@ -2,16 +2,26 @@
 
 importer="texture"
 type="CompressedTexture2D"
+<<<<<<<< HEAD:assets/UI/UI/Font.png.import
 uid="uid://cehi7pfhd8xt4"
 path="res://.godot/imported/Font.png-ccce2985a68df5919de36edab5416886.ctex"
+========
+uid="uid://dnva3atnrr4t8"
+path="res://.godot/imported/axe.png-837e4ac16761b0e23e254c9575177448.ctex"
+>>>>>>>> cc2540d38740adc7ace8031db043786d4bdfb923:assets/UI/axe.png.import
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
+<<<<<<<< HEAD:assets/UI/UI/Font.png.import
 source_file="res://assets/UI/UI/Font.png"
 dest_files=["res://.godot/imported/Font.png-ccce2985a68df5919de36edab5416886.ctex"]
+========
+source_file="res://assets/UI/axe.png"
+dest_files=["res://.godot/imported/axe.png-837e4ac16761b0e23e254c9575177448.ctex"]
+>>>>>>>> cc2540d38740adc7ace8031db043786d4bdfb923:assets/UI/axe.png.import
 
 [params]
 
