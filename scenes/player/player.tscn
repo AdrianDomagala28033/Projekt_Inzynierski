@@ -9,6 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://wg0s8bvdv1m1" path="res://assets/characterAssets/Player/Head/Hair_1/Hair_1_Blonde.png" id="7_fm80t"]
 [ext_resource type="Texture2D" uid="uid://bp0ip0tp4hjhg" path="res://assets/characterAssets/Player/Tools/Iron/Iron_Tools.png" id="8_gx1jg"]
 [ext_resource type="Texture2D" uid="uid://cem4ansrxfvv3" path="res://assets/characterAssets/Player/Tools/Iron/Iron_Sword.png" id="9_5gtgg"]
+[ext_resource type="FontFile" uid="uid://dkjntnelb5d1" path="res://assets/fonts/CuteFantasy-5x9.ttf" id="10_h17s1"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ixa1u"]
 radius = 3.0
@@ -200,15 +201,15 @@ position = Vector2(0, 4)
 shape = SubResource("CapsuleShape2D_ixa1u")
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1845303378]
-zoom = Vector2(3, 3)
 
 [node name="Label" type="Label" parent="." unique_id=1881190810]
-offset_left = -6.0
+offset_left = -15.999999
 offset_top = -22.0
-offset_right = 7.0
-offset_bottom = -14.0
+offset_right = 275.0
+offset_bottom = 106.0
 scale = Vector2(0.1, 0.1)
-theme_override_font_sizes/font_size = 50
+theme_override_fonts/font = ExtResource("10_h17s1")
+theme_override_font_sizes/font_size = 135
 text = "gracz"
 horizontal_alignment = 1
 

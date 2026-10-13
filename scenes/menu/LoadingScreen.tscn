@@ -1,0 +1,162 @@
+[gd_scene format=3 uid="uid://dko267twi788f"]
+
+[ext_resource type="Script" uid="uid://byt61ierumbox" path="res://scripts/Menu/LoadingScreen.cs" id="1_n2vsc"]
+[ext_resource type="FontFile" uid="uid://dkjntnelb5d1" path="res://assets/fonts/CuteFantasy-5x9.ttf" id="1_uo7ie"]
+[ext_resource type="Texture2D" uid="uid://bmh23op4yyabx" path="res://assets/UI/UI/Loading_Icon.png" id="2_qhghk"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_n2vsc"]
+atlas = ExtResource("2_qhghk")
+region = Rect2(0, 32, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0l1xk"]
+atlas = ExtResource("2_qhghk")
+region = Rect2(16, 32, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jr15b"]
+atlas = ExtResource("2_qhghk")
+region = Rect2(32, 32, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mu3ej"]
+atlas = ExtResource("2_qhghk")
+region = Rect2(48, 32, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yqhm2"]
+atlas = ExtResource("2_qhghk")
+region = Rect2(64, 32, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ijonw"]
+atlas = ExtResource("2_qhghk")
+region = Rect2(80, 32, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_w6byu"]
+atlas = ExtResource("2_qhghk")
+region = Rect2(96, 32, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_17vla"]
+atlas = ExtResource("2_qhghk")
+region = Rect2(112, 32, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hq2hq"]
+atlas = ExtResource("2_qhghk")
+region = Rect2(128, 32, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ss8ft"]
+atlas = ExtResource("2_qhghk")
+region = Rect2(144, 32, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kk7pr"]
+atlas = ExtResource("2_qhghk")
+region = Rect2(160, 32, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7hkig"]
+atlas = ExtResource("2_qhghk")
+region = Rect2(176, 32, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7dmk2"]
+atlas = ExtResource("2_qhghk")
+region = Rect2(192, 32, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mq4tj"]
+atlas = ExtResource("2_qhghk")
+region = Rect2(208, 32, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_o4hi6"]
+atlas = ExtResource("2_qhghk")
+region = Rect2(224, 32, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3eawe"]
+atlas = ExtResource("2_qhghk")
+region = Rect2(240, 32, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_kgtat"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_n2vsc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0l1xk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jr15b")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mu3ej")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yqhm2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ijonw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_w6byu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_17vla")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hq2hq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ss8ft")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kk7pr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7hkig")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7dmk2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mq4tj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_o4hi6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3eawe")
+}],
+"loop": 1,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="LoadingScreen" type="CanvasLayer" unique_id=384648001]
+script = ExtResource("1_n2vsc")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=191808244]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.06469653, 0.06469653, 0.06469653, 1)
+
+[node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=1725565097]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="HBoxContainer" unique_id=1470655041]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_uo7ie")
+theme_override_font_sizes/font_size = 18
+text = "Loading"
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="HBoxContainer" unique_id=703565186]
+position = Vector2(66, 20)
+sprite_frames = SubResource("SpriteFrames_kgtat")
+autoplay = "default"
+frame_progress = 0.5850266
+speed_scale = 4.0

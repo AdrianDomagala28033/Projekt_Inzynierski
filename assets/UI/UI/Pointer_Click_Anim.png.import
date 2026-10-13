@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c6h1ruvmnl5y"
-path="res://.godot/imported/label_middle.png-b30afc0740243c910ce00c4199f213c2.ctex"
+uid="uid://bqk86tq85b0ik"
+path="res://.godot/imported/Pointer_Click_Anim.png-0c8d021355d56270f7dfd3b461d7b98d.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/UI/label_middle.png"
-dest_files=["res://.godot/imported/label_middle.png-b30afc0740243c910ce00c4199f213c2.ctex"]
+source_file="res://assets/UI/UI/Pointer_Click_Anim.png"
+dest_files=["res://.godot/imported/Pointer_Click_Anim.png-0c8d021355d56270f7dfd3b461d7b98d.ctex"]
 
 [params]
 

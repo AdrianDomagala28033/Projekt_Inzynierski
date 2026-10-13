@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://n57hx7qd7xgb"
-path="res://.godot/imported/pickaxe.png-abee816b0115ea5245fba3443c53da92.ctex"
+uid="uid://5mbp8l2kpvu4"
+path="res://.godot/imported/Cute_Fantasy_Font_5x7.png-6b15aa3645286d6252d9ffa547134b5b.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/UI/pickaxe.png"
-dest_files=["res://.godot/imported/pickaxe.png-abee816b0115ea5245fba3443c53da92.ctex"]
+source_file="res://assets/UI/UI/Cute_Fantasy_Font_5x7.png"
+dest_files=["res://.godot/imported/Cute_Fantasy_Font_5x7.png-6b15aa3645286d6252d9ffa547134b5b.ctex"]
 
 [params]
 
