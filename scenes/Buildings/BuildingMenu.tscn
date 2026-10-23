@@ -1,0 +1,109 @@
+[gd_scene format=3 uid="uid://ddouuehm6krsq"]
+
+[ext_resource type="Texture2D" uid="uid://bdpviqj2ioxnk" path="res://assets/UI/UI/UI_ALL.png" id="1_2nfss"]
+[ext_resource type="Script" uid="uid://bwr7dl11s1dlu" path="res://scripts/Buildings/BuildingMenu.cs" id="2_qi45h"]
+[ext_resource type="PackedScene" uid="uid://doqebv4vqqcuw" path="res://scenes/Buildings/BuildingButton.tscn" id="3_stsbt"]
+[ext_resource type="PackedScene" uid="uid://dmqi1ct61s1fm" path="res://scenes/Buildings/Walls/Stone_Wall.tscn" id="4_0gnbo"]
+[ext_resource type="PackedScene" uid="uid://m5qibitmakr2" path="res://scenes/Buildings/Walls/Volcanic_Wall.tscn" id="5_o670v"]
+[ext_resource type="PackedScene" uid="uid://5rq63r7s5ur1" path="res://scenes/Buildings/Walls/Wood_Wall.tscn" id="6_f3q8m"]
+[ext_resource type="PackedScene" uid="uid://d2py1omgud5iy" path="res://scenes/Buildings/Turrets/ArcherTower.tscn" id="7_lm3hq"]
+[ext_resource type="PackedScene" uid="uid://4wm2fsocowdy" path="res://scenes/Buildings/Turrets/WitchTower.tscn" id="8_l53cb"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qi45h"]
+atlas = ExtResource("1_2nfss")
+region = Rect2(1112, 8, 32, 32)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_kgtat"]
+texture = SubResource("AtlasTexture_qi45h")
+texture_margin_left = 5.0
+texture_margin_top = 5.0
+texture_margin_right = 5.0
+texture_margin_bottom = 5.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_stsbt"]
+atlas = ExtResource("1_2nfss")
+region = Rect2(1022, 158, 20, 20)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_qi45h"]
+texture = SubResource("AtlasTexture_stsbt")
+texture_margin_left = 6.0
+texture_margin_top = 6.0
+texture_margin_right = 6.0
+texture_margin_bottom = 6.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_adsga"]
+atlas = ExtResource("1_2nfss")
+region = Rect2(1, 353, 30, 14)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_bno2s"]
+texture = SubResource("AtlasTexture_adsga")
+texture_margin_left = 4.0
+texture_margin_top = 4.0
+texture_margin_right = 4.0
+texture_margin_bottom = 4.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2nfss"]
+atlas = ExtResource("1_2nfss")
+region = Rect2(33, 354, 30, 13)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_2nfss"]
+texture = SubResource("AtlasTexture_2nfss")
+texture_margin_left = 4.0
+texture_margin_top = 4.0
+texture_margin_right = 4.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_71cdu"]
+atlas = ExtResource("1_2nfss")
+region = Rect2(65, 355, 30, 12)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_2yrg2"]
+texture = SubResource("AtlasTexture_71cdu")
+texture_margin_left = 4.0
+texture_margin_top = 4.0
+texture_margin_right = 4.0
+texture_margin_bottom = 4.0
+
+[node name="BuildingMenu" type="PanelContainer" unique_id=163348060]
+custom_minimum_size = Vector2(250, 0)
+anchors_preset = 9
+anchor_bottom = 1.0
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_kgtat")
+script = ExtResource("2_qi45h")
+buildingButton = ExtResource("3_stsbt")
+WallScenes = Array[PackedScene]([ExtResource("4_0gnbo"), ExtResource("5_o670v"), ExtResource("6_f3q8m")])
+TowerScenes = Array[PackedScene]([ExtResource("7_lm3hq"), ExtResource("8_l53cb")])
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=261114306]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="TabContainer" type="TabContainer" parent="MarginContainer" unique_id=13318877]
+layout_mode = 2
+theme_override_colors/font_unselected_color = Color(0.19219694, 0.19219697, 0.19219697, 1)
+theme_override_styles/panel = SubResource("StyleBoxTexture_qi45h")
+theme_override_styles/tab_unselected = SubResource("StyleBoxTexture_bno2s")
+theme_override_styles/tab_hovered = SubResource("StyleBoxTexture_2nfss")
+theme_override_styles/tab_selected = SubResource("StyleBoxTexture_2yrg2")
+tab_alignment = 1
+current_tab = 1
+
+[node name="Walls" type="ScrollContainer" parent="MarginContainer/TabContainer" unique_id=732974324]
+visible = false
+layout_mode = 2
+metadata/_tab_index = 0
+
+[node name="WallsGrid" type="GridContainer" parent="MarginContainer/TabContainer/Walls" unique_id=476608304]
+layout_mode = 2
+columns = 2
+
+[node name="Towers" type="ScrollContainer" parent="MarginContainer/TabContainer" unique_id=533674011]
+layout_mode = 2
+metadata/_tab_index = 1
+
+[node name="TowersGrid" type="GridContainer" parent="MarginContainer/TabContainer/Towers" unique_id=396756571]
+layout_mode = 2
+columns = 2

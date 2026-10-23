@@ -60,7 +60,7 @@ public partial class CharacterCreator : CanvasLayer
             textureNumber = 0;
         TextureNumber[category] = textureNumber;
         string path = AllTextures[category][textureNumber];
-        var node = GetNode<Sprite2D>("TextureRect/LeftPage/CenterContainer/CharacterPreview/" + category);
+        var node = GetNode<Sprite2D>("%CharacterPreview/" + category);
         node.Texture = GD.Load<Texture2D>(path);
     }
     public void SaveProfile()

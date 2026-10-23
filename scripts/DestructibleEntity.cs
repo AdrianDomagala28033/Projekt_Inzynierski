@@ -49,12 +49,12 @@ public partial class DestructibleEntity : Node2D
                     damage = 40;
                 break;
         }
-        if(player.CanHoldResources(materialType))
+        if(player.backpack.CanHoldResources(materialType))
         {
             currentHealth -= damage;
             if(currentHealth <= 0)
             {
-                player.AddResources(dropQuantity, materialType);
+                player.backpack.AddResources(dropQuantity, materialType);
                 QueueFree();   
             }
         }

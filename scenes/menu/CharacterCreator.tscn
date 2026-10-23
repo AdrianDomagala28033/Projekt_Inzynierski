@@ -101,6 +101,7 @@ offset_bottom = 107.057
 layout_mode = 2
 
 [node name="CharacterPreview" parent="UIRoot/TextureRect/LeftPage/CenterContainer" unique_id=1307479886 instance=ExtResource("3_x7o1g")]
+unique_name_in_owner = true
 layout_mode = 2
 
 [node name="RightPage" type="MarginContainer" parent="UIRoot/TextureRect" unique_id=1405710972]
@@ -268,13 +269,12 @@ texture_normal = SubResource("AtlasTexture_kddlq")
 texture_pressed = SubResource("AtlasTexture_w24gt")
 texture_hover = SubResource("AtlasTexture_6mkmj")
 
-[connection signal="pressed" from="UIRoot/TextureRect/RightPage/VBoxContainer/HBoxContainer/VBoxContainer/HeadCustomization/ArrowLeft" to="." method="ChangeItem"]
-[connection signal="pressed" from="UIRoot/TextureRect/RightPage/VBoxContainer/HBoxContainer/VBoxContainer/HeadCustomization/ArrowRight" to="." method="ChangeItem"]
-[connection signal="pressed" from="UIRoot/TextureRect/RightPage/VBoxContainer/HBoxContainer/VBoxContainer/ChestCustomization/ArrowLeft" to="." method="ChangeItem"]
-[connection signal="pressed" from="UIRoot/TextureRect/RightPage/VBoxContainer/HBoxContainer/VBoxContainer/ChestCustomization/ArrowRight" to="." method="ChangeItem"]
-[connection signal="pressed" from="UIRoot/TextureRect/RightPage/VBoxContainer/HBoxContainer/VBoxContainer/LegsCustomization/ArrowLeft" to="." method="ChangeItem"]
-[connection signal="pressed" from="UIRoot/TextureRect/RightPage/VBoxContainer/HBoxContainer/VBoxContainer/LegsCustomization/ArrowRight" to="." method="ChangeItem"]
-[connection signal="pressed" from="UIRoot/TextureRect/RightPage/VBoxContainer/HBoxContainer/VBoxContainer/FeetCustomization/ArrowLeft" to="." method="ChangeItem"]
-[connection signal="pressed" from="UIRoot/TextureRect/RightPage/VBoxContainer/HBoxContainer/VBoxContainer/FeetCustomization/ArrowRight" to="." method="ChangeItem"]
+[connection signal="pressed" from="UIRoot/TextureRect/RightPage/VBoxContainer/HBoxContainer/VBoxContainer/HeadCustomization/ArrowLeft" to="." method="ChangeItem" binds= ["Head", -1]]
+[connection signal="pressed" from="UIRoot/TextureRect/RightPage/VBoxContainer/HBoxContainer/VBoxContainer/HeadCustomization/ArrowRight" to="." method="ChangeItem" binds= ["Head", 1]]
+[connection signal="pressed" from="UIRoot/TextureRect/RightPage/VBoxContainer/HBoxContainer/VBoxContainer/ChestCustomization/ArrowLeft" to="." method="ChangeItem" binds= ["Chest", -1]]
+[connection signal="pressed" from="UIRoot/TextureRect/RightPage/VBoxContainer/HBoxContainer/VBoxContainer/ChestCustomization/ArrowRight" to="." method="ChangeItem" binds= ["Chest", 1]]
+[connection signal="pressed" from="UIRoot/TextureRect/RightPage/VBoxContainer/HBoxContainer/VBoxContainer/LegsCustomization/ArrowLeft" to="." method="ChangeItem" binds= ["Legs", -1]]
+[connection signal="pressed" from="UIRoot/TextureRect/RightPage/VBoxContainer/HBoxContainer/VBoxContainer/LegsCustomization/ArrowRight" to="." method="ChangeItem" binds= ["Legs", 1]]
+[connection signal="pressed" from="UIRoot/TextureRect/RightPage/VBoxContainer/HBoxContainer/VBoxContainer/FeetCustomization/ArrowRight" to="." method="ChangeItem" binds= ["Feet", 1]]
 [connection signal="pressed" from="UIRoot/TextureRect/RightPage/VBoxContainer/HBoxContainer/VBoxContainer/OptionButtons/ExitButton" to="." method="OnLeaveButtonPressed"]
 [connection signal="pressed" from="UIRoot/TextureRect/RightPage/VBoxContainer/HBoxContainer/VBoxContainer/OptionButtons/SaveButton" to="." method="SaveProfile"]

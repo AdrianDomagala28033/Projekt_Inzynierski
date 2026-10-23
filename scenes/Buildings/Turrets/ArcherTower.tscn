@@ -202,6 +202,11 @@ animations = [{
 [sub_resource type="CircleShape2D" id="CircleShape2D_usgnq"]
 radius = 96.0833
 
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_px2b5"]
+properties/0/path = NodePath(".:position")
+properties/0/spawn = true
+properties/0/replication_mode = 1
+
 [node name="ArcherTower" type="StaticBody2D" unique_id=1476660522]
 z_index = 1
 script = ExtResource("1_y4rua")
@@ -236,3 +241,6 @@ position = Vector2(0, -52)
 y_sort_enabled = true
 position = Vector2(0, -52)
 shape = SubResource("CircleShape2D_usgnq")
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="." unique_id=1289221176]
+replication_config = SubResource("SceneReplicationConfig_px2b5")

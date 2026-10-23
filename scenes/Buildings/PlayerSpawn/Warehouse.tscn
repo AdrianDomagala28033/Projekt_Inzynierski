@@ -1,0 +1,35 @@
+[gd_scene format=3 uid="uid://djkvcfn2cj1ig"]
+
+[ext_resource type="Script" uid="uid://cyd23jly8s4ri" path="res://scripts/Buildings/Spawn/Warehouse.cs" id="1_7x464"]
+[ext_resource type="Texture2D" uid="uid://d0lq8oj0cblju" path="res://assets/buildingsAssets/Spawn/Barn_Base_Black.png" id="2_rwljm"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_kgtat"]
+size = Vector2(93, 67)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_kgtat"]
+radius = 57.07889
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_7x464"]
+properties/0/path = NodePath(".:position")
+properties/0/spawn = true
+properties/0/replication_mode = 1
+
+[node name="Warehouse" type="StaticBody2D" unique_id=1231190895 node_paths=PackedStringArray("interactionArea")]
+script = ExtResource("1_7x464")
+interactionArea = NodePath("InteractionArea")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=755436346]
+texture = ExtResource("2_rwljm")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=46043164]
+position = Vector2(-0.5, 23.5)
+shape = SubResource("RectangleShape2D_kgtat")
+
+[node name="InteractionArea" type="Area2D" parent="." unique_id=1990768859]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractionArea" unique_id=738673678]
+position = Vector2(0, 23)
+shape = SubResource("CircleShape2D_kgtat")
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="." unique_id=2049865040]
+replication_config = SubResource("SceneReplicationConfig_7x464")

@@ -19,9 +19,9 @@ animations = [{
 "speed": 5.0
 }]
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_kgtat"]
-radius = 8.0
-height = 54.0
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_sphtb"]
+radius = 17.0
+height = 52.0
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_vbn3b"]
 properties/0/path = NodePath(".:position")
@@ -46,7 +46,7 @@ position = Vector2(0, -9)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=1816289263]
 position = Vector2(0, -11)
-shape = SubResource("CapsuleShape2D_kgtat")
+shape = SubResource("CapsuleShape2D_sphtb")
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="." unique_id=1115139287]
 replication_config = SubResource("SceneReplicationConfig_vbn3b")

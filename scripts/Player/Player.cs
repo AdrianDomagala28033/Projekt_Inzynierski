@@ -15,8 +15,7 @@ public partial class Player : CharacterBody2D
     private Sprite2D[] clothingLayers;
     [Export] Label playerName;
     [Export] public float speed;
-    [Export] public int maxBackpackCapacity;
-    public Dictionary<MaterialType, int> inventory = new Dictionary<MaterialType, int>();
+    [Export] public Backpack backpack;
     public Tool activeTool;
     public static Player localPlayer;
     public event Action<Tool> OnToolChanged;
@@ -24,11 +23,12 @@ public partial class Player : CharacterBody2D
 
     public override void _Ready()
     {
-        foreach (MaterialType material in Enum.GetValues(typeof(MaterialType)))
-        {
-            inventory[material] = 0; 
-        }
-        GlobalPosition = new Vector2(50 * 16, 50 * 16);
+        
+        var spaceState = GetWorld2D().DirectSpaceState;
+        Vector2 desiredPos = new Vector2(54*16, 54*16);
+        Vector2 safePos = SpawnLocator.GetFreeSpot(desiredPos, spaceState, new Vector2(3, 6));
+        
+        GlobalPosition = safePos;
         AddToGroup("Players");
         
         int id = int.Parse(Name);
@@ -155,17 +155,6 @@ public partial class Player : CharacterBody2D
         else
             animPlayer.Play("waiting");
     }
-    public void AddResources(int quantity, MaterialType material)
-    {
-        int availableSpace = maxBackpackCapacity - inventory[material];
-        inventory[material] += Math.Min(quantity, availableSpace);
-
-        RpcId(int.Parse(Name), MethodName.SyncInventoryRpc, inventory[material], (int)material);
-    }
-    public bool CanHoldResources(MaterialType material)
-    {
-        return inventory[material] < maxBackpackCapacity;
-    }
     public async void PerformToolAction(Vector2 targetPosition, Action onActionCompleted)
     {
         isInteracting = true;
@@ -199,13 +188,6 @@ public partial class Player : CharacterBody2D
         animPlayer.Play($"mine_animation");
         await ToSignal(animPlayer, AnimationPlayer.SignalName.AnimationFinished);
         isInteracting = false;
-    }
-    [Rpc(MultiplayerApi.RpcMode.AnyPeer, CallLocal = true)]
-    public void SyncInventoryRpc(int newVal, int materialId)
-    {
-        MaterialType material = (MaterialType)materialId;
-        inventory[material] = newVal;
-        GD.Print($"Zaktualizowano {material}: masz teraz {inventory[material]} sztuk");
     }
 
 }

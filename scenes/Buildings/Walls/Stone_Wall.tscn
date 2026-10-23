@@ -93,6 +93,11 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_mtxbc"]
 size = Vector2(16, 16)
 
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_c088u"]
+properties/0/path = NodePath(".:position")
+properties/0/spawn = true
+properties/0/replication_mode = 1
+
 [node name="StoneWall" type="StaticBody2D" unique_id=1329918865]
 script = ExtResource("1_c088u")
 
@@ -102,3 +107,6 @@ animation = &"horizontal"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1083109595]
 shape = SubResource("RectangleShape2D_mtxbc")
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="." unique_id=673838231]
+replication_config = SubResource("SceneReplicationConfig_c088u")

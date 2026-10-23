@@ -1,0 +1,9 @@
+[gd_scene format=3 uid="uid://rb8gttaqhjq2"]
+
+[node name="BuildingsManager" type="Node2D" unique_id=479070726]
+
+[node name="BuildingContainer" type="Node2D" parent="." unique_id=2069511255]
+
+[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="." unique_id=2054317804]
+_spawnable_scenes = PackedStringArray("uid://d2py1omgud5iy", "uid://4wm2fsocowdy", "uid://dmqi1ct61s1fm", "uid://m5qibitmakr2", "uid://5rq63r7s5ur1")
+spawn_path = NodePath("../BuildingContainer")

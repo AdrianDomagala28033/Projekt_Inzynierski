@@ -15,12 +15,14 @@ public partial class ConnectionManager : Node
 	public event Action OnPlayerListChanged;
 	public event Action<string> OnLobbyCreated;
 	public int GlobalMapSeed;
+	public int playersLoadedCount;
 	
 	public override void _Ready()
 	{
 		Multiplayer.ConnectedToServer += OnConnectedToServer;
 		Multiplayer.PeerConnected += OnPeerConnected;
 		Multiplayer.PeerDisconnected += OnPeerDisconnected;
+		playersLoadedCount = 0;
 	}
 	public void HostGame(string name, string appearance)
 	{
@@ -128,9 +130,27 @@ public partial class ConnectionManager : Node
 	[Rpc(MultiplayerApi.RpcMode.AnyPeer, CallLocal =true)]
 	public void LoadMap(string path, int seed)
 	{
+		GetNode<LoadingScreen>("/root/LoadingScreen").ShowLoading();
 		GD.Print($"[NETWORK] Wczytywanie mapy z seedem: {seed}");
 		GlobalMapSeed = seed;
 		GetTree().ChangeSceneToFile(path);
+	}
+	[Rpc(MultiplayerApi.RpcMode.AnyPeer, CallLocal = true)]
+	public void PlayerFinishedLoadingRpc()
+	{
+		if(!Multiplayer.IsServer()) return;
+		playersLoadedCount++;
+		if(playersLoadedCount == PlayerList.Count)
+		{
+			var baseManager = GetNode<BaseManager>("/root/Main/BaseManager");
+			baseManager.SpawnInitialBase();
+			Rpc("StartGameRpc");
+		}
+	}
+	[Rpc(MultiplayerApi.RpcMode.Authority, CallLocal = true)]
+	public void StartGameRpc()
+	{
+		GetNode<LoadingScreen>("/root/LoadingScreen").HideLoading();
 	}
 #endregion
 }

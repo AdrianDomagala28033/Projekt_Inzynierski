@@ -8,8 +8,8 @@ public partial class UiManager : CanvasLayer
 
     public override void _Process(double delta)
     {
-        woodCounter.Text = $"{Player.localPlayer.inventory[MaterialType.Wood]}";
-        rockCounter.Text = $"{Player.localPlayer.inventory[MaterialType.Rock]}";
+        woodCounter.Text = $"{Player.localPlayer.backpack.playerInventory[MaterialType.Wood]}";
+        rockCounter.Text = $"{Player.localPlayer.backpack.playerInventory[MaterialType.Rock]}";
     }
 
 }

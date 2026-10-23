@@ -1,0 +1,45 @@
+[gd_scene format=3 uid="uid://doqebv4vqqcuw"]
+
+[ext_resource type="Texture2D" uid="uid://bdpviqj2ioxnk" path="res://assets/UI/UI/UI_ALL.png" id="1_1ssea"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_2nfss"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_stsbt"]
+atlas = ExtResource("1_1ssea")
+region = Rect2(107, 1546, 26, 28)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_qi45h"]
+texture = SubResource("AtlasTexture_stsbt")
+
+[node name="BuildingButton" type="Button" unique_id=944902098]
+custom_minimum_size = Vector2(80, 100)
+offset_right = 8.0
+offset_bottom = 8.0
+theme_override_styles/normal = SubResource("StyleBoxEmpty_2nfss")
+theme_override_styles/hover = SubResource("StyleBoxTexture_qi45h")
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=1332857209]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer" unique_id=1944660851]
+layout_mode = 2
+mouse_filter = 2
+alignment = 1
+
+[node name="Icon" type="TextureRect" parent="MarginContainer/VBoxContainer" unique_id=2082100443]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+expand_mode = 1
+stretch_mode = 5
+
+[node name="NameLabel" type="Label" parent="MarginContainer/VBoxContainer" unique_id=1083322897]
+layout_mode = 2

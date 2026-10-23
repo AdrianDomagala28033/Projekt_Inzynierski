@@ -56,6 +56,10 @@ public partial class NetworkSetup : CanvasLayer
     }
     private void OnCreated(string code)
     {
+        if (!IsInstanceValid(this) || IsQueuedForDeletion()) 
+        {
+            return;
+        }
         GetNode<LoadingScreen>("/root/LoadingScreen").HideLoading();
         OnCreatePressed?.Invoke();
     }

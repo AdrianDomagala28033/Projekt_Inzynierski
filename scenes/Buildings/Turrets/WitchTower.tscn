@@ -202,6 +202,11 @@ animations = [{
 [sub_resource type="CircleShape2D" id="CircleShape2D_tr2rv"]
 radius = 136.0
 
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_tba7l"]
+properties/0/path = NodePath(".:position")
+properties/0/spawn = true
+properties/0/replication_mode = 1
+
 [node name="WitchTower" type="StaticBody2D" unique_id=474387470]
 script = ExtResource("1_2eye7")
 ProjectileScene = ExtResource("2_tba7l")
@@ -234,3 +239,6 @@ position = Vector2(0, -72)
 y_sort_enabled = true
 position = Vector2(0, -72)
 shape = SubResource("CircleShape2D_tr2rv")
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="." unique_id=1376345664]
+replication_config = SubResource("SceneReplicationConfig_tba7l")

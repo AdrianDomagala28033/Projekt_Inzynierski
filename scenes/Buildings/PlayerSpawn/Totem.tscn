@@ -1,0 +1,21 @@
+[gd_scene format=3 uid="uid://dlh5ywgx2pfic"]
+
+[ext_resource type="Script" uid="uid://dbrwltm2mnpvg" path="res://scripts/Buildings/Spawn/Totem.cs" id="1_vpyxr"]
+[ext_resource type="Texture2D" uid="uid://bprubue2uq6y1" path="res://assets/buildingsAssets/Spawn/Dungeon_Objects.png" id="2_hgjap"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_abukt"]
+atlas = ExtResource("2_hgjap")
+region = Rect2(8, 64, 32, 32)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bputu"]
+size = Vector2(16, 16)
+
+[node name="Totem" type="StaticBody2D" unique_id=900901452]
+script = ExtResource("1_vpyxr")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=402675685]
+texture = SubResource("AtlasTexture_abukt")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1441834650]
+position = Vector2(-1, 5)
+shape = SubResource("RectangleShape2D_bputu")

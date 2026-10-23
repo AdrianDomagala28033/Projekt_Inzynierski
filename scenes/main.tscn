@@ -3,6 +3,8 @@
 [ext_resource type="PackedScene" uid="uid://c7ihefuax76wn" path="res://scenes/World/WorldMap.tscn" id="1_0wfyh"]
 [ext_resource type="PackedScene" uid="uid://byvlls4ws0ytv" path="res://scenes/player/players_manager.tscn" id="2_sugp2"]
 [ext_resource type="PackedScene" uid="uid://bd4sqddmbapby" path="res://scenes/ui/ui_manager.tscn" id="3_sugp2"]
+[ext_resource type="PackedScene" uid="uid://sjhpij35t0c4" path="res://scenes/Buildings/PlayerSpawn/BaseManager.tscn" id="4_jyhfs"]
+[ext_resource type="PackedScene" uid="uid://rb8gttaqhjq2" path="res://scenes/Buildings/BuildingsManager.tscn" id="5_tbgi4"]
 
 [node name="Main" type="Node2D" unique_id=1924783958]
 y_sort_enabled = true
@@ -12,3 +14,7 @@ y_sort_enabled = true
 [node name="PlayersManager" parent="." unique_id=2047574068 instance=ExtResource("2_sugp2")]
 
 [node name="UIManager" parent="." unique_id=760827620 instance=ExtResource("3_sugp2")]
+
+[node name="BaseManager" parent="." unique_id=1012265438 instance=ExtResource("4_jyhfs")]
+
+[node name="BuildingsManager" parent="." unique_id=479070726 instance=ExtResource("5_tbgi4")]

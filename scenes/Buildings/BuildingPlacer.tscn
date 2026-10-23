@@ -1,0 +1,20 @@
+[gd_scene format=3 uid="uid://bhhpkb0ca2sxj"]
+
+[ext_resource type="Script" uid="uid://cb8e1u5c6oxu7" path="res://scripts/Buildings/BuildingPlacer.cs" id="1_s6517"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_kgtat"]
+size = Vector2(14, 14)
+
+[node name="BuildingPlacer" type="Node2D" unique_id=1152318021 node_paths=PackedStringArray("ghostSprite", "validationArea")]
+z_index = 100
+script = ExtResource("1_s6517")
+ghostSprite = NodePath("GhostSprite")
+validationArea = NodePath("ValidationArea")
+
+[node name="GhostSprite" type="Sprite2D" parent="." unique_id=1217831430]
+modulate = Color(1, 1, 1, 0.4862745)
+
+[node name="ValidationArea" type="Area2D" parent="." unique_id=447683508]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ValidationArea" unique_id=1903753372]
+shape = SubResource("RectangleShape2D_kgtat")

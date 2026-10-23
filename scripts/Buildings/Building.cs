@@ -1,4 +1,5 @@
 using Godot;
+using Godot.Collections;
 
 public partial class Building : StaticBody2D, IDamageable
 {
@@ -6,9 +7,7 @@ public partial class Building : StaticBody2D, IDamageable
     [Export] public int MaxHealth = 100;
 
     [ExportGroup("Building Cost")]
-    [Export] public int CostWood = 0;
-    [Export] public int CostStone = 0;
-    [Export] public int CostGold = 0;
+    [Export] public Dictionary<MaterialType, int> requiredMaterials;
 
     [ExportGroup("Grid Settings")]
     [Export] public Vector2[] OccupiedTilesOffsets = new Vector2[] { new Vector2(0, 0) };
