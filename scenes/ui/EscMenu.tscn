@@ -1,0 +1,100 @@
+[gd_scene format=3 uid="uid://dau6ffu3rhttv"]
+
+[ext_resource type="Texture2D" uid="uid://dx06brc75icyr" path="res://assets/UI/UI/UI_Buttons.png" id="1_cqhy7"]
+[ext_resource type="Texture2D" uid="uid://bdpviqj2ioxnk" path="res://assets/UI/UI/UI_ALL.png" id="1_nijgj"]
+[ext_resource type="Script" uid="uid://cjtbrwn6bu3va" path="res://scripts/UI/EscMenu.cs" id="2_0i4tf"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nijgj"]
+atlas = ExtResource("1_nijgj")
+region = Rect2(1112, 8, 32, 32)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_cqhy7"]
+texture = SubResource("AtlasTexture_nijgj")
+modulate_color = Color(1, 1, 1, 0.6666667)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kgtat"]
+atlas = ExtResource("1_cqhy7")
+region = Rect2(1632, 97, 47, 14)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_j4ohn"]
+atlas = ExtResource("1_cqhy7")
+region = Rect2(1728, 98, 47, 14)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_w0nfr"]
+atlas = ExtResource("1_cqhy7")
+region = Rect2(1680, 98, 47, 14)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bputu"]
+atlas = ExtResource("1_cqhy7")
+region = Rect2(1632, 49, 47, 14)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2mynh"]
+atlas = ExtResource("1_cqhy7")
+region = Rect2(1728, 49, 47, 14)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ebqk3"]
+atlas = ExtResource("1_cqhy7")
+region = Rect2(1680, 49, 47, 14)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kddlq"]
+atlas = ExtResource("1_cqhy7")
+region = Rect2(1632, 273, 47, 14)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fscpo"]
+atlas = ExtResource("1_cqhy7")
+region = Rect2(1728, 273, 47, 14)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_e54iu"]
+atlas = ExtResource("1_cqhy7")
+region = Rect2(1680, 273, 47, 14)
+
+[node name="EscMenu" type="PanelContainer" unique_id=193694690]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -38.5
+offset_top = -40.0
+offset_right = 38.5
+offset_bottom = 40.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_cqhy7")
+script = ExtResource("2_0i4tf")
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=1579314443]
+layout_mode = 2
+theme_override_constants/margin_left = 30
+theme_override_constants/margin_top = 30
+theme_override_constants/margin_right = 30
+theme_override_constants/margin_bottom = 30
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer" unique_id=1427235116]
+layout_mode = 2
+
+[node name="SaveButton" type="TextureButton" parent="MarginContainer/VBoxContainer" unique_id=404698693]
+custom_minimum_size = Vector2(94, 28)
+layout_mode = 2
+texture_normal = SubResource("AtlasTexture_kgtat")
+texture_pressed = SubResource("AtlasTexture_j4ohn")
+texture_hover = SubResource("AtlasTexture_w0nfr")
+stretch_mode = 0
+
+[node name="OptionsButton" type="TextureButton" parent="MarginContainer/VBoxContainer" unique_id=240639663]
+custom_minimum_size = Vector2(94, 28)
+layout_mode = 2
+texture_normal = SubResource("AtlasTexture_bputu")
+texture_pressed = SubResource("AtlasTexture_2mynh")
+texture_hover = SubResource("AtlasTexture_ebqk3")
+stretch_mode = 0
+
+[node name="LeaveButton" type="TextureButton" parent="MarginContainer/VBoxContainer" unique_id=2081548111]
+custom_minimum_size = Vector2(94, 28)
+layout_mode = 2
+texture_normal = SubResource("AtlasTexture_kddlq")
+texture_pressed = SubResource("AtlasTexture_fscpo")
+texture_hover = SubResource("AtlasTexture_e54iu")
+stretch_mode = 0
+
+[connection signal="pressed" from="MarginContainer/VBoxContainer/LeaveButton" to="." method="OnLeaveButtonPressed"]

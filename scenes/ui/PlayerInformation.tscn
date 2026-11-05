@@ -1,0 +1,91 @@
+[gd_scene format=3 uid="uid://b6vluhnlu4y1x"]
+
+[ext_resource type="Texture2D" uid="uid://d23peken6dc3f" path="res://assets/UI/UI/UI_Bars.png" id="1_0nr11"]
+[ext_resource type="Script" uid="uid://bdpk37xegbltk" path="res://scripts/UI/PlayerInformation.cs" id="1_7swij"]
+[ext_resource type="Texture2D" uid="uid://bdpviqj2ioxnk" path="res://assets/UI/UI/UI_ALL.png" id="1_75ax2"]
+[ext_resource type="Texture2D" uid="uid://bowse5le5aoqx" path="res://assets/UI/UI/UI_Icons.png" id="3_75ax2"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hbk4f"]
+atlas = ExtResource("1_75ax2")
+region = Rect2(1021, 13, 22, 22)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_0j8vr"]
+texture = SubResource("AtlasTexture_hbk4f")
+texture_margin_left = 6.0
+texture_margin_top = 6.0
+texture_margin_right = 6.0
+texture_margin_bottom = 6.0
+modulate_color = Color(1, 1, 1, 0.47058824)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kgtat"]
+atlas = ExtResource("1_0nr11")
+region = Rect2(192, 6, 19, 19)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_abukt"]
+atlas = ExtResource("1_0nr11")
+region = Rect2(1, 21, 30, 5)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_j4ohn"]
+atlas = ExtResource("1_0nr11")
+region = Rect2(3, 7, 28, 3)
+margin = Rect2(1, 0, 1, 0)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_w0nfr"]
+atlas = ExtResource("3_75ax2")
+region = Rect2(161, 33, 14, 14)
+
+[node name="PlayerInformation" type="PanelContainer" unique_id=514723230 node_paths=PackedStringArray("healthBar", "backpackCapacity")]
+custom_minimum_size = Vector2(250, 0)
+offset_right = 74.0
+offset_bottom = 18.0
+theme_override_styles/panel = SubResource("StyleBoxTexture_0j8vr")
+script = ExtResource("1_7swij")
+healthBar = NodePath("HBoxContainer/VBoxContainer/TextureProgressBar")
+backpackCapacity = NodePath("HBoxContainer/VBoxContainer/HBoxContainer/Label")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=1793908812]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="HBoxContainer" unique_id=1061032985]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+texture = SubResource("AtlasTexture_kgtat")
+expand_mode = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer" unique_id=1596270366]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="HBoxContainer/VBoxContainer" unique_id=1033029449]
+layout_mode = 2
+theme_override_constants/margin_top = 5
+
+[node name="TextureProgressBar" type="TextureProgressBar" parent="HBoxContainer/VBoxContainer" unique_id=1232017601]
+texture_filter = 1
+custom_minimum_size = Vector2(100, 20)
+layout_mode = 2
+size_flags_horizontal = 0
+value = 100.0
+nine_patch_stretch = true
+texture_under = SubResource("AtlasTexture_abukt")
+texture_over = SubResource("AtlasTexture_abukt")
+texture_progress = SubResource("AtlasTexture_j4ohn")
+
+[node name="MarginContainer2" type="MarginContainer" parent="HBoxContainer/VBoxContainer" unique_id=1741647942]
+layout_mode = 2
+theme_override_constants/margin_bottom = 10
+
+[node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer/VBoxContainer" unique_id=668168827]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="HBoxContainer/VBoxContainer/HBoxContainer" unique_id=256985257]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+texture = SubResource("AtlasTexture_w0nfr")
+expand_mode = 1
+
+[node name="Label" type="Label" parent="HBoxContainer/VBoxContainer/HBoxContainer" unique_id=1593186952]
+layout_mode = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 5
+theme_override_constants/shadow_outline_size = 2
+theme_override_font_sizes/font_size = 16

@@ -177,7 +177,9 @@ public partial class Signaling : Node
 	{
 		socket.Close();
 		IsConnected = false;
-		RtcPeer.Close();
+
 		Connections.Clear();
+		
+		RtcPeer = new WebRtcMultiplayerPeer();
 	}
 }

@@ -27,6 +27,15 @@ public partial class CharacterCreator : CanvasLayer
             if (parsedData.ContainsKey("PlayerName"))
             {
                 UserNick.Text = parsedData["PlayerName"].AsString();
+                var appearance = parsedData["Appearance"].AsGodotDictionary();
+
+                foreach (var item in appearance)
+                {
+                    TextureNumber[item.Key.AsString()] = item.Value.AsInt32();
+                }
+                
+                var avatar = GetNode<PlayerAvatar>("%CharacterPreview");
+                AppearanceLoader.Apply(avatar, Json.Stringify(appearance));
             }
         }
     }
@@ -81,5 +90,10 @@ public partial class CharacterCreator : CanvasLayer
     {
         SaveProfile();
         OnLeavePressed?.Invoke();
+    }
+    public void OnLineEditChanged(string value)
+    {
+        var avatar = GetNode<PlayerAvatar>("%CharacterPreview");
+        avatar.UserNick.Text = value;
     }
 }

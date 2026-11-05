@@ -21,6 +21,11 @@ public partial class LobbyScreen : CanvasLayer
         if(Multiplayer.IsServer()) StartButton.Disabled = true;
         RefreshLobby();
     }
+    public override void _ExitTree()
+    {
+        connectionManager.OnPlayerListChanged -= RefreshLobby;
+    }
+
 
     private void RefreshLobby()
     {

@@ -6,6 +6,7 @@ public partial class Backpack : Node
 {
     [Export] public int maxBackpackCapacity;
     public Dictionary<MaterialType, int> playerInventory = new Dictionary<MaterialType, int>();
+    public event Action OnItemsQuantityChanged;
 
     public override void _Ready()
     {
@@ -20,6 +21,7 @@ public partial class Backpack : Node
         playerInventory[material] += Math.Min(quantity, availableSpace);
 
         RpcId(GetMultiplayerAuthority(), MethodName.SyncInventoryRpc, playerInventory[material], (int)material);
+        OnItemsQuantityChanged?.Invoke();
     }
     public bool CanHoldResources(MaterialType material)
     {
@@ -33,6 +35,7 @@ public partial class Backpack : Node
             playerInventory[key] = 0;
             RpcId(GetMultiplayerAuthority(), MethodName.SyncInventoryRpc, 0, (int)key);
         }
+        OnItemsQuantityChanged?.Invoke();
         return tmp;
      }
 
@@ -43,6 +46,15 @@ public partial class Backpack : Node
         MaterialType material = (MaterialType)materialId;
         playerInventory[material] = newVal;
         GD.Print($"Zaktualizowano {material}: masz teraz {playerInventory[material]} sztuk");
+    }
+    public int SumItems()
+    {
+        int totalItems = 0;
+        foreach (var item in playerInventory)
+        {
+            totalItems += item.Value;
+        }
+        return totalItems;
     }
 
 }

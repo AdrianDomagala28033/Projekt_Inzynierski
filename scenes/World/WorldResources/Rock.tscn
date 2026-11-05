@@ -48,6 +48,7 @@ replication_config = SubResource("SceneReplicationConfig_sswam")
 position = Vector2(0, 7)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=1381104996]
+visible = false
 position = Vector2(0, -13)
 shape = SubResource("CapsuleShape2D_sswam")
 
@@ -92,5 +93,11 @@ scale_amount_min = 3.0
 scale_amount_max = 5.0
 scale_amount_curve = SubResource("Curve_ixa1u")
 color = Color(0.36078432, 0.41960785, 0.5411765, 1)
+
+[node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=529585550]
+
+[node name="CollisionShape2D" type="CollisionPolygon2D" parent="StaticBody2D" unique_id=408669749]
+position = Vector2(-2.5, 0.5)
+polygon = PackedVector2Array(-11.5, 3.5, 10.5, 3.5, 15.5, -2.5, 15.5, -8.5, -6.5, -8.5, -11.5, -4.5)
 
 [connection signal="input_event" from="Area2D" to="." method="_on_area_2d_input_event"]

@@ -1,18 +1,20 @@
 using Godot;
 using Godot.Collections;
 
+
 public partial class Building : StaticBody2D, IDamageable
 {
     [ExportGroup("Building Stats")]
     [Export] public int MaxHealth = 100;
 
     [ExportGroup("Building Cost")]
-    [Export] public Dictionary<MaterialType, int> requiredMaterials;
+    [Export] public Array<MaterialCost> buildingCosts = new Array<MaterialCost>();
 
     [ExportGroup("Grid Settings")]
     [Export] public Vector2[] OccupiedTilesOffsets = new Vector2[] { new Vector2(0, 0) };
     
     public int CurrentHealth { get; protected set; }
+    public Dictionary<MaterialType, int> requiredMaterials = new Dictionary<MaterialType, int>();
     
     public AiGridManager GridManager; 
 
@@ -72,6 +74,18 @@ public partial class Building : StaticBody2D, IDamageable
         {
             Vector2I targetTile = baseGridPos + new Vector2I(Mathf.RoundToInt(offset.X), Mathf.RoundToInt(offset.Y));
             GridManager.SetObstaclePenalty(targetTile, penaltyValue);
+        }
+    }
+    public void InitializeCost()
+    {
+        requiredMaterials.Clear();
+        if (buildingCosts != null)
+        {
+            foreach (var cost in buildingCosts)
+            {
+                if (cost != null)
+                    requiredMaterials[cost.material] = cost.amount;
+            }
         }
     }
 }

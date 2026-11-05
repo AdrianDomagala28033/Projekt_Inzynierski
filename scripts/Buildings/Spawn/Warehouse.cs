@@ -31,6 +31,7 @@ public partial class Warehouse : Building
     }
     public void OnBodyExited(Node2D body)
     {
+        if (!Multiplayer.HasMultiplayerPeer()) return;
         if(body is Player && body.IsMultiplayerAuthority())
         {
             isPlayerInRange = false;
@@ -45,7 +46,7 @@ public partial class Warehouse : Building
         if(id == 0) id = 1;
         var player = GetNode<Player>($"/root/Main/PlayersManager/PlayersContainer/{id}");
         Dictionary<MaterialType, int> dict = player.backpack.EmptyBackpack();
-        var baseManager = GetNode<BaseManager>("/root/Main/BaseManager");
+        var baseManager = GetTree().GetFirstNodeInGroup("BaseManager") as BaseManager;
         baseManager.ReceiveItems(dict);
     }
     

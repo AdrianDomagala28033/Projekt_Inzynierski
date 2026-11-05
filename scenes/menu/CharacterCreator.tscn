@@ -269,6 +269,7 @@ texture_normal = SubResource("AtlasTexture_kddlq")
 texture_pressed = SubResource("AtlasTexture_w24gt")
 texture_hover = SubResource("AtlasTexture_6mkmj")
 
+[connection signal="text_changed" from="UIRoot/TextureRect/RightPage/VBoxContainer/HBoxContainer2/LineEdit" to="." method="OnLineEditChanged"]
 [connection signal="pressed" from="UIRoot/TextureRect/RightPage/VBoxContainer/HBoxContainer/VBoxContainer/HeadCustomization/ArrowLeft" to="." method="ChangeItem" binds= ["Head", -1]]
 [connection signal="pressed" from="UIRoot/TextureRect/RightPage/VBoxContainer/HBoxContainer/VBoxContainer/HeadCustomization/ArrowRight" to="." method="ChangeItem" binds= ["Head", 1]]
 [connection signal="pressed" from="UIRoot/TextureRect/RightPage/VBoxContainer/HBoxContainer/VBoxContainer/ChestCustomization/ArrowLeft" to="." method="ChangeItem" binds= ["Chest", -1]]

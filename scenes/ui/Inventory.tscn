@@ -1,0 +1,125 @@
+[gd_scene format=3 uid="uid://cone4t613e4sb"]
+
+[ext_resource type="Texture2D" uid="uid://bdpviqj2ioxnk" path="res://assets/UI/UI/UI_ALL.png" id="1_aa520"]
+[ext_resource type="Script" uid="uid://cjdfm46svhrf8" path="res://scripts/UI/Inventory.cs" id="2_0j8vr"]
+[ext_resource type="Texture2D" uid="uid://k8vt5nr1xa4m" path="res://assets/UI/No Outline/Resources_Icons_NO_Outline.png" id="2_0s510"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_eb6af"]
+atlas = ExtResource("1_aa520")
+region = Rect2(1067, 11, 26, 26)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_ybivm"]
+texture = SubResource("AtlasTexture_eb6af")
+texture_margin_left = 6.0
+texture_margin_top = 6.0
+texture_margin_right = 6.0
+texture_margin_bottom = 6.0
+modulate_color = Color(1, 1, 1, 0.6666667)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kgtat"]
+atlas = ExtResource("2_0s510")
+region = Rect2(1, 65, 14, 14)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hbk4f"]
+atlas = ExtResource("2_0s510")
+region = Rect2(1, 81, 14, 14)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0j8vr"]
+atlas = ExtResource("2_0s510")
+region = Rect2(19, 1, 10, 13)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0s510"]
+atlas = ExtResource("2_0s510")
+region = Rect2(19, 33, 10, 13)
+
+[node name="Inventory" type="PanelContainer" unique_id=234691437 node_paths=PackedStringArray("playerWoodCounter", "playerRockCounter", "playerIronCounter", "playerGoldCounter", "globalWoodCounter", "globalRockCounter", "globalIronCounter", "globalGoldCounter") groups=["Inventory"]]
+custom_minimum_size = Vector2(0, 50)
+custom_maximum_size = Vector2(400, -1)
+anchors_preset = 10
+anchor_right = 1.0
+grow_horizontal = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_ybivm")
+script = ExtResource("2_0j8vr")
+playerWoodCounter = NodePath("")
+playerRockCounter = NodePath("")
+playerIronCounter = NodePath("")
+playerGoldCounter = NodePath("")
+globalWoodCounter = NodePath("MarginContainer/HBoxContainer/WoodContainer/WoodCounter")
+globalRockCounter = NodePath("MarginContainer/HBoxContainer/RockContainer/RockCounter")
+globalIronCounter = NodePath("MarginContainer/HBoxContainer/IronContainer/IronCounter")
+globalGoldCounter = NodePath("MarginContainer/HBoxContainer/GoldContainer/GoldCounter")
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=1905975963]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer" unique_id=1677446348]
+layout_mode = 2
+alignment = 1
+
+[node name="WoodContainer" type="HBoxContainer" parent="MarginContainer/HBoxContainer" unique_id=1750603474]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/HBoxContainer/WoodContainer" unique_id=1672471576]
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 2
+texture = SubResource("AtlasTexture_kgtat")
+
+[node name="WoodCounter" type="Label" parent="MarginContainer/HBoxContainer/WoodContainer" unique_id=665153172]
+layout_mode = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 5
+theme_override_constants/shadow_outline_size = 2
+theme_override_font_sizes/font_size = 18
+text = "0"
+
+[node name="RockContainer" type="HBoxContainer" parent="MarginContainer/HBoxContainer" unique_id=470138402]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/HBoxContainer/RockContainer" unique_id=764233516]
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 2
+texture = SubResource("AtlasTexture_hbk4f")
+
+[node name="RockCounter" type="Label" parent="MarginContainer/HBoxContainer/RockContainer" unique_id=2088883638]
+layout_mode = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 5
+theme_override_constants/shadow_outline_size = 2
+theme_override_font_sizes/font_size = 18
+text = "0"
+
+[node name="IronContainer" type="HBoxContainer" parent="MarginContainer/HBoxContainer" unique_id=1884114866]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/HBoxContainer/IronContainer" unique_id=1114859552]
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 2
+texture = SubResource("AtlasTexture_0j8vr")
+
+[node name="IronCounter" type="Label" parent="MarginContainer/HBoxContainer/IronContainer" unique_id=586744478]
+layout_mode = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 5
+theme_override_constants/shadow_outline_size = 2
+theme_override_font_sizes/font_size = 18
+text = "0"
+
+[node name="GoldContainer" type="HBoxContainer" parent="MarginContainer/HBoxContainer" unique_id=376431061]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/HBoxContainer/GoldContainer" unique_id=272071834]
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 2
+texture = SubResource("AtlasTexture_0s510")
+
+[node name="GoldCounter" type="Label" parent="MarginContainer/HBoxContainer/GoldContainer" unique_id=1327745578]
+layout_mode = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 5
+theme_override_constants/shadow_outline_size = 2
+theme_override_font_sizes/font_size = 18
+text = "0"

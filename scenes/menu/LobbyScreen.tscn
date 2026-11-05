@@ -4,6 +4,7 @@
 [ext_resource type="Script" uid="uid://ce8h0p4eihtw7" path="res://scripts/Menu/LobbyScreen.cs" id="1_t52x6"]
 [ext_resource type="PackedScene" uid="uid://dun2niw8n0v51" path="res://scenes/player/PlayerAvatar.tscn" id="2_nfn8l"]
 [ext_resource type="FontFile" uid="uid://dkjntnelb5d1" path="res://assets/fonts/CuteFantasy-5x9.ttf" id="2_t52x6"]
+[ext_resource type="Texture2D" uid="uid://dx06brc75icyr" path="res://assets/UI/UI/UI_Buttons.png" id="5_buefv"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_kgtat"]
 atlas = ExtResource("1_a4ndi")
@@ -28,6 +29,10 @@ region = Rect2(65, 355, 30, 12)
 [sub_resource type="AtlasTexture" id="AtlasTexture_y7q35"]
 atlas = ExtResource("1_a4ndi")
 region = Rect2(33, 354, 30, 13)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_trovf"]
+atlas = ExtResource("5_buefv")
+region = Rect2(65, 67, 30, 12)
 
 [node name="LobbyScreen" type="CanvasLayer" unique_id=2139292389 node_paths=PackedStringArray("AvatarContainer", "CodeDisplay", "ReadyButton", "StartButton")]
 scale = Vector2(4, 4)
@@ -144,6 +149,7 @@ size_flags_horizontal = 8
 texture_normal = SubResource("AtlasTexture_nfn8l")
 texture_pressed = SubResource("AtlasTexture_buefv")
 texture_hover = SubResource("AtlasTexture_y7q35")
+texture_disabled = SubResource("AtlasTexture_trovf")
 
 [node name="Label" type="Label" parent="UIRoot/TextureRect/RightPage/VBoxContainer/HBoxContainer/StartButton" unique_id=92203821]
 layout_mode = 0

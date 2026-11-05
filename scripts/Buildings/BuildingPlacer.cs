@@ -1,4 +1,5 @@
 using Godot;
+using Godot.Collections;
 using System;
 using System.Linq;
 
@@ -11,6 +12,8 @@ public partial class BuildingPlacer : Node2D
     private int tileSize = 16;
     private Player player;
     private PackedScene selectedBuilding;
+    private Dictionary<MaterialType, int> currentBuildingCost;
+    private BaseManager baseManager;
     public string[] animationName = ["corner_bottom_left", "corner_bottom_right", "corner_top_left", "corner_top_right", "horizontal", "vertical_left", "vertical_right"];
     public int animationIndex = 4;
 
@@ -22,59 +25,85 @@ public partial class BuildingPlacer : Node2D
         buildingMenu = GetNode<BuildingMenu>("/root/Main/UIManager/BuildingMenu");
         buildingMenu.Visible = false;
         buildingMenu.OnBuildingSelected += UpdateGhost;
+        baseManager = GetTree().GetFirstNodeInGroup("BaseManager") as BaseManager;
         
     }
-    public override void _Process(double delta)
+    public override void _PhysicsProcess(double delta)
     {
+
         if(!isBuildingMode || !player.IsMultiplayerAuthority()) return;
         Vector2 mousePos = GetGlobalMousePosition();
 
-        float snappedX = Mathf.Floor(mousePos.X / tileSize) * tileSize;
-        float snappedY = Mathf.Floor(mousePos.Y / tileSize) * tileSize;
+        float snappedX = Mathf.Floor(mousePos.X / tileSize) * tileSize + (tileSize / 2.0f);
+        float snappedY = Mathf.Floor(mousePos.Y / tileSize) * tileSize + (tileSize / 2.0f);
         
         this.GlobalPosition = new Vector2(snappedX, snappedY);
-        if(validationArea.HasOverlappingBodies() || validationArea.HasOverlappingAreas()) ghostSprite.Modulate = new Color(1, 0, 0, 0.5f);
-        else ghostSprite.Modulate = new Color(0, 1, 0, 0.5f);
+
+        bool canAfford = true;
+        if (currentBuildingCost != null)
+        {
+            foreach (var item in currentBuildingCost)
+            {
+                if (!baseManager.inventory.TryGetValue(item.Key, out int amount) || amount < item.Value)
+                {
+                    canAfford = false;
+                    break;
+                }
+            }
+        }
+        if (validationArea.HasOverlappingBodies() || !canAfford)
+        ghostSprite.Modulate = new Color(1, 0, 0, 0.5f);
+        else 
+            ghostSprite.Modulate = new Color(0, 1, 0, 0.5f);
         
     }
     public override void _UnhandledInput(InputEvent @event)
     {
-        if(!isBuildingMode || !player.IsMultiplayerAuthority()) return;
-        if (@event is InputEventMouseButton mouseEvent)
+        if (!isBuildingMode || !player.IsMultiplayerAuthority()) return;
+        
+        if (@event is InputEventMouseButton mouseEvent && mouseEvent.IsPressed())
         {
-            if (mouseEvent.IsPressed())
+            bool variantChanged = false;
+
+            if (mouseEvent.ButtonIndex == MouseButton.WheelUp)
             {
-                if (mouseEvent.ButtonIndex == MouseButton.WheelUp)
+                animationIndex++;
+                if (animationIndex > animationName.Length - 1) animationIndex = 0;
+                variantChanged = true;
+            }
+            else if (mouseEvent.ButtonIndex == MouseButton.WheelDown)
+            {
+                animationIndex--;
+                if (animationIndex < 0) animationIndex = animationName.Length - 1;
+                variantChanged = true;
+            }
+            
+            if (variantChanged && selectedBuilding != null)
+            {
+                UpdateGhost(selectedBuilding);
+            }
+
+            if (mouseEvent.ButtonIndex == MouseButton.Left)
+            {
+                bool canAfford = true;
+                if (currentBuildingCost != null)
                 {
-                    animationIndex++;
-                    if(animationIndex == animationName.Count() - 1)
+                    foreach (var item in currentBuildingCost)
                     {
-                        animationIndex = 0;
+                        if (!baseManager.inventory.TryGetValue(item.Key, out int amount) || amount < item.Value)
+                        {
+                            canAfford = false;
+                            break;
+                        }
                     }
                 }
-                else if(mouseEvent.ButtonIndex == MouseButton.WheelDown)
+
+                if (!validationArea.HasOverlappingBodies() && canAfford && selectedBuilding != null)
                 {
-                    animationIndex--;
-                    if(animationIndex < 0)
-                    {
-                        animationIndex = animationName.Count() - 1;
-                    }
-                }
-                if(mouseEvent.ButtonIndex == MouseButton.Left)
-                {
-                    if(validationArea.HasOverlappingBodies() || validationArea.HasOverlappingAreas()) return;
-                    if(!validationArea.HasOverlappingBodies() || !validationArea.HasOverlappingAreas())
-                    {
-                        if (selectedBuilding == null) return;
-                        Rpc(MethodName.PlaceBuilding, selectedBuilding.ResourcePath, this.GlobalPosition, animationIndex);
-                    }
+                    Rpc(MethodName.PlaceBuilding, selectedBuilding.ResourcePath, this.GlobalPosition, animationIndex);
                 }
             }
-            if (selectedBuilding != null)
-                UpdateGhost(selectedBuilding);
         }
-        
-        
     }
 
 
@@ -99,11 +128,16 @@ public partial class BuildingPlacer : Node2D
     {
         selectedBuilding = scene;
         Building tempBuilding = scene.Instantiate<Building>();
+        tempBuilding.InitializeCost();
+        currentBuildingCost = tempBuilding.requiredMaterials;
 
         Sprite2D sprite = tempBuilding.GetNodeOrNull<Sprite2D>("Sprite2D");
         if(sprite != null && sprite.Texture != null)
         {
             ghostSprite.Texture = sprite.Texture;
+            ghostSprite.Scale = sprite.Scale;
+            ghostSprite.Offset = sprite.Offset;
+            ghostSprite.Position = sprite.Position;
 
             if (sprite.RegionEnabled)
             {
@@ -119,14 +153,19 @@ public partial class BuildingPlacer : Node2D
         {
             AnimatedSprite2D animatedSprite = tempBuilding.GetNodeOrNull<AnimatedSprite2D>("AnimatedSprite2D");
             ghostSprite.Texture = animatedSprite.SpriteFrames.GetFrameTexture(animationName[animationIndex], 0);
+
+            ghostSprite.Scale = animatedSprite.Scale;
+            ghostSprite.Offset = animatedSprite.Offset;
+            ghostSprite.Position = animatedSprite.Position;
         }
         
         var buildingCollisionShape = tempBuilding.GetNode<CollisionShape2D>("CollisionShape2D");
-
         CollisionShape2D collisionShape = validationArea.GetNode<CollisionShape2D>("CollisionShape2D");
-        collisionShape.Shape = buildingCollisionShape.Shape;
 
-        
+        RectangleShape2D rectShape = (RectangleShape2D)buildingCollisionShape.Shape.Duplicate();
+        rectShape.Size = new Vector2(rectShape.Size.X - 2, rectShape.Size.Y - 2);
+
+        collisionShape.Shape = rectShape;
         collisionShape.Position = buildingCollisionShape.Position;
 
         tempBuilding.QueueFree();
@@ -139,12 +178,19 @@ public partial class BuildingPlacer : Node2D
 
         PackedScene buildingScene = GD.Load<PackedScene>(buildingPath);
         Building building = buildingScene.Instantiate<Building>();
+        building.InitializeCost();
+
         building.GlobalPosition = position;
         AnimatedSprite2D animatedSprite = building.GetNodeOrNull<AnimatedSprite2D>("AnimatedSprite2D");
         if(animatedSprite != null)
             animatedSprite.Animation = animationName[variant];
-        
-        GetNode("/root/Main/BuildingsManager/BuildingContainer").AddChild(building);
+        if(baseManager.TrySpendResources(building.requiredMaterials))
+            GetNode("/root/Main/BuildingsManager/BuildingContainer").AddChild(building, true);
+        else
+        {
+            building.QueueFree();
+            return;
+        }
     }
 
 }

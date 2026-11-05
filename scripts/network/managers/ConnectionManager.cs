@@ -11,7 +11,7 @@ public partial class ConnectionManager : Node
 	public string LobbyCode;
 	public event Action OnConnected;
 	public event Action OnJoined;
-	public event Action OnDisconnected;
+	public event Action<long> OnDisconnected;
 	public event Action OnPlayerListChanged;
 	public event Action<string> OnLobbyCreated;
 	public int GlobalMapSeed;
@@ -44,6 +44,7 @@ public partial class ConnectionManager : Node
 		var player = PlayerList.Find(p => p.Id == id);
 		PlayerList.Remove(player);
 		OnPlayerListChanged?.Invoke();
+		OnDisconnected?.Invoke(id);
 	}
 
 	private void OnPeerConnected(long id)
@@ -79,6 +80,12 @@ public partial class ConnectionManager : Node
 	{
 		LobbyCode = code;
 		OnLobbyCreated?.Invoke(code);
+	}
+	public void ClearNetworkState()
+	{
+		PlayerList.Clear();
+		playersLoadedCount = 0;
+		Multiplayer.MultiplayerPeer = null;
 	}
 
 #region funkcje rpc
@@ -142,7 +149,7 @@ public partial class ConnectionManager : Node
 		playersLoadedCount++;
 		if(playersLoadedCount == PlayerList.Count)
 		{
-			var baseManager = GetNode<BaseManager>("/root/Main/BaseManager");
+			var baseManager = GetTree().GetFirstNodeInGroup("BaseManager") as BaseManager;
 			baseManager.SpawnInitialBase();
 			Rpc("StartGameRpc");
 		}

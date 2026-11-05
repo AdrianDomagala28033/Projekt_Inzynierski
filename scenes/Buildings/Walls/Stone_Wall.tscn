@@ -1,7 +1,14 @@
 [gd_scene format=3 uid="uid://dmqi1ct61s1fm"]
 
 [ext_resource type="Script" uid="uid://blca84csjif14" path="res://scripts/Buildings/Walls/Wall.cs" id="1_c088u"]
+[ext_resource type="Script" uid="uid://dastof4vi888h" path="res://scripts/Buildings/MaterialCost.cs" id="2_b2hgy"]
 [ext_resource type="Texture2D" uid="uid://bgdibjj2ntpaq" path="res://assets/buildingsAssets/Walls/Stone_Wall.png" id="2_c088u"]
+
+[sub_resource type="Resource" id="Resource_c088u"]
+script = ExtResource("2_b2hgy")
+material = 1
+amount = 20
+metadata/_custom_type_script = "uid://dastof4vi888h"
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_b2hgy"]
 atlas = ExtResource("2_c088u")
@@ -97,9 +104,13 @@ size = Vector2(16, 16)
 properties/0/path = NodePath(".:position")
 properties/0/spawn = true
 properties/0/replication_mode = 1
+properties/1/path = NodePath("AnimatedSprite2D:animation")
+properties/1/spawn = true
+properties/1/replication_mode = 1
 
 [node name="StoneWall" type="StaticBody2D" unique_id=1329918865]
 script = ExtResource("1_c088u")
+buildingCosts = Array[ExtResource("2_b2hgy")]([SubResource("Resource_c088u")])
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1769233361]
 sprite_frames = SubResource("SpriteFrames_wxvp1")

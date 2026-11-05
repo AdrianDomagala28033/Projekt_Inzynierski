@@ -6,7 +6,9 @@ public enum MaterialType
 {
     Wood = 0,
     Rock = 1,
-    Body = 2
+    Iron = 2,
+    Gold = 3,
+    Body = 4
 }
 public partial class DestructibleEntity : Node2D
 {
@@ -37,6 +39,18 @@ public partial class DestructibleEntity : Node2D
                     damage = 40;
                 break;
             case MaterialType.Rock:
+                if(tool != Tool.Pickaxe)
+                    damage = 1;
+                else
+                    damage = 40;
+                break;
+            case MaterialType.Iron:
+                if(tool != Tool.Pickaxe)
+                    damage = 1;
+                else
+                    damage = 40;
+                break;
+            case MaterialType.Gold:
                 if(tool != Tool.Pickaxe)
                     damage = 1;
                 else

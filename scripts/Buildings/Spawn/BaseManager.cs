@@ -8,6 +8,7 @@ public partial class BaseManager : Node2D
     [Export] public PackedScene warehouseScene;
     [Export] public PackedScene totemScene;
     [Export] public Node2D buildingsContainer;
+    [Export] public TileMapLayer groundLayer;
     public Dictionary<MaterialType, int> inventory = new Dictionary<MaterialType, int>();
     public event Action<MaterialType, int> onQuantityChanged;
     public ConnectionManager connectionManager;
@@ -33,6 +34,13 @@ public partial class BaseManager : Node2D
     public bool TrySpendResources(Dictionary<MaterialType, int> requiredResources)
     {
         if(!Multiplayer.IsServer()) return false;
+
+        GD.Print($"[Serwer] Próba wydania. Koszt składa się z {requiredResources?.Count ?? 0} pozycji.");
+        foreach(var item in requiredResources)
+        {
+            GD.Print($"[Serwer] Potrzeba: {item.Key} x{item.Value}. W magazynie jest: {inventory[item.Key]}");
+        }
+
         foreach (var item in requiredResources)
         {
             if(inventory[item.Key] < item.Value) return false;
@@ -50,6 +58,8 @@ public partial class BaseManager : Node2D
         MaterialType material = (MaterialType)key;
         inventory[material] = value;
         onQuantityChanged?.Invoke((MaterialType)key, value);
+        var inventoryInterface = GetTree().GetFirstNodeInGroup("Inventory") as Inventory;
+        inventoryInterface.UpdateGlobalInventory();
         GD.Print($"Zaktualizowano {material}: masz teraz {inventory[material]} sztuk");
     }
     public async void SpawnInitialBase()
@@ -59,7 +69,7 @@ public partial class BaseManager : Node2D
             await ToSignal(GetTree().CreateTimer(0.5f), SceneTreeTimer.SignalName.Timeout);
             var spaceState = GetWorld2D().DirectSpaceState;
             Vector2 desiredPos = new Vector2(50*16, 50*16);
-            Vector2 safePos = SpawnLocator.GetFreeSpot(desiredPos, spaceState, new Vector2(93, 67));
+            Vector2 safePos = SpawnLocator.GetFreeSpot(desiredPos, spaceState, new Vector2(93, 67), groundLayer);
 
             var warehouseInstance = warehouseScene.Instantiate<Warehouse>();
             //var totemInstance = totemScene.Instantiate<Totem>();
@@ -70,5 +80,6 @@ public partial class BaseManager : Node2D
             //buildingsContainer.AddChild(totemInstance, true);
         }
     }
+    
 
 }

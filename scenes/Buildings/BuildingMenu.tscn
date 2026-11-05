@@ -8,21 +8,13 @@
 [ext_resource type="PackedScene" uid="uid://5rq63r7s5ur1" path="res://scenes/Buildings/Walls/Wood_Wall.tscn" id="6_f3q8m"]
 [ext_resource type="PackedScene" uid="uid://d2py1omgud5iy" path="res://scenes/Buildings/Turrets/ArcherTower.tscn" id="7_lm3hq"]
 [ext_resource type="PackedScene" uid="uid://4wm2fsocowdy" path="res://scenes/Buildings/Turrets/WitchTower.tscn" id="8_l53cb"]
+[ext_resource type="Texture2D" uid="uid://bowse5le5aoqx" path="res://assets/UI/UI/UI_Icons.png" id="9_o670v"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_qi45h"]
-atlas = ExtResource("1_2nfss")
-region = Rect2(1112, 8, 32, 32)
-
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_kgtat"]
-texture = SubResource("AtlasTexture_qi45h")
-texture_margin_left = 5.0
-texture_margin_top = 5.0
-texture_margin_right = 5.0
-texture_margin_bottom = 5.0
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_0gnbo"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_stsbt"]
 atlas = ExtResource("1_2nfss")
-region = Rect2(1022, 158, 20, 20)
+region = Rect2(1067, 11, 26, 26)
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_qi45h"]
 texture = SubResource("AtlasTexture_stsbt")
@@ -33,7 +25,7 @@ texture_margin_bottom = 6.0
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_adsga"]
 atlas = ExtResource("1_2nfss")
-region = Rect2(1, 353, 30, 14)
+region = Rect2(623, 2172, 20, 21)
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_bno2s"]
 texture = SubResource("AtlasTexture_adsga")
@@ -42,19 +34,9 @@ texture_margin_top = 4.0
 texture_margin_right = 4.0
 texture_margin_bottom = 4.0
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_2nfss"]
-atlas = ExtResource("1_2nfss")
-region = Rect2(33, 354, 30, 13)
-
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_2nfss"]
-texture = SubResource("AtlasTexture_2nfss")
-texture_margin_left = 4.0
-texture_margin_top = 4.0
-texture_margin_right = 4.0
-
 [sub_resource type="AtlasTexture" id="AtlasTexture_71cdu"]
 atlas = ExtResource("1_2nfss")
-region = Rect2(65, 355, 30, 12)
+region = Rect2(623, 2220, 20, 21)
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_2yrg2"]
 texture = SubResource("AtlasTexture_71cdu")
@@ -63,12 +45,24 @@ texture_margin_top = 4.0
 texture_margin_right = 4.0
 texture_margin_bottom = 4.0
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_0gnbo"]
+atlas = ExtResource("9_o670v")
+region = Rect2(194, 1, 12, 14)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_o670v"]
+atlas = ExtResource("9_o670v")
+region = Rect2(113, 17, 14, 14)
+
 [node name="BuildingMenu" type="PanelContainer" unique_id=163348060]
-custom_minimum_size = Vector2(250, 0)
-anchors_preset = 9
+modulate = Color(1, 1, 1, 0.84705883)
+custom_minimum_size = Vector2(250, 350)
+anchors_preset = 2
+anchor_top = 1.0
 anchor_bottom = 1.0
-grow_vertical = 2
-theme_override_styles/panel = SubResource("StyleBoxTexture_kgtat")
+offset_top = -350.0
+offset_right = 250.0
+grow_vertical = 0
+theme_override_styles/panel = SubResource("StyleBoxEmpty_0gnbo")
 script = ExtResource("2_qi45h")
 buildingButton = ExtResource("3_stsbt")
 WallScenes = Array[PackedScene]([ExtResource("4_0gnbo"), ExtResource("5_o670v"), ExtResource("6_f3q8m")])
@@ -76,23 +70,18 @@ TowerScenes = Array[PackedScene]([ExtResource("7_lm3hq"), ExtResource("8_l53cb")
 
 [node name="MarginContainer" type="MarginContainer" parent="." unique_id=261114306]
 layout_mode = 2
-theme_override_constants/margin_left = 10
-theme_override_constants/margin_top = 10
-theme_override_constants/margin_right = 10
-theme_override_constants/margin_bottom = 10
 
 [node name="TabContainer" type="TabContainer" parent="MarginContainer" unique_id=13318877]
 layout_mode = 2
 theme_override_colors/font_unselected_color = Color(0.19219694, 0.19219697, 0.19219697, 1)
 theme_override_styles/panel = SubResource("StyleBoxTexture_qi45h")
 theme_override_styles/tab_unselected = SubResource("StyleBoxTexture_bno2s")
-theme_override_styles/tab_hovered = SubResource("StyleBoxTexture_2nfss")
 theme_override_styles/tab_selected = SubResource("StyleBoxTexture_2yrg2")
-tab_alignment = 1
-current_tab = 1
+current_tab = 0
+tab_0/icon = SubResource("AtlasTexture_0gnbo")
+tab_1/icon = SubResource("AtlasTexture_o670v")
 
 [node name="Walls" type="ScrollContainer" parent="MarginContainer/TabContainer" unique_id=732974324]
-visible = false
 layout_mode = 2
 metadata/_tab_index = 0
 
@@ -101,6 +90,7 @@ layout_mode = 2
 columns = 2
 
 [node name="Towers" type="ScrollContainer" parent="MarginContainer/TabContainer" unique_id=533674011]
+visible = false
 layout_mode = 2
 metadata/_tab_index = 1
 
