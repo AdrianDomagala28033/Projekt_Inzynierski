@@ -1,0 +1,28 @@
+[gd_scene format=3 uid="uid://yacaehiw7gl6"]
+
+[ext_resource type="Script" uid="uid://cs7d5ah6comgp" path="res://scripts/Menu/MenuController.cs" id="1_aymjc"]
+[ext_resource type="PackedScene" uid="uid://bgphp7bu2n3lo" path="res://scenes/menu/StartScreen.tscn" id="2_10xk2"]
+[ext_resource type="PackedScene" uid="uid://g6uc42o6jf1a" path="res://scenes/menu/NetworkSetup.tscn" id="3_5dwjd"]
+[ext_resource type="PackedScene" uid="uid://ckhb1lvehw6ps" path="res://scenes/menu/LobbyScreen.tscn" id="4_8agck"]
+[ext_resource type="PackedScene" uid="uid://4frhvoyqyl2j" path="res://scenes/menu/CharacterCreator.tscn" id="5_10xk2"]
+
+[node name="MenuController" type="Control" unique_id=60250380]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_aymjc")
+StartScreenScene = ExtResource("2_10xk2")
+NetworkSetupScene = ExtResource("3_5dwjd")
+LobbyScene = ExtResource("4_8agck")
+CharacterCustomizationScene = ExtResource("5_10xk2")
+
+[node name="ScreenContainer" type="Control" parent="." unique_id=413754467]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2

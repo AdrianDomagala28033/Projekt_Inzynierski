@@ -15,20 +15,28 @@ public partial class Player : CharacterBody2D
     private Sprite2D[] clothingLayers;
     [Export] Label playerName;
     [Export] public float speed;
-    [Export] public int maxBackpackCapacity;
-    public Dictionary<MaterialType, int> inventory = new Dictionary<MaterialType, int>();
+    [Export] public Backpack backpack;
+    [Export] public int maxHealth;
     public Tool activeTool;
     public static Player localPlayer;
     public event Action<Tool> OnToolChanged;
     public bool isInteracting = false;
+    
 
     public override void _Ready()
     {
-        foreach (MaterialType material in Enum.GetValues(typeof(MaterialType)))
-        {
-            inventory[material] = 0; 
-        }
-        GlobalPosition = new Vector2(50 * 16, 50 * 16);
+        
+        var spaceState = GetWorld2D().DirectSpaceState;
+        Vector2 desiredPos = new Vector2(54*16, 54*16);
+        Vector2 safePos = desiredPos;
+
+        TileMapLayer groundLayer = GetTree().GetFirstNodeInGroup("WalkableMap") as TileMapLayer;
+        if (groundLayer != null)
+            safePos = SpawnLocator.GetFreeSpot(desiredPos, spaceState, new Vector2(3, 6), groundLayer);
+        else
+            GD.PrintErr("[Player] Nie znaleziono TileMapLayer w grupie 'WalkableMap'!");
+        
+        GlobalPosition = safePos;
         AddToGroup("Players");
         
         int id = int.Parse(Name);
@@ -49,7 +57,10 @@ public partial class Player : CharacterBody2D
         var connectionManager = GetNode<ConnectionManager>("/root/ConnectionManager");
         var playerData = connectionManager.PlayerList.Find(p => p.Id == id);
         if(playerData != null)
+        {
             playerName.Text = playerData.Name;
+            AppearanceLoader.Apply(this, playerData.AppearanceJson, "PlayerBase/");   
+        }
         activeTool = Tool.Axe;
         GD.Print(activeTool);
         if (IsMultiplayerAuthority())
@@ -57,6 +68,11 @@ public partial class Player : CharacterBody2D
             localPlayer = this;
             var toolSelector = GetNode<ToolSelector>("/root/Main/UIManager/ToolSelector");
             toolSelector.InitializeSelector(this); 
+            var playerInformation = GetNode<PlayerInformation>("/root/Main/UIManager/PlayerInformation");
+            if (playerInformation != null)
+                playerInformation.InitializeInterface();
+            else
+                GD.PrintErr("Nie znaleziono węzła PlayerInformation w grupie!");
         }
     }
     public override void _UnhandledInput(InputEvent @event)
@@ -155,17 +171,6 @@ public partial class Player : CharacterBody2D
         else
             animPlayer.Play("waiting");
     }
-    public void AddResources(int quantity, MaterialType material)
-    {
-        int availableSpace = maxBackpackCapacity - inventory[material];
-        inventory[material] += Math.Min(quantity, availableSpace);
-
-        RpcId(int.Parse(Name), MethodName.SyncInventoryRpc, inventory[material], (int)material);
-    }
-    public bool CanHoldResources(MaterialType material)
-    {
-        return inventory[material] < maxBackpackCapacity;
-    }
     public async void PerformToolAction(Vector2 targetPosition, Action onActionCompleted)
     {
         isInteracting = true;
@@ -196,16 +201,9 @@ public partial class Player : CharacterBody2D
             playerBase.FlipH = true;
         else 
             playerBase.FlipH = false;
-        animPlayer.Play($"mine_animation");
+        animPlayer.Play($"mine_animation_side");
         await ToSignal(animPlayer, AnimationPlayer.SignalName.AnimationFinished);
         isInteracting = false;
-    }
-    [Rpc(MultiplayerApi.RpcMode.AnyPeer, CallLocal = true)]
-    public void SyncInventoryRpc(int newVal, int materialId)
-    {
-        MaterialType material = (MaterialType)materialId;
-        inventory[material] = newVal;
-        GD.Print($"Zaktualizowano {material}: masz teraz {inventory[material]} sztuk");
     }
 
 }

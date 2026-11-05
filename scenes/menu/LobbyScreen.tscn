@@ -1,0 +1,168 @@
+[gd_scene format=3 uid="uid://ckhb1lvehw6ps"]
+
+[ext_resource type="Texture2D" uid="uid://bdpviqj2ioxnk" path="res://assets/UI/UI/UI_ALL.png" id="1_a4ndi"]
+[ext_resource type="Script" uid="uid://ce8h0p4eihtw7" path="res://scripts/Menu/LobbyScreen.cs" id="1_t52x6"]
+[ext_resource type="PackedScene" uid="uid://dun2niw8n0v51" path="res://scenes/player/PlayerAvatar.tscn" id="2_nfn8l"]
+[ext_resource type="FontFile" uid="uid://dkjntnelb5d1" path="res://assets/fonts/CuteFantasy-5x9.ttf" id="2_t52x6"]
+[ext_resource type="Texture2D" uid="uid://dx06brc75icyr" path="res://assets/UI/UI/UI_Buttons.png" id="5_buefv"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kgtat"]
+atlas = ExtResource("1_a4ndi")
+region = Rect2(248, 2150, 224, 133)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_j4ohn"]
+atlas = ExtResource("1_a4ndi")
+region = Rect2(289, 1313, 30, 14)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_w0nfr"]
+atlas = ExtResource("1_a4ndi")
+region = Rect2(193, 1313, 30, 14)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nfn8l"]
+atlas = ExtResource("1_a4ndi")
+region = Rect2(1, 353, 30, 14)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_buefv"]
+atlas = ExtResource("1_a4ndi")
+region = Rect2(65, 355, 30, 12)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_y7q35"]
+atlas = ExtResource("1_a4ndi")
+region = Rect2(33, 354, 30, 13)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_trovf"]
+atlas = ExtResource("5_buefv")
+region = Rect2(65, 67, 30, 12)
+
+[node name="LobbyScreen" type="CanvasLayer" unique_id=2139292389 node_paths=PackedStringArray("AvatarContainer", "CodeDisplay", "ReadyButton", "StartButton")]
+scale = Vector2(4, 4)
+transform = Transform2D(4, 0, 0, 4, 0, 0)
+script = ExtResource("1_t52x6")
+PlayerAvatarScene = ExtResource("2_nfn8l")
+AvatarContainer = NodePath("UIRoot/TextureRect/LeftPage/ScrollContainer/GridContainer")
+CodeDisplay = NodePath("UIRoot/TextureRect/RightPage/VBoxContainer/HBoxContainer3/LobbyCode")
+ReadyButton = NodePath("UIRoot/TextureRect/RightPage/VBoxContainer/HBoxContainer2/ReadyButton")
+StartButton = NodePath("UIRoot/TextureRect/RightPage/VBoxContainer/HBoxContainer/StartButton")
+
+[node name="UIRoot" type="Control" parent="." unique_id=455777904]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 320.0
+offset_bottom = 180.0
+
+[node name="TextureRect" type="TextureRect" parent="UIRoot" unique_id=1934294927]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("AtlasTexture_kgtat")
+
+[node name="LeftPage" type="MarginContainer" parent="UIRoot/TextureRect" unique_id=2123622433]
+layout_mode = 0
+offset_left = 18.0
+offset_top = 12.0
+offset_right = 143.0
+offset_bottom = 158.0
+
+[node name="ScrollContainer" type="ScrollContainer" parent="UIRoot/TextureRect/LeftPage" unique_id=39169385]
+layout_mode = 2
+
+[node name="GridContainer" type="GridContainer" parent="UIRoot/TextureRect/LeftPage/ScrollContainer" unique_id=934555894]
+layout_mode = 2
+columns = 2
+
+[node name="RightPage" type="MarginContainer" parent="UIRoot/TextureRect" unique_id=1432246908]
+layout_mode = 0
+offset_left = 176.0
+offset_top = 13.0
+offset_right = 301.0
+offset_bottom = 158.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UIRoot/TextureRect/RightPage" unique_id=1828601582]
+layout_mode = 2
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="UIRoot/TextureRect/RightPage/VBoxContainer" unique_id=412147670]
+layout_mode = 2
+
+[node name="LobbyCodeLabel" type="Label" parent="UIRoot/TextureRect/RightPage/VBoxContainer/HBoxContainer3" unique_id=2050539926]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.72156864, 0.43529412, 0.3137255, 1)
+theme_override_fonts/font = ExtResource("2_t52x6")
+theme_override_font_sizes/font_size = 18
+text = "Kod lobby:"
+
+[node name="LobbyCode" type="LineEdit" parent="UIRoot/TextureRect/RightPage/VBoxContainer/HBoxContainer3" unique_id=1582583508]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_t52x6")
+theme_override_font_sizes/font_size = 18
+editable = false
+
+[node name="Control" type="Control" parent="UIRoot/TextureRect/RightPage/VBoxContainer" unique_id=1195437364]
+custom_minimum_size = Vector2(0, 70)
+layout_mode = 2
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="UIRoot/TextureRect/RightPage/VBoxContainer" unique_id=1854592054]
+layout_mode = 2
+alignment = 2
+
+[node name="Label" type="Label" parent="UIRoot/TextureRect/RightPage/VBoxContainer/HBoxContainer2" unique_id=1513553208]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.72156864, 0.43529412, 0.3137255, 1)
+theme_override_fonts/font = ExtResource("2_t52x6")
+theme_override_font_sizes/font_size = 18
+text = "Ready"
+
+[node name="ReadyButton" type="TextureButton" parent="UIRoot/TextureRect/RightPage/VBoxContainer/HBoxContainer2" unique_id=985682659]
+layout_mode = 2
+toggle_mode = true
+texture_normal = SubResource("AtlasTexture_j4ohn")
+texture_pressed = SubResource("AtlasTexture_w0nfr")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="UIRoot/TextureRect/RightPage/VBoxContainer" unique_id=408119449]
+layout_mode = 2
+alignment = 1
+
+[node name="LeaveButton" type="TextureButton" parent="UIRoot/TextureRect/RightPage/VBoxContainer/HBoxContainer" unique_id=1392162849]
+layout_mode = 2
+size_flags_horizontal = 8
+texture_normal = SubResource("AtlasTexture_nfn8l")
+texture_pressed = SubResource("AtlasTexture_buefv")
+texture_hover = SubResource("AtlasTexture_y7q35")
+
+[node name="Label" type="Label" parent="UIRoot/TextureRect/RightPage/VBoxContainer/HBoxContainer/LeaveButton" unique_id=1189891674]
+layout_mode = 0
+offset_left = 2.0
+offset_top = 2.0
+offset_right = 27.0
+offset_bottom = 12.0
+theme_override_colors/font_color = Color(0.72156864, 0.43529412, 0.3137255, 1)
+theme_override_fonts/font = ExtResource("2_t52x6")
+theme_override_font_sizes/font_size = 9
+text = "Leave"
+horizontal_alignment = 1
+
+[node name="StartButton" type="TextureButton" parent="UIRoot/TextureRect/RightPage/VBoxContainer/HBoxContainer" unique_id=2138890676]
+layout_mode = 2
+size_flags_horizontal = 8
+texture_normal = SubResource("AtlasTexture_nfn8l")
+texture_pressed = SubResource("AtlasTexture_buefv")
+texture_hover = SubResource("AtlasTexture_y7q35")
+texture_disabled = SubResource("AtlasTexture_trovf")
+
+[node name="Label" type="Label" parent="UIRoot/TextureRect/RightPage/VBoxContainer/HBoxContainer/StartButton" unique_id=92203821]
+layout_mode = 0
+offset_left = 2.0
+offset_top = 2.0
+offset_right = 27.0
+offset_bottom = 12.0
+theme_override_colors/font_color = Color(0.72156864, 0.43529412, 0.3137255, 1)
+theme_override_fonts/font = ExtResource("2_t52x6")
+theme_override_font_sizes/font_size = 9
+text = "Start"
+horizontal_alignment = 1
+
+[connection signal="pressed" from="UIRoot/TextureRect/RightPage/VBoxContainer/HBoxContainer2/ReadyButton" to="." method="OnReadyButtonPressed"]
+[connection signal="pressed" from="UIRoot/TextureRect/RightPage/VBoxContainer/HBoxContainer/LeaveButton" to="." method="OnLeaveButtonPressed"]
+[connection signal="pressed" from="UIRoot/TextureRect/RightPage/VBoxContainer/HBoxContainer/StartButton" to="." method="OnStartButtonPressed"]

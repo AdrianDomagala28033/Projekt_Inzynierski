@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://bwtfr7knw33pe"]
 
-[ext_resource type="Texture2D" uid="uid://bm6238xoucl3m" path="res://assets/buildingsAssets/Turrets/Bolt.png" id="1_h3hqr"]
 [ext_resource type="Script" uid="uid://xf67pmia04ue" path="res://scripts/Enemies/Bolt.cs" id="1_yls65"]
+[ext_resource type="Texture2D" uid="uid://b3wb05tb5kk3w" path="res://assets/enemiesAssets/Bolts/Bolt.png" id="2_yls65"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_usgnq"]
 size = Vector2(4.500001, 1.375)
@@ -12,7 +12,7 @@ script = ExtResource("1_yls65")
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=73973273]
 position = Vector2(-1.4210855e-14, 1.4210855e-14)
 scale = Vector2(0.625, 0.625)
-texture = ExtResource("1_h3hqr")
+texture = ExtResource("2_yls65")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1416458534]
 position = Vector2(-0.24999978, 0.31250012)

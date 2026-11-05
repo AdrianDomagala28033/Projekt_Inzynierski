@@ -56,6 +56,21 @@ public partial class AiGridManager : Node
         }
     }
 
+    public void BlockCell(Vector2I gridPos)
+    {
+        if (gridPos.X >= 0 && gridPos.X < _width && gridPos.Y >= 0 && gridPos.Y < _height)
+        {
+            if (_isTestMode && _testObstacles != null)
+            {
+                _testObstacles[gridPos.X, gridPos.Y] = true;
+            }
+            else
+            {
+                OccupiedCells[gridPos.X, gridPos.Y] = true;
+            }
+        }
+    }
+
     public bool IsCellWalkable(int x, int y)
     {
         if (x < 0 || x >= _width || y < 0 || y >= _height)
@@ -64,7 +79,6 @@ public partial class AiGridManager : Node
         if (_isTestMode)
         {
             if (ObstaclePenalties[x, y] > 0) return true;
-            
             return !_testObstacles[x, y];
         }
 
@@ -109,7 +123,8 @@ public partial class AiGridManager : Node
         }
     }
 
-    public List<Vector2I> FindPath(Vector2I startPos, Vector2I targetPos)
+    // TUTAJ POPRAWKA: Dodano int obstacleMultiplier = 1
+    public List<Vector2I> FindPath(Vector2I startPos, Vector2I targetPos, int obstacleMultiplier = 1)
     {
         if (targetPos.X < 0 || targetPos.X >= _width || targetPos.Y < 0 || targetPos.Y >= _height)
         {
@@ -150,7 +165,6 @@ public partial class AiGridManager : Node
             foreach (var dir in directions)
             {
                 Vector2I neighborPos = currentNode.Position + dir;
-
                 bool isTarget = (neighborPos == targetPos);
 
                 if ((!IsCellWalkable(neighborPos.X, neighborPos.Y) && !isTarget) || closedList.Contains(neighborPos))
@@ -160,21 +174,32 @@ public partial class AiGridManager : Node
 
                 if (dir.X != 0 && dir.Y != 0)
                 {
-                    bool corner1Valid = IsCellWalkable(currentNode.Position.X + dir.X, currentNode.Position.Y) || (new Vector2I(currentNode.Position.X + dir.X, currentNode.Position.Y) == targetPos);
-                    bool corner2Valid = IsCellWalkable(currentNode.Position.X, currentNode.Position.Y + dir.Y) || (new Vector2I(currentNode.Position.X, currentNode.Position.Y + dir.Y) == targetPos);
+                    int x1 = currentNode.Position.X + dir.X;
+                    int y1 = currentNode.Position.Y;
+                    int x2 = currentNode.Position.X;
+                    int y2 = currentNode.Position.Y + dir.Y;
 
-                    if (!corner1Valid || !corner2Valid)
+                    bool isCorner1Solid = !IsCellWalkable(x1, y1) || ObstaclePenalties[x1, y1] > 0;
+                    bool isCorner2Solid = !IsCellWalkable(x2, y2) || ObstaclePenalties[x2, y2] > 0;
+
+                    // ZMIANA NA || (LUB) - Blokuje skos nawet jeśli tylko jedna kratka obok to mur
+                    if (isCorner1Solid || isCorner2Solid)
                     {
-                        continue; 
+                        if (new Vector2I(x1, y1) != targetPos && new Vector2I(x2, y2) != targetPos)
+                        {
+                            continue; 
+                        }
                     }
                 }
 
                 int heatPenalty = Heatmap[neighborPos.X, neighborPos.Y];
-                int obstaclePenalty = ObstaclePenalties[neighborPos.X, neighborPos.Y]; // Kara muru jest pobierana
+                int obstaclePenalty = ObstaclePenalties[neighborPos.X, neighborPos.Y];
                 
                 int moveCost = (dir.X != 0 && dir.Y != 0) ? 14 : 10;
-                int newMovementCostToNeighbor = currentNode.GCost + moveCost + heatPenalty + obstaclePenalty; // Kara dodawana do kosztu G
-
+                
+                // MNOŻENIE KARY
+                int newMovementCostToNeighbor = currentNode.GCost + moveCost + heatPenalty + (obstaclePenalty * obstacleMultiplier);
+                
                 PathNode neighborNode = null;
                 foreach (var node in openList)
                 {
@@ -194,7 +219,7 @@ public partial class AiGridManager : Node
                     }
 
                     neighborNode.GCost = newMovementCostToNeighbor;
-                    neighborNode.HCost = GetManhattanDistance(neighborPos, targetPos);
+                    neighborNode.HCost = GetOctileDistance(neighborPos, targetPos);
                     neighborNode.Parent = currentNode;
                 }
             }
@@ -203,9 +228,11 @@ public partial class AiGridManager : Node
         return null; 
     }
 
-    private int GetManhattanDistance(Vector2I a, Vector2I b)
+    private int GetOctileDistance(Vector2I a, Vector2I b)
     {
-        return (Math.Abs(a.X - b.X) + Math.Abs(a.Y - b.Y)) * 10;
+        int dx = Math.Abs(a.X - b.X);
+        int dy = Math.Abs(a.Y - b.Y);
+        return 10 * (dx + dy) - 6 * Math.Min(dx, dy);
     }
 
     private List<Vector2I> RetracePath(PathNode startNode, PathNode endNode)

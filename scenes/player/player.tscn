@@ -9,6 +9,9 @@
 [ext_resource type="Texture2D" uid="uid://wg0s8bvdv1m1" path="res://assets/characterAssets/Player/Head/Hair_1/Hair_1_Blonde.png" id="7_fm80t"]
 [ext_resource type="Texture2D" uid="uid://bp0ip0tp4hjhg" path="res://assets/characterAssets/Player/Tools/Iron/Iron_Tools.png" id="8_gx1jg"]
 [ext_resource type="Texture2D" uid="uid://cem4ansrxfvv3" path="res://assets/characterAssets/Player/Tools/Iron/Iron_Sword.png" id="9_5gtgg"]
+[ext_resource type="FontFile" uid="uid://dkjntnelb5d1" path="res://assets/fonts/CuteFantasy-5x9.ttf" id="10_h17s1"]
+[ext_resource type="Script" uid="uid://da7f7pfv4l2sc" path="res://scripts/Player/Backpack.cs" id="11_je7p5"]
+[ext_resource type="PackedScene" uid="uid://bhhpkb0ca2sxj" path="res://scenes/Buildings/BuildingPlacer.tscn" id="12_fm80t"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ixa1u"]
 radius = 3.0
@@ -140,12 +143,12 @@ _data = {
 &"walk_up": SubResource("Animation_5gtgg")
 }
 
-[node name="CharacterBody2D" type="CharacterBody2D" unique_id=1490481388 node_paths=PackedStringArray("playerName")]
+[node name="CharacterBody2D" type="CharacterBody2D" unique_id=1490481388 node_paths=PackedStringArray("playerName", "backpack")]
 y_sort_enabled = true
 script = ExtResource("1_gmlin")
 playerName = NodePath("Label")
 speed = 200.0
-maxBackpackCapacity = 300
+backpack = NodePath("Backpack")
 
 [node name="PlayerBase" type="Sprite2D" parent="." unique_id=253148660]
 texture = ExtResource("2_dovo2")
@@ -200,17 +203,25 @@ position = Vector2(0, 4)
 shape = SubResource("CapsuleShape2D_ixa1u")
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1845303378]
-zoom = Vector2(3, 3)
+zoom = Vector2(4, 4)
 
 [node name="Label" type="Label" parent="." unique_id=1881190810]
-offset_left = -6.0
+offset_left = -15.999999
 offset_top = -22.0
-offset_right = 7.0
-offset_bottom = -14.0
+offset_right = 275.0
+offset_bottom = 106.0
 scale = Vector2(0.1, 0.1)
-theme_override_font_sizes/font_size = 50
+theme_override_fonts/font = ExtResource("10_h17s1")
+theme_override_font_sizes/font_size = 135
 text = "gracz"
 horizontal_alignment = 1
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1213609096]
 libraries/ = SubResource("AnimationLibrary_h17s1")
+
+[node name="Backpack" type="Node" parent="." unique_id=1349607379]
+script = ExtResource("11_je7p5")
+maxBackpackCapacity = 300
+
+[node name="BuildingPlacer" parent="." unique_id=1152318021 instance=ExtResource("12_fm80t")]
+visible = false

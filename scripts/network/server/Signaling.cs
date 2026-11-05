@@ -16,7 +16,10 @@ public partial class Signaling : Node
 
 	public override void _Ready()
 	{
-
+		Multiplayer.PeerConnected += (id) =>
+		{
+			GD.Print("Gracz w pełni połączony przez WebRTC: " + id);
+		};
 	}
 	public override void _Process(double delta)
 	{
@@ -50,10 +53,10 @@ public partial class Signaling : Node
 					RtcPeer.CreateServer();
 					Multiplayer.MultiplayerPeer = RtcPeer;
 					var ConnectionManager = GetNode<ConnectionManager>("/root/ConnectionManager");
-					ConnectionManager.RegisterNewPlayer(1, ConnectionManager.LocalPlayerName, false);
+					ConnectionManager.RegisterNewPlayer(1, ConnectionManager.LocalPlayerName, false, ConnectionManager.LocalPlayerAppearance);
 					
 					ConnectionManager.LobbyCode = gotenCode;
-					ConnectionManager.ReportConnection();
+					ConnectionManager.RoomCreatedSuccess(gotenCode);
 				}
 				else if((string)data["akcja"] == "polaczono")
 				{
@@ -118,7 +121,22 @@ public partial class Signaling : Node
 	private void CreateConnection(int playerId)
 	{
 		WebRtcPeerConnection newConnection = new WebRtcPeerConnection();
-		newConnection.Initialize(new Godot.Collections.Dictionary());
+
+		var iceServers = new Godot.Collections.Array();
+
+		var stun1 = new Godot.Collections.Dictionary();
+		stun1["urls"] = "stun:stun.l.google.com:19302";
+
+		var stun2 = new Godot.Collections.Dictionary();
+		stun2["urls"] = "stun:stun1.l.google.com:19302";
+
+		iceServers.Add(stun1);
+		iceServers.Add(stun2);
+
+		var config = new Godot.Collections.Dictionary();
+		config["iceServers"] = iceServers;
+
+		newConnection.Initialize(config);
 		newConnection.SessionDescriptionCreated += (type, sdp) =>
 		{
 		   OnOfferCreated(type, sdp, playerId); 
@@ -159,7 +177,9 @@ public partial class Signaling : Node
 	{
 		socket.Close();
 		IsConnected = false;
-		RtcPeer.Close();
+
 		Connections.Clear();
+		
+		RtcPeer = new WebRtcMultiplayerPeer();
 	}
 }

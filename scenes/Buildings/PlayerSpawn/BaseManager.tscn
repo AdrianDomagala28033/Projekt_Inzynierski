@@ -1,0 +1,17 @@
+[gd_scene format=3 uid="uid://sjhpij35t0c4"]
+
+[ext_resource type="Script" uid="uid://kvrmtan7tlf1" path="res://scripts/Buildings/Spawn/BaseManager.cs" id="1_qirgp"]
+[ext_resource type="PackedScene" uid="uid://djkvcfn2cj1ig" path="res://scenes/Buildings/PlayerSpawn/Warehouse.tscn" id="2_t37uq"]
+[ext_resource type="PackedScene" uid="uid://dlh5ywgx2pfic" path="res://scenes/Buildings/PlayerSpawn/Totem.tscn" id="3_djoqy"]
+
+[node name="BaseManager" type="Node2D" unique_id=1012265438 node_paths=PackedStringArray("buildingsContainer")]
+script = ExtResource("1_qirgp")
+warehouseScene = ExtResource("2_t37uq")
+totemScene = ExtResource("3_djoqy")
+buildingsContainer = NodePath("BuildingContainer")
+
+[node name="BuildingContainer" type="Node2D" parent="." unique_id=910616263]
+
+[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="." unique_id=1704618715]
+_spawnable_scenes = PackedStringArray("uid://djkvcfn2cj1ig")
+spawn_path = NodePath("../BuildingContainer")

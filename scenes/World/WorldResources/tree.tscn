@@ -19,9 +19,9 @@ animations = [{
 "speed": 5.0
 }]
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_kgtat"]
-radius = 8.0
-height = 54.0
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_sphtb"]
+radius = 17.0
+height = 52.0
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_vbn3b"]
 properties/0/path = NodePath(".:position")
@@ -45,8 +45,9 @@ sprite_frames = SubResource("SpriteFrames_kgtat")
 position = Vector2(0, -9)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=1816289263]
+visible = false
 position = Vector2(0, -11)
-shape = SubResource("CapsuleShape2D_kgtat")
+shape = SubResource("CapsuleShape2D_sphtb")
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="." unique_id=1115139287]
 replication_config = SubResource("SceneReplicationConfig_vbn3b")
@@ -89,5 +90,10 @@ damping_max = 120.0
 scale_amount_max = 3.0
 scale_amount_curve = SubResource("Curve_vbn3b")
 color = Color(0.38431373, 0.78431374, 0.35686275, 1)
+
+[node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=2100220589]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D" unique_id=2146926109]
+polygon = PackedVector2Array(0, 7, -7, 6, -5, 0, -5, -9, 5, -9, 5, 0, 7, 4)
 
 [connection signal="input_event" from="Area2D" to="." method="_on_area_2d_input_event"]

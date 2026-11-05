@@ -1,0 +1,281 @@
+[gd_scene format=3 uid="uid://4frhvoyqyl2j"]
+
+[ext_resource type="Texture2D" uid="uid://i0enahlc3yqf" path="res://assets/UI/UI/Book_UI.png" id="1_5kfpf"]
+[ext_resource type="Script" uid="uid://dv740us6ugovj" path="res://scripts/Menu/CharacterCreator.cs" id="1_ipv6k"]
+[ext_resource type="Texture2D" uid="uid://bdpviqj2ioxnk" path="res://assets/UI/UI/UI_ALL.png" id="2_c0r0o"]
+[ext_resource type="FontFile" uid="uid://dkjntnelb5d1" path="res://assets/fonts/CuteFantasy-5x9.ttf" id="2_rwsd7"]
+[ext_resource type="PackedScene" uid="uid://dun2niw8n0v51" path="res://scenes/player/PlayerAvatar.tscn" id="3_x7o1g"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kgtat"]
+atlas = ExtResource("1_5kfpf")
+region = Rect2(8, 6, 224, 133)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_abukt"]
+atlas = ExtResource("2_c0r0o")
+region = Rect2(100, 1186, 7, 12)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_j4ohn"]
+atlas = ExtResource("2_c0r0o")
+region = Rect2(132, 1188, 7, 10)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_w0nfr"]
+atlas = ExtResource("2_c0r0o")
+region = Rect2(116, 1187, 7, 11)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bputu"]
+atlas = ExtResource("2_c0r0o")
+region = Rect2(149, 1186, 7, 12)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2mynh"]
+atlas = ExtResource("2_c0r0o")
+region = Rect2(181, 1188, 7, 10)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ebqk3"]
+atlas = ExtResource("2_c0r0o")
+region = Rect2(165, 1187, 7, 11)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fscpo"]
+atlas = ExtResource("2_c0r0o")
+region = Rect2(433, 593, 14, 14)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_e54iu"]
+atlas = ExtResource("2_c0r0o")
+region = Rect2(465, 595, 14, 12)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rhkmd"]
+atlas = ExtResource("2_c0r0o")
+region = Rect2(449, 594, 14, 13)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kddlq"]
+atlas = ExtResource("2_c0r0o")
+region = Rect2(1632, 496, 48, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_w24gt"]
+atlas = ExtResource("2_c0r0o")
+region = Rect2(1728, 497, 47, 14)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6mkmj"]
+atlas = ExtResource("2_c0r0o")
+region = Rect2(1680, 497, 48, 14)
+
+[node name="CharacterCreator" type="CanvasLayer" unique_id=1892791749 node_paths=PackedStringArray("UserNick")]
+scale = Vector2(4, 4)
+transform = Transform2D(4, 0, 0, 4, 0, 0)
+script = ExtResource("1_ipv6k")
+UserNick = NodePath("UIRoot/TextureRect/RightPage/VBoxContainer/HBoxContainer2/LineEdit")
+
+[node name="UIRoot" type="Control" parent="." unique_id=128705723]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 320.0
+offset_bottom = 180.0
+
+[node name="TextureRect" type="TextureRect" parent="UIRoot" unique_id=232917305]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -112.0
+offset_top = -66.5
+offset_right = 112.0
+offset_bottom = 66.5
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("AtlasTexture_kgtat")
+
+[node name="LeftPage" type="MarginContainer" parent="UIRoot/TextureRect" unique_id=1401772917]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.058000002
+anchor_top = 0.071
+anchor_right = 0.058000002
+anchor_bottom = 0.071
+offset_left = 0.00799942
+offset_top = 0.05700016
+offset_right = 86.007996
+offset_bottom = 107.057
+
+[node name="CenterContainer" type="CenterContainer" parent="UIRoot/TextureRect/LeftPage" unique_id=136490567]
+layout_mode = 2
+
+[node name="CharacterPreview" parent="UIRoot/TextureRect/LeftPage/CenterContainer" unique_id=1307479886 instance=ExtResource("3_x7o1g")]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="RightPage" type="MarginContainer" parent="UIRoot/TextureRect" unique_id=1405710972]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.554
+anchor_top = 0.071
+anchor_right = 0.554
+anchor_bottom = 0.071
+offset_left = -0.0960083
+offset_top = 0.05700016
+offset_right = 86.90399
+offset_bottom = 108.057
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UIRoot/TextureRect/RightPage" unique_id=1669927281]
+layout_mode = 2
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="UIRoot/TextureRect/RightPage/VBoxContainer" unique_id=1965487670]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="UIRoot/TextureRect/RightPage/VBoxContainer/HBoxContainer2" unique_id=2047994883]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_rwsd7")
+theme_override_font_sizes/font_size = 9
+text = "Your name"
+
+[node name="LineEdit" type="LineEdit" parent="UIRoot/TextureRect/RightPage/VBoxContainer/HBoxContainer2" unique_id=655749101]
+custom_minimum_size = Vector2(0, 12)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_rwsd7")
+theme_override_font_sizes/font_size = 9
+
+[node name="HBoxContainer" type="HBoxContainer" parent="UIRoot/TextureRect/RightPage/VBoxContainer" unique_id=866997215]
+layout_mode = 2
+alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UIRoot/TextureRect/RightPage/VBoxContainer/HBoxContainer" unique_id=2098393006]
+layout_mode = 2
+
+[node name="HeadCustomization" type="HBoxContainer" parent="UIRoot/TextureRect/RightPage/VBoxContainer/HBoxContainer/VBoxContainer" unique_id=218925506]
+layout_mode = 2
+
+[node name="ArrowLeft" type="TextureButton" parent="UIRoot/TextureRect/RightPage/VBoxContainer/HBoxContainer/VBoxContainer/HeadCustomization" unique_id=495987634]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+texture_normal = SubResource("AtlasTexture_abukt")
+texture_pressed = SubResource("AtlasTexture_j4ohn")
+texture_hover = SubResource("AtlasTexture_w0nfr")
+
+[node name="Label" type="Label" parent="UIRoot/TextureRect/RightPage/VBoxContainer/HBoxContainer/VBoxContainer/HeadCustomization" unique_id=443313380]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+theme_override_fonts/font = ExtResource("2_rwsd7")
+theme_override_font_sizes/font_size = 11
+text = "Head"
+horizontal_alignment = 1
+
+[node name="ArrowRight" type="TextureButton" parent="UIRoot/TextureRect/RightPage/VBoxContainer/HBoxContainer/VBoxContainer/HeadCustomization" unique_id=475501340]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+texture_normal = SubResource("AtlasTexture_bputu")
+texture_pressed = SubResource("AtlasTexture_2mynh")
+texture_hover = SubResource("AtlasTexture_ebqk3")
+
+[node name="ChestCustomization" type="HBoxContainer" parent="UIRoot/TextureRect/RightPage/VBoxContainer/HBoxContainer/VBoxContainer" unique_id=557363903]
+layout_mode = 2
+
+[node name="ArrowLeft" type="TextureButton" parent="UIRoot/TextureRect/RightPage/VBoxContainer/HBoxContainer/VBoxContainer/ChestCustomization" unique_id=368037787]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+texture_normal = SubResource("AtlasTexture_abukt")
+texture_pressed = SubResource("AtlasTexture_j4ohn")
+texture_hover = SubResource("AtlasTexture_w0nfr")
+
+[node name="Label" type="Label" parent="UIRoot/TextureRect/RightPage/VBoxContainer/HBoxContainer/VBoxContainer/ChestCustomization" unique_id=468591312]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+theme_override_fonts/font = ExtResource("2_rwsd7")
+theme_override_font_sizes/font_size = 11
+text = "Chest"
+horizontal_alignment = 1
+
+[node name="ArrowRight" type="TextureButton" parent="UIRoot/TextureRect/RightPage/VBoxContainer/HBoxContainer/VBoxContainer/ChestCustomization" unique_id=175254855]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+texture_normal = SubResource("AtlasTexture_bputu")
+texture_pressed = SubResource("AtlasTexture_2mynh")
+texture_hover = SubResource("AtlasTexture_ebqk3")
+
+[node name="LegsCustomization" type="HBoxContainer" parent="UIRoot/TextureRect/RightPage/VBoxContainer/HBoxContainer/VBoxContainer" unique_id=370509599]
+layout_mode = 2
+
+[node name="ArrowLeft" type="TextureButton" parent="UIRoot/TextureRect/RightPage/VBoxContainer/HBoxContainer/VBoxContainer/LegsCustomization" unique_id=414609975]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+texture_normal = SubResource("AtlasTexture_abukt")
+texture_pressed = SubResource("AtlasTexture_j4ohn")
+texture_hover = SubResource("AtlasTexture_w0nfr")
+
+[node name="Label" type="Label" parent="UIRoot/TextureRect/RightPage/VBoxContainer/HBoxContainer/VBoxContainer/LegsCustomization" unique_id=786401255]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+theme_override_fonts/font = ExtResource("2_rwsd7")
+theme_override_font_sizes/font_size = 11
+text = "Legs"
+horizontal_alignment = 1
+
+[node name="ArrowRight" type="TextureButton" parent="UIRoot/TextureRect/RightPage/VBoxContainer/HBoxContainer/VBoxContainer/LegsCustomization" unique_id=2046466354]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+texture_normal = SubResource("AtlasTexture_bputu")
+texture_pressed = SubResource("AtlasTexture_2mynh")
+texture_hover = SubResource("AtlasTexture_ebqk3")
+
+[node name="FeetCustomization" type="HBoxContainer" parent="UIRoot/TextureRect/RightPage/VBoxContainer/HBoxContainer/VBoxContainer" unique_id=322017968]
+layout_mode = 2
+
+[node name="ArrowLeft" type="TextureButton" parent="UIRoot/TextureRect/RightPage/VBoxContainer/HBoxContainer/VBoxContainer/FeetCustomization" unique_id=1862387868]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+texture_normal = SubResource("AtlasTexture_abukt")
+texture_pressed = SubResource("AtlasTexture_j4ohn")
+texture_hover = SubResource("AtlasTexture_w0nfr")
+
+[node name="Label" type="Label" parent="UIRoot/TextureRect/RightPage/VBoxContainer/HBoxContainer/VBoxContainer/FeetCustomization" unique_id=149276734]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+theme_override_fonts/font = ExtResource("2_rwsd7")
+theme_override_font_sizes/font_size = 11
+text = "Feet"
+horizontal_alignment = 1
+
+[node name="ArrowRight" type="TextureButton" parent="UIRoot/TextureRect/RightPage/VBoxContainer/HBoxContainer/VBoxContainer/FeetCustomization" unique_id=1154029086]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+texture_normal = SubResource("AtlasTexture_bputu")
+texture_pressed = SubResource("AtlasTexture_2mynh")
+texture_hover = SubResource("AtlasTexture_ebqk3")
+
+[node name="OptionButtons" type="HBoxContainer" parent="UIRoot/TextureRect/RightPage/VBoxContainer/HBoxContainer/VBoxContainer" unique_id=324725686]
+layout_mode = 2
+alignment = 1
+
+[node name="ExitButton" type="TextureButton" parent="UIRoot/TextureRect/RightPage/VBoxContainer/HBoxContainer/VBoxContainer/OptionButtons" unique_id=1783857753]
+layout_mode = 2
+texture_normal = SubResource("AtlasTexture_fscpo")
+texture_pressed = SubResource("AtlasTexture_e54iu")
+texture_hover = SubResource("AtlasTexture_rhkmd")
+
+[node name="SaveButton" type="TextureButton" parent="UIRoot/TextureRect/RightPage/VBoxContainer/HBoxContainer/VBoxContainer/OptionButtons" unique_id=236644250]
+layout_mode = 2
+texture_normal = SubResource("AtlasTexture_kddlq")
+texture_pressed = SubResource("AtlasTexture_w24gt")
+texture_hover = SubResource("AtlasTexture_6mkmj")
+
+[connection signal="text_changed" from="UIRoot/TextureRect/RightPage/VBoxContainer/HBoxContainer2/LineEdit" to="." method="OnLineEditChanged"]
+[connection signal="pressed" from="UIRoot/TextureRect/RightPage/VBoxContainer/HBoxContainer/VBoxContainer/HeadCustomization/ArrowLeft" to="." method="ChangeItem" binds= ["Head", -1]]
+[connection signal="pressed" from="UIRoot/TextureRect/RightPage/VBoxContainer/HBoxContainer/VBoxContainer/HeadCustomization/ArrowRight" to="." method="ChangeItem" binds= ["Head", 1]]
+[connection signal="pressed" from="UIRoot/TextureRect/RightPage/VBoxContainer/HBoxContainer/VBoxContainer/ChestCustomization/ArrowLeft" to="." method="ChangeItem" binds= ["Chest", -1]]
+[connection signal="pressed" from="UIRoot/TextureRect/RightPage/VBoxContainer/HBoxContainer/VBoxContainer/ChestCustomization/ArrowRight" to="." method="ChangeItem" binds= ["Chest", 1]]
+[connection signal="pressed" from="UIRoot/TextureRect/RightPage/VBoxContainer/HBoxContainer/VBoxContainer/LegsCustomization/ArrowLeft" to="." method="ChangeItem" binds= ["Legs", -1]]
+[connection signal="pressed" from="UIRoot/TextureRect/RightPage/VBoxContainer/HBoxContainer/VBoxContainer/LegsCustomization/ArrowRight" to="." method="ChangeItem" binds= ["Legs", 1]]
+[connection signal="pressed" from="UIRoot/TextureRect/RightPage/VBoxContainer/HBoxContainer/VBoxContainer/FeetCustomization/ArrowRight" to="." method="ChangeItem" binds= ["Feet", 1]]
+[connection signal="pressed" from="UIRoot/TextureRect/RightPage/VBoxContainer/HBoxContainer/VBoxContainer/OptionButtons/ExitButton" to="." method="OnLeaveButtonPressed"]
+[connection signal="pressed" from="UIRoot/TextureRect/RightPage/VBoxContainer/HBoxContainer/VBoxContainer/OptionButtons/SaveButton" to="." method="SaveProfile"]
