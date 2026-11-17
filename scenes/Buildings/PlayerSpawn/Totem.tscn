@@ -8,14 +8,16 @@ atlas = ExtResource("2_hgjap")
 region = Rect2(8, 64, 32, 32)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_bputu"]
-size = Vector2(16, 16)
+size = Vector2(17, 17)
 
 [node name="Totem" type="StaticBody2D" unique_id=900901452]
+z_index = 1
+y_sort_enabled = true
 script = ExtResource("1_vpyxr")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=402675685]
 texture = SubResource("AtlasTexture_abukt")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1441834650]
-position = Vector2(-1, 5)
+position = Vector2(-0.5, 5.5)
 shape = SubResource("RectangleShape2D_bputu")

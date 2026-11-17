@@ -44,8 +44,9 @@ project/assembly_name="inzynierka prototyp"
 
 [global_group]
 
-player=""
 WalkableMap=""
+Warehouse=""
+Player=""
 
 [input]
 

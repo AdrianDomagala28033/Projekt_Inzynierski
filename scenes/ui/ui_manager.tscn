@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://b6vluhnlu4y1x" path="res://scenes/ui/PlayerInformation.tscn" id="5_yp0ob"]
 [ext_resource type="PackedScene" uid="uid://dau6ffu3rhttv" path="res://scenes/ui/EscMenu.tscn" id="6_ybivm"]
 [ext_resource type="PackedScene" uid="uid://ddouuehm6krsq" path="res://scenes/Buildings/BuildingMenu.tscn" id="6_yp0ob"]
+[ext_resource type="PackedScene" uid="uid://c4wfrvdrperl4" path="res://scenes/ui/minimap.tscn" id="7_ybivm"]
 
 [node name="UIManager" type="CanvasLayer" unique_id=760827620]
 script = ExtResource("1_js4l8")
@@ -31,3 +32,5 @@ size_flags_vertical = 8
 [node name="PlayerInformation" parent="." unique_id=514723230 instance=ExtResource("5_yp0ob")]
 
 [node name="EscMenu" parent="." unique_id=193694690 groups=["PlayerInformation"] instance=ExtResource("6_ybivm")]
+
+[node name="Minimap" parent="." unique_id=1105619961 instance=ExtResource("7_ybivm")]

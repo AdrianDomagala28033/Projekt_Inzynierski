@@ -33,7 +33,7 @@ region = Rect2(48, 16, 16, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ax6ea"]
 atlas = ExtResource("2_wihx0")
-region = Rect2(32, 48, 16, 16)
+region = Rect2(32, 0, 16, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ntouj"]
 atlas = ExtResource("2_wihx0")
@@ -121,7 +121,7 @@ buildingCosts = Array[ExtResource("2_qhwpi")]([SubResource("Resource_duuis"), Su
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1769233361]
 sprite_frames = SubResource("SpriteFrames_wxvp1")
-animation = &"vertical_right"
+animation = &"horizontal"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1083109595]
 shape = SubResource("RectangleShape2D_mtxbc")

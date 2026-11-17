@@ -68,16 +68,25 @@ public partial class BaseManager : Node2D
         {
             await ToSignal(GetTree().CreateTimer(0.5f), SceneTreeTimer.SignalName.Timeout);
             var spaceState = GetWorld2D().DirectSpaceState;
-            Vector2 desiredPos = new Vector2(50*16, 50*16);
-            Vector2 safePos = SpawnLocator.GetFreeSpot(desiredPos, spaceState, new Vector2(93, 67), groundLayer);
 
+            Vector2 desiredPosWarehouse = new Vector2(50*16, 50*16);
+
+            Vector2 safePosWarehouse = SpawnLocator.GetFreeSpot(desiredPosWarehouse, spaceState, new Vector2(93, 67), groundLayer);
             var warehouseInstance = warehouseScene.Instantiate<Warehouse>();
-            //var totemInstance = totemScene.Instantiate<Totem>();
-            warehouseInstance.GlobalPosition = safePos;
-            //totemInstance.GlobalPosition = new Vector2(50*16-4, 50*16-4);
+            warehouseInstance.GlobalPosition = safePosWarehouse;
             warehouseInstance.Name = "Warehouse1";
             buildingsContainer.AddChild(warehouseInstance, true);
-            //buildingsContainer.AddChild(totemInstance, true);
+
+            await ToSignal(GetTree(), SceneTree.SignalName.PhysicsFrame);
+
+            spaceState = GetWorld2D().DirectSpaceState; 
+            Vector2 desiredPosTotem = new Vector2(55*16, 55*16);
+            Vector2 safePosTotem = SpawnLocator.GetFreeSpot(desiredPosTotem, spaceState, new Vector2(93, 67), groundLayer);
+
+            var totemInstance = totemScene.Instantiate<Totem>();
+            totemInstance.GlobalPosition = safePosTotem;
+            totemInstance.AddToGroup("RespawnTotem");
+            buildingsContainer.AddChild(totemInstance, true);
         }
     }
     

@@ -15,3 +15,4 @@ y_sort_enabled = true
 [node name="UIManager" parent="." unique_id=760827620 instance=ExtResource("3_sugp2")]
 
 [node name="BuildingsManager" parent="." unique_id=479070726 instance=ExtResource("5_tbgi4")]
+y_sort_enabled = true

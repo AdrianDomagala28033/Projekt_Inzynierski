@@ -16,6 +16,20 @@ public partial class Turret : Building
     private EnemyBase _currentTarget;
     private double _fireTimer = 0;
 
+    private bool _isBuildingModeActive;
+    private bool IsBuildingModeActive
+    {
+        get { return _isBuildingModeActive; }
+        set
+        {
+            if(_isBuildingModeActive != value)
+            {
+                _isBuildingModeActive = value;
+                QueueRedraw();
+            }
+        }
+    }
+
     public override void _Ready()
     {
         base._Ready(); 
@@ -54,6 +68,7 @@ public partial class Turret : Building
                   _archerSprite.Play("idle");
             }
         }
+        IsBuildingModeActive = Player.localPlayer.activeTool == Tool.Hammer;
     }
 
     private void UpdateTarget()
@@ -133,6 +148,11 @@ public partial class Turret : Building
     }
 
 	public override void _Draw()
+    {
+        if(IsBuildingModeActive)
+            DrawTurretRange();
+    }
+    public void DrawTurretRange()
     {
         if (_detectionZone != null)
         {
