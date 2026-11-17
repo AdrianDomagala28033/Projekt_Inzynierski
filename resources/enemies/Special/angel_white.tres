@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="EnemyConfig" format=3 uid="uid://brntvc43p14q"]
+
+[ext_resource type="PackedScene" uid="uid://dwlsiq6ry5med" path="res://scenes/Enemies/Angels/Angel_White.tscn" id="1_72cl4"]
+[ext_resource type="Script" uid="uid://culnirg0sur72" path="res://scripts/Waves/EnemyConfig.cs" id="2_ywqlr"]
+
+[resource]
+script = ExtResource("2_ywqlr")
+EnemyName = "Angel White"
+EnemyScene = ExtResource("1_72cl4")
+Role = 2
+SpawnCost = 110
+MinWave = 8
+metadata/_custom_type_script = "uid://culnirg0sur72"

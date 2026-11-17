@@ -608,6 +608,9 @@ radius = 3.6055512
 
 [node name="Orc_Grunt" type="CharacterBody2D" unique_id=460627698]
 script = ExtResource("1_dat8h")
+AttackDamage = 24
+MaxHealth = 160
+Speed = 50.0
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=579069517]
 y_sort_enabled = true

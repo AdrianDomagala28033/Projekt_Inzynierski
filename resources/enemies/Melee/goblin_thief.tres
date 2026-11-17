@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="EnemyConfig" format=3 uid="uid://cj6dpexqhojot"]
+
+[ext_resource type="PackedScene" uid="uid://0ns7oupr58tf" path="res://scenes/Enemies/Goblins/Goblin_Thief.tscn" id="1_3mkvk"]
+[ext_resource type="Script" uid="uid://culnirg0sur72" path="res://scripts/Waves/EnemyConfig.cs" id="1_b264v"]
+
+[resource]
+script = ExtResource("1_b264v")
+EnemyName = "Goblin Thief"
+EnemyScene = ExtResource("1_3mkvk")
+metadata/_custom_type_script = "uid://culnirg0sur72"

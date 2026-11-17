@@ -10,7 +10,7 @@ region = Rect2(8, 64, 32, 32)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_bputu"]
 size = Vector2(16, 16)
 
-[node name="Totem" type="StaticBody2D" unique_id=900901452]
+[node name="Totem" type="StaticBody2D" unique_id=900901452 groups=["Totem"]]
 script = ExtResource("1_vpyxr")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=402675685]

@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="EnemyConfig" format=3 uid="uid://cnl7s38egs7ln"]
+
+[ext_resource type="PackedScene" uid="uid://dgk88v30aed3u" path="res://scenes/Enemies/Kamikaze_Mushroom.tscn" id="1_urwq0"]
+[ext_resource type="Script" uid="uid://culnirg0sur72" path="res://scripts/Waves/EnemyConfig.cs" id="2_vu1yu"]
+
+[resource]
+script = ExtResource("2_vu1yu")
+EnemyName = "Kamikaze Mushroom"
+EnemyScene = ExtResource("1_urwq0")
+Role = 2
+SpawnCost = 40
+MinWave = 6
+metadata/_custom_type_script = "uid://culnirg0sur72"

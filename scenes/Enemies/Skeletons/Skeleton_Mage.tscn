@@ -610,7 +610,10 @@ radius = 3.1622777
 [node name="Skeleton_Mage" type="CharacterBody2D" unique_id=534672405]
 y_sort_enabled = true
 script = ExtResource("1_tfu1j")
+AttackDamage = 22
 ProjectileScene = ExtResource("2_i4ikb")
+MaxHealth = 60
+Speed = 55.0
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=124287754]
 y_sort_enabled = true

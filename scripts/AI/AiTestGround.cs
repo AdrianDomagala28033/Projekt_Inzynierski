@@ -27,8 +27,7 @@ public partial class AiTestGround : Node2D
             {
                 Vector2I pos = new Vector2I(x, y);
 
-                TileData tileData = groundLayer.GetCellTileData(pos);
-                if (tileData != null && tileData.GetCollisionPolygonsCount(0) > 0)
+                if (groundLayer.GetCellSourceId(pos) == 5)
                 {
                     obstacles[x, y] = true;
                 }
@@ -36,6 +35,6 @@ public partial class AiTestGround : Node2D
         }
 
         aiManager.InitializeTestMode(width, height, obstacles);
-        GD.Print($"[Poligon] Gotowe! Wymiary: {width}x{height}. AI swobodnie przechodzi przez las i skały, omija wodę.");
+        GD.Print($"[Poligon] Gotowe! Wymiary: {width}x{height}. AI swobodnie przechodzi przez trawę i piasek, omija wodę.");
     }
 }

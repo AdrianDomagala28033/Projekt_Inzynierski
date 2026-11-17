@@ -527,6 +527,8 @@ height = 6.0
 [node name="Goblin_Archer" type="CharacterBody2D" unique_id=501765844]
 script = ExtResource("1_i47tn")
 ProjectileScene = ExtResource("2_rfs11")
+MaxHealth = 40
+Speed = 65.0
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=2074318737]
 y_sort_enabled = true

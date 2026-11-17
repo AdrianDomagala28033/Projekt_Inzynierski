@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="EnemyConfig" format=3 uid="uid://d1w0u4s8yr5s2"]
+
+[ext_resource type="PackedScene" uid="uid://b88jbfkkf1v6a" path="res://scenes/Enemies/Slimes/Pink/Slime_Big_Pink.tscn" id="1_fem3o"]
+[ext_resource type="Script" uid="uid://culnirg0sur72" path="res://scripts/Waves/EnemyConfig.cs" id="2_ai3ks"]
+
+[resource]
+script = ExtResource("2_ai3ks")
+EnemyName = "Slime Big Pink"
+EnemyScene = ExtResource("1_fem3o")
+Role = 2
+SpawnCost = 45
+MinWave = 6
+metadata/_custom_type_script = "uid://culnirg0sur72"

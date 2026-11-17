@@ -566,6 +566,9 @@ radius = 3.1622777
 
 [node name="Orc_Peon" type="CharacterBody2D" unique_id=463518838]
 script = ExtResource("1_7yq3u")
+AttackDamage = 18
+MaxHealth = 110
+Speed = 55.0
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1399078003]
 y_sort_enabled = true

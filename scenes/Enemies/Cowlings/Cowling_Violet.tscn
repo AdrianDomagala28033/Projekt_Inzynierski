@@ -465,6 +465,9 @@ position = Vector2(0, -8)
 sprite_frames = SubResource("SpriteFrames_rj7a8")
 animation = &"idle_down"
 script = ExtResource("2_dgi2g")
+AttackDamage = 20
+MaxHealth = 130
+Speed = 75.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=96863977]
 position = Vector2(0, -4)

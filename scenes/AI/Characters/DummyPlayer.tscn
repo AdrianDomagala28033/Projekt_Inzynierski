@@ -6,7 +6,7 @@
 [sub_resource type="CircleShape2D" id="CircleShape2D_6xkuk"]
 radius = 2.0
 
-[node name="DummyPlayer" type="CharacterBody2D" unique_id=2011542992 groups=["player"]]
+[node name="DummyPlayer" type="CharacterBody2D" unique_id=2011542992 groups=["Player", "player"]]
 y_sort_enabled = true
 script = ExtResource("1_i7vt8")
 

@@ -500,6 +500,8 @@ radius = 3.0
 
 [node name="Goblin_Spearman" type="CharacterBody2D" unique_id=321575849]
 script = ExtResource("1_n0pn7")
+AttackDamage = 12
+Speed = 70.0
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=768036320]
 y_sort_enabled = true

@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="EnemyConfig" format=3 uid="uid://cbwho7t8pfpsf"]
+
+[ext_resource type="PackedScene" uid="uid://bjxc3irh44qt7" path="res://scenes/Enemies/Slimes/Yellow/Slime_Big_Yellow.tscn" id="1_jowsp"]
+[ext_resource type="Script" uid="uid://culnirg0sur72" path="res://scripts/Waves/EnemyConfig.cs" id="2_b7wkq"]
+
+[resource]
+script = ExtResource("2_b7wkq")
+EnemyName = "Slime Big Yellow"
+EnemyScene = ExtResource("1_jowsp")
+Role = 2
+SpawnCost = 45
+MinWave = 6
+metadata/_custom_type_script = "uid://culnirg0sur72"

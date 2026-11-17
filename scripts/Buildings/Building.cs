@@ -1,7 +1,6 @@
 using Godot;
 using Godot.Collections;
 
-
 public partial class Building : StaticBody2D, IDamageable
 {
     [ExportGroup("Building Stats")]
@@ -18,18 +17,53 @@ public partial class Building : StaticBody2D, IDamageable
     
     public AiGridManager GridManager; 
 
-   public override void _Ready()
+    public override void _Ready()
     {
         CurrentHealth = MaxHealth;
         AddToGroup("buildings");
 
         GD.Print($"[{Name}] Inspektor przekazał tablicę o rozmiarze: {OccupiedTilesOffsets.Length}");
 
-        //OccupiedTilesOffsets = new Vector2[] { new Vector2(0, 0), new Vector2(-1, 0) };
+        CallDeferred(MethodName.InitBuildingGridDeferred);
+    }
+
+    private void InitBuildingGridDeferred()
+    {
+        if (IsQueuedForDeletion()) return;
+
+        if (GridManager == null)
+        {
+            GridManager = GetTree().GetFirstNodeInGroup("GridManager") as AiGridManager;
+        }
 
         if (GridManager != null)
         {
+            if (GridManager.IsInitialized)
+            {
+                UpdateGridPenalties(CurrentHealth);
+            }
+            else
+            {
+                GridManager.GridInitialized += OnBuildingGridInitialized;
+            }
+        }
+    }
+
+    private void OnBuildingGridInitialized()
+    {
+        if (GridManager != null)
+        {
+            GridManager.GridInitialized -= OnBuildingGridInitialized;
             UpdateGridPenalties(CurrentHealth);
+        }
+    }
+
+    public override void _ExitTree()
+    {
+        if (GridManager != null)
+        {
+            GridManager.GridInitialized -= OnBuildingGridInitialized;
+            UpdateGridPenalties(0);
         }
     }
 
@@ -63,7 +97,7 @@ public partial class Building : StaticBody2D, IDamageable
 
     public void UpdateGridPenalties(int penaltyValue)
     {
-        if (GridManager == null) return;
+        if (GridManager == null || !GridManager.IsInitialized) return;
 
         Vector2I baseGridPos = new Vector2I(
             Mathf.FloorToInt(GlobalPosition.X / 16.0f), 
@@ -76,6 +110,7 @@ public partial class Building : StaticBody2D, IDamageable
             GridManager.SetObstaclePenalty(targetTile, penaltyValue);
         }
     }
+
     public void InitializeCost()
     {
         requiredMaterials.Clear();

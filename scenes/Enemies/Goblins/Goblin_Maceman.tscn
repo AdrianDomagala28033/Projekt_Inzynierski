@@ -525,6 +525,9 @@ height = 6.0
 
 [node name="Goblin_Maceman" type="CharacterBody2D" unique_id=501765844]
 script = ExtResource("1_3geuw")
+AttackDamage = 16
+MaxHealth = 75
+Speed = 60.0
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=2074318737]
 y_sort_enabled = true

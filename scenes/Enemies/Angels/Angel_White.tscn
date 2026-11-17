@@ -608,6 +608,9 @@ radius = 3.1622777
 
 [node name="Angel_White" type="CharacterBody2D" unique_id=60667349]
 script = ExtResource("1_o0cfh")
+AttackDamage = 40
+MaxHealth = 420
+Speed = 70.0
 IsFlying = true
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1405772524]

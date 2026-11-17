@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="EnemyConfig" format=3 uid="uid://dnc307dl7at0s"]
+
+[ext_resource type="PackedScene" uid="uid://dgvojq3o1mq52" path="res://scenes/Enemies/Cowlings/Cowling_Red.tscn" id="1_l0tec"]
+[ext_resource type="Script" uid="uid://culnirg0sur72" path="res://scripts/Waves/EnemyConfig.cs" id="2_53syn"]
+
+[resource]
+script = ExtResource("2_53syn")
+EnemyName = "Cowling Red"
+EnemyScene = ExtResource("1_l0tec")
+SpawnCost = 35
+MinWave = 4
+metadata/_custom_type_script = "uid://culnirg0sur72"
