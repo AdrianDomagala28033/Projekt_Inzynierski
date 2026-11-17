@@ -140,7 +140,7 @@ script = ExtResource("2_eb3v6")
 
 [node name="WaveManager" type="Node" parent="." unique_id=1279484468 node_paths=PackedStringArray("SpawnPoints")]
 script = ExtResource("7_unnps")
-TimeBetweenWaves = 8.0
+TimeBetweenWaves = 600.0
 SpawnInterval = 0.8
 BudgetIncreasePerWave = 35
 EnemyPool = Array[ExtResource("8_1ecjd")]([ExtResource("9_4bqk4"), ExtResource("10_oh7mr"), ExtResource("11_yjj2v"), ExtResource("12_kpawf"), ExtResource("13_a7yv6"), ExtResource("14_ph67b"), ExtResource("15_6suy1"), ExtResource("16_kx8xa"), ExtResource("17_holhn"), ExtResource("18_cwmst"), ExtResource("19_686ng"), ExtResource("20_4wubk"), ExtResource("21_1lpg0"), ExtResource("22_klfjw"), ExtResource("23_r44av"), ExtResource("24_mkjli"), ExtResource("25_7to53"), ExtResource("26_naglt"), ExtResource("27_i8nub"), ExtResource("28_2msla"), ExtResource("29_b85ss"), ExtResource("30_t7jr0"), ExtResource("31_fs3wk")])
@@ -322,7 +322,7 @@ y_sort_enabled = true
 position = Vector2(264, 160)
 
 [node name="WitchTower" parent="." unique_id=474387470 instance=ExtResource("12_c13po")]
-position = Vector2(288, 296)
+position = Vector2(296, 352)
 
 [node name="Totem" parent="." unique_id=900901452 instance=ExtResource("13_unnps")]
 position = Vector2(360, 168)
@@ -366,7 +366,7 @@ position = Vector2(392, 360)
 position = Vector2(376, 360)
 
 [node name="WitchTower2" parent="." unique_id=1288139508 instance=ExtResource("12_c13po")]
-position = Vector2(392, 464)
+position = Vector2(248, 224)
 
 [node name="WitchTower3" parent="." unique_id=179015749 instance=ExtResource("12_c13po")]
 position = Vector2(576, 184)
