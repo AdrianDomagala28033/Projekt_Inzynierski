@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="EnemyConfig" format=3 uid="uid://cd8bsoix0fw1g"]
+
+[ext_resource type="PackedScene" uid="uid://b461kevhhtodw" path="res://scenes/Enemies/Cowlings/Cowling_Mage_Violet.tscn" id="1_pwqyh"]
+[ext_resource type="Script" uid="uid://culnirg0sur72" path="res://scripts/Waves/EnemyConfig.cs" id="2_n2eeo"]
+
+[resource]
+script = ExtResource("2_n2eeo")
+EnemyName = "Cowling Mage Violet"
+EnemyScene = ExtResource("1_pwqyh")
+Role = 1
+SpawnCost = 55
+MinWave = 6
+metadata/_custom_type_script = "uid://culnirg0sur72"

@@ -7,6 +7,9 @@ public partial class Turret : Building
     [Export] public PackedScene ProjectileScene; 
     [Export] public float FireRate = 1.0f; 
     [Export] public int Damage = 15; 
+
+    [ExportGroup("AI Threat Settings")]
+    [Export] public int ThreatPenalty = 50;
     
     private Area2D _detectionZone;
     private Marker2D _shootPoint;
@@ -15,6 +18,7 @@ public partial class Turret : Building
     private List<EnemyBase> _enemiesInRange = new List<EnemyBase>();
     private EnemyBase _currentTarget;
     private double _fireTimer = 0;
+    private bool _isThreatApplied = false;
 
     private bool _isBuildingModeActive;
     private bool IsBuildingModeActive
@@ -41,12 +45,80 @@ public partial class Turret : Building
         _detectionZone.BodyEntered += OnBodyEntered;
         _detectionZone.BodyExited += OnBodyExited;
 
-		QueueRedraw();
+        CallDeferred(MethodName.InitTurretThreatDeferred);
+        QueueRedraw();
+    }
+
+    private void InitTurretThreatDeferred()
+    {
+        if (IsQueuedForDeletion()) return;
+
+        if (GridManager == null)
+        {
+            GridManager = GetTree().GetFirstNodeInGroup("GridManager") as AiGridManager;
+        }
+
+        if (GridManager != null)
+        {
+            if (GridManager.IsInitialized)
+            {
+                ApplyTurretThreat(true);
+            }
+            else
+            {
+                GridManager.GridInitialized += OnTurretGridInitialized;
+            }
+        }
+    }
+
+    private void OnTurretGridInitialized()
+    {
+        if (GridManager != null)
+        {
+            GridManager.GridInitialized -= OnTurretGridInitialized;
+            ApplyTurretThreat(true);
+        }
+    }
+
+    protected override void Die()
+    {
+        ApplyTurretThreat(false);
+        base.Die();
+    }
+
+    public override void _ExitTree()
+    {
+        if (GridManager != null)
+        {
+            GridManager.GridInitialized -= OnTurretGridInitialized;
+        }
+
+        ApplyTurretThreat(false);
+        base._ExitTree();
+    }
+
+    public void ApplyTurretThreat(bool addThreat)
+    {
+        if (GridManager == null || !GridManager.IsInitialized || _detectionZone == null) return;
+        if (addThreat && _isThreatApplied) return;
+        if (!addThreat && !_isThreatApplied) return;
+
+        var collisionShape = _detectionZone.GetNodeOrNull<CollisionShape2D>("CollisionShape2D");
+        if (collisionShape != null && collisionShape.Shape is CircleShape2D circleShape)
+        {
+            Vector2I centerTile = new Vector2I(
+                Mathf.FloorToInt(collisionShape.GlobalPosition.X / 16.0f),
+                Mathf.FloorToInt(collisionShape.GlobalPosition.Y / 16.0f)
+            );
+            float radiusInTiles = (circleShape.Radius / 16.0f) + 0.5f;
+
+            GridManager.ModifyTurretHeat(centerTile, radiusInTiles, ThreatPenalty, addThreat);
+            _isThreatApplied = addThreat;
+        }
     }
 
     public override void _Process(double delta)
     {
-
         UpdateTarget();
 
         if (_currentTarget != null)
@@ -65,7 +137,7 @@ public partial class Turret : Building
             
             if (_archerSprite != null && _archerSprite.Animation.ToString().StartsWith("attack"))
             {
-                  _archerSprite.Play("idle");
+                _archerSprite.Play("idle");
             }
         }
         IsBuildingModeActive = Player.localPlayer.activeTool == Tool.Hammer;
@@ -147,7 +219,7 @@ public partial class Turret : Building
         }
     }
 
-	public override void _Draw()
+    public override void _Draw()
     {
         if(IsBuildingModeActive)
             DrawTurretRange();
@@ -160,7 +232,6 @@ public partial class Turret : Building
             if (collisionShape != null && collisionShape.Shape is CircleShape2D circleShape)
             {
                 DrawCircle(collisionShape.Position, circleShape.Radius, new Color(1, 0, 0, 0.15f));
-                
                 DrawArc(collisionShape.Position, circleShape.Radius, 0, Mathf.Tau, 32, new Color(1, 0, 0, 0.4f), 1.0f);
             }
         }

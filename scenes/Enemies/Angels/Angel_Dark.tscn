@@ -608,6 +608,9 @@ radius = 3.1622777
 
 [node name="Angel_Dark" type="CharacterBody2D" unique_id=638542880]
 script = ExtResource("1_j66eq")
+AttackDamage = 35
+MaxHealth = 350
+Speed = 65.0
 IsFlying = true
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=66909208]

@@ -560,7 +560,10 @@ radius = 3.0
 
 [node name="Skeleton_Bowman" type="CharacterBody2D" unique_id=939869898]
 script = ExtResource("1_alktg")
+AttackDamage = 12
 ProjectileScene = ExtResource("2_oh8wa")
+MaxHealth = 45
+Speed = 60.0
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1236456319]
 y_sort_enabled = true

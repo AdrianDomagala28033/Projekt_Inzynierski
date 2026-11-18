@@ -384,6 +384,9 @@ radius = 1.0
 
 [node name="Slime_Small_Red" type="CharacterBody2D" unique_id=372240059]
 script = ExtResource("1_hjstp")
+AttackDamage = 6
+MaxHealth = 35
+Speed = 65.0
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1829468767]
 y_sort_enabled = true

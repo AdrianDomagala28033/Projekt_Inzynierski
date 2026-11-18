@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="EnemyConfig" format=3 uid="uid://bmjqfcbyr32y7"]
+
+[ext_resource type="PackedScene" uid="uid://ccypriluk8g5x" path="res://scenes/Enemies/Angels/Angel_Dark.tscn" id="1_bqtc3"]
+[ext_resource type="Script" uid="uid://culnirg0sur72" path="res://scripts/Waves/EnemyConfig.cs" id="2_ffuxo"]
+
+[resource]
+script = ExtResource("2_ffuxo")
+EnemyName = "Angel Dark"
+EnemyScene = ExtResource("1_bqtc3")
+Role = 2
+SpawnCost = 130
+MinWave = 9
+metadata/_custom_type_script = "uid://culnirg0sur72"

@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="EnemyConfig" format=3 uid="uid://d1ahtfns38lyr"]
+
+[ext_resource type="PackedScene" uid="uid://delt6l8ep27ou" path="res://scenes/Enemies/Orcs/Orc_Grunt.tscn" id="1_6blqy"]
+[ext_resource type="Script" uid="uid://culnirg0sur72" path="res://scripts/Waves/EnemyConfig.cs" id="2_lp80b"]
+
+[resource]
+script = ExtResource("2_lp80b")
+EnemyName = "Orc Grunt"
+EnemyScene = ExtResource("1_6blqy")
+SpawnCost = 30
+MinWave = 3
+metadata/_custom_type_script = "uid://culnirg0sur72"

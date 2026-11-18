@@ -5,8 +5,8 @@
 
 [node name="AiSystem" type="Node" unique_id=80081562]
 
-[node name="PathTester" type="Node2D" parent="." unique_id=143039849]
+[node name="PathTester" type="Node2D" parent="." unique_id=143039849 groups=["GridManager"]]
 script = ExtResource("2_kodj3")
 
-[node name="AiGridManager" type="Node" parent="." unique_id=1424219807]
+[node name="AiGridManager" type="Node" parent="." unique_id=1424219807 groups=["GridManager"]]
 script = ExtResource("1_6prgi")

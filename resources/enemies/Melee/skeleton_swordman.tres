@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="EnemyConfig" format=3 uid="uid://ymvhq4qq7h73"]
+
+[ext_resource type="PackedScene" uid="uid://meoj3h7apown" path="res://scenes/Enemies/Skeletons/Skeleton_Swordman.tscn" id="1_4sv2o"]
+[ext_resource type="Script" uid="uid://culnirg0sur72" path="res://scripts/Waves/EnemyConfig.cs" id="2_gqx8w"]
+
+[resource]
+script = ExtResource("2_gqx8w")
+EnemyName = "Skeleton Swordman"
+EnemyScene = ExtResource("1_4sv2o")
+SpawnCost = 15
+metadata/_custom_type_script = "uid://culnirg0sur72"

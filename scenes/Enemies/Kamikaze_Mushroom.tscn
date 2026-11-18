@@ -440,6 +440,11 @@ radius = 24.0
 [node name="Kamikaze_Mushroom" type="CharacterBody2D" unique_id=196561528]
 y_sort_enabled = true
 script = ExtResource("1_3c31f")
+ExplosionDamage = 90
+AttackDamage = 90
+MaxHealth = 45
+Speed = 105.0
+IgnoreTowerThreat = true
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=2047032430]
 position = Vector2(0, -8)

@@ -350,7 +350,9 @@ radius = 2.0
 [node name="Slime_Medium_Blue" type="CharacterBody2D" unique_id=1766386179]
 script = ExtResource("1_xwv2v")
 NextSlimeScene = ExtResource("2_il5rl")
-MaxHealth = 30
+AttackDamage = 12
+MaxHealth = 80
+Speed = 50.0
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1115946062]
 position = Vector2(0, -4)
