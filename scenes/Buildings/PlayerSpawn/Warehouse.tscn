@@ -11,7 +11,7 @@ properties/0/path = NodePath(".:position")
 properties/0/spawn = true
 properties/0/replication_mode = 1
 
-[node name="Warehouse" type="StaticBody2D" unique_id=1231190895 node_paths=PackedStringArray("interactionArea")]
+[node name="Warehouse" type="StaticBody2D" unique_id=1231190895 node_paths=PackedStringArray("interactionArea") groups=["Warehouse"]]
 script = ExtResource("1_7x464")
 interactionArea = NodePath("InteractionArea")
 

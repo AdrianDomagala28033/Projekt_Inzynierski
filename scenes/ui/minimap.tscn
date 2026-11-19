@@ -1,0 +1,116 @@
+[gd_scene format=3 uid="uid://c4wfrvdrperl4"]
+
+[ext_resource type="Script" uid="uid://rtdg3gn7ltyf" path="res://scripts/UI/Minimap.cs" id="1_4bivy"]
+[ext_resource type="Texture2D" uid="uid://bdpviqj2ioxnk" path="res://assets/UI/UI/UI_ALL.png" id="2_qqvxh"]
+[ext_resource type="Texture2D" uid="uid://d0lq8oj0cblju" path="res://assets/buildingsAssets/Spawn/Barn_Base_Black.png" id="3_ixymw"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ixymw"]
+atlas = ExtResource("2_qqvxh")
+region = Rect2(192, 871, 19, 18)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0slp3"]
+atlas = ExtResource("2_qqvxh")
+region = Rect2(1116, 107, 24, 26)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_ixymw"]
+texture = SubResource("AtlasTexture_0slp3")
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4bivy"]
+atlas = ExtResource("2_qqvxh")
+region = Rect2(82, 1028, 12, 10)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_abukt"]
+atlas = ExtResource("2_qqvxh")
+region = Rect2(1019, 107, 26, 26)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_kgtat"]
+texture = SubResource("AtlasTexture_abukt")
+texture_margin_left = 4.0
+texture_margin_top = 4.0
+texture_margin_right = 4.0
+texture_margin_bottom = 4.0
+modulate_color = Color(1, 1, 1, 0.8117647)
+
+[node name="VBoxContainer" type="VBoxContainer" unique_id=374256976 node_paths=PackedStringArray("subViewport", "minimapCamera", "iconsOverlay")]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -200.0
+offset_bottom = 200.0
+grow_horizontal = 0
+script = ExtResource("1_4bivy")
+subViewport = NodePath("RadarPanel/MarginContainer/SubViewportContainer/SubViewport")
+minimapCamera = NodePath("RadarPanel/MarginContainer/SubViewportContainer/SubViewport/MinimapCamera")
+iconsOverlay = NodePath("RadarPanel/IconsOverlay")
+playerIconTexture = SubResource("AtlasTexture_ixymw")
+warehouseIconTexture = ExtResource("3_ixymw")
+
+[node name="RadarPanel" type="PanelContainer" parent="." unique_id=646619146]
+custom_minimum_size = Vector2(200, 200)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_ixymw")
+
+[node name="MarginContainer" type="MarginContainer" parent="RadarPanel" unique_id=1850214910]
+layout_mode = 2
+theme_override_constants/margin_left = 15
+theme_override_constants/margin_top = 15
+theme_override_constants/margin_right = 15
+theme_override_constants/margin_bottom = 15
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="RadarPanel/MarginContainer" unique_id=1370659010]
+layout_mode = 2
+stretch = true
+
+[node name="SubViewport" type="SubViewport" parent="RadarPanel/MarginContainer/SubViewportContainer" unique_id=34965248]
+handle_input_locally = false
+size = Vector2i(170, 170)
+render_target_update_mode = 4
+
+[node name="MinimapCamera" type="Camera2D" parent="RadarPanel/MarginContainer/SubViewportContainer/SubViewport" unique_id=2004793027]
+zoom = Vector2(0.4, 0.4)
+
+[node name="IconsOverlay" type="Control" parent="RadarPanel" unique_id=1608390691]
+layout_mode = 2
+
+[node name="PlayerCenterIcon" type="TextureRect" parent="RadarPanel/IconsOverlay" unique_id=318686782]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -4.0
+offset_top = -3.5
+offset_right = 4.0
+offset_bottom = 3.5
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("AtlasTexture_4bivy")
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=947653220]
+layout_mode = 2
+theme_override_constants/margin_top = 10
+
+[node name="InfoPanel" type="PanelContainer" parent="." unique_id=804743111]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_kgtat")
+
+[node name="MarginContainer" type="MarginContainer" parent="InfoPanel" unique_id=1720008959]
+layout_mode = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 15
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 15
+
+[node name="VBoxContainer" type="VBoxContainer" parent="InfoPanel/MarginContainer" unique_id=435225340]
+layout_mode = 2
+
+[node name="WaveNumber" type="Label" parent="InfoPanel/MarginContainer/VBoxContainer" unique_id=64175779]
+layout_mode = 2
+text = "Wave: 1"
+horizontal_alignment = 2
+
+[node name="WaveTimer" type="Label" parent="InfoPanel/MarginContainer/VBoxContainer" unique_id=328181131]
+layout_mode = 2
+text = "Next wave in: --:--"
+horizontal_alignment = 2

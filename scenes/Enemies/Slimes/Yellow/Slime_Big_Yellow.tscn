@@ -414,6 +414,9 @@ radius = 4.1231055
 [node name="Slime_Big_Yellow" type="CharacterBody2D" unique_id=2129655851]
 script = ExtResource("1_poryb")
 NextSlimeScene = ExtResource("2_7tmhj")
+AttackDamage = 20
+MaxHealth = 180
+Speed = 40.0
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1228791708]
 y_sort_enabled = true

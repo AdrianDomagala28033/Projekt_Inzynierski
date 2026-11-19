@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="EnemyConfig" format=3 uid="uid://d4k5h3dbxmy4y"]
+
+[ext_resource type="PackedScene" uid="uid://dswaltijwnhwr" path="res://scenes/Enemies/Goblins/Goblin_Spearman.tscn" id="1_jqgn6"]
+[ext_resource type="Script" uid="uid://culnirg0sur72" path="res://scripts/Waves/EnemyConfig.cs" id="2_sxclx"]
+
+[resource]
+script = ExtResource("2_sxclx")
+EnemyName = "Goblin Spearman"
+EnemyScene = ExtResource("1_jqgn6")
+SpawnCost = 12
+metadata/_custom_type_script = "uid://culnirg0sur72"

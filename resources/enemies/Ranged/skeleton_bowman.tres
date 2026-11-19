@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="EnemyConfig" format=3 uid="uid://dy27wgjdmjyl2"]
+
+[ext_resource type="PackedScene" uid="uid://cldhwhhn7sy1b" path="res://scenes/Enemies/Skeletons/Skeleton_Bowman.tscn" id="1_40y0h"]
+[ext_resource type="Script" uid="uid://culnirg0sur72" path="res://scripts/Waves/EnemyConfig.cs" id="2_wg7yb"]
+
+[resource]
+script = ExtResource("2_wg7yb")
+EnemyName = "Skeleton Bowman"
+EnemyScene = ExtResource("1_40y0h")
+Role = 1
+SpawnCost = 30
+MinWave = 4
+metadata/_custom_type_script = "uid://culnirg0sur72"

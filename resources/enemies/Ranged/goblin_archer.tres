@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="EnemyConfig" format=3 uid="uid://c07gn6bmusvou"]
+
+[ext_resource type="PackedScene" uid="uid://di1q1dr4aikhj" path="res://scenes/Enemies/Goblins/Goblin_Archer.tscn" id="1_c7mlu"]
+[ext_resource type="Script" uid="uid://culnirg0sur72" path="res://scripts/Waves/EnemyConfig.cs" id="1_kqqnj"]
+
+[resource]
+script = ExtResource("1_kqqnj")
+EnemyName = "Goblin Archer"
+EnemyScene = ExtResource("1_c7mlu")
+Role = 1
+SpawnCost = 25
+MinWave = 3
+metadata/_custom_type_script = "uid://culnirg0sur72"

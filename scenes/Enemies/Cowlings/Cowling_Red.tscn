@@ -458,6 +458,9 @@ radius = 2.0
 
 [node name="Cowling_Red" type="CharacterBody2D" unique_id=1211796730]
 script = ExtResource("1_7yjqf")
+AttackDamage = 20
+MaxHealth = 130
+Speed = 75.0
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1616527275]
 y_sort_enabled = true

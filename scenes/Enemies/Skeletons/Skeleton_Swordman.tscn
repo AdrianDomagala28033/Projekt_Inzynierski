@@ -524,6 +524,9 @@ radius = 3.0
 
 [node name="Skeleton_Swordman" type="CharacterBody2D" unique_id=1113691679]
 script = ExtResource("1_cvfwu")
+AttackDamage = 14
+MaxHealth = 65
+Speed = 65.0
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1857050910]
 y_sort_enabled = true

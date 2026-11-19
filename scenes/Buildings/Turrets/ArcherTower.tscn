@@ -209,6 +209,7 @@ properties/0/replication_mode = 1
 
 [node name="ArcherTower" type="StaticBody2D" unique_id=1476660522]
 z_index = 1
+y_sort_enabled = true
 script = ExtResource("1_y4rua")
 ProjectileScene = ExtResource("2_5y00a")
 OccupiedTilesOffsets = PackedVector2Array(-1, -1, -1, -2, 0, -1, 0, -2)

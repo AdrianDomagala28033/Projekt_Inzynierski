@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="EnemyConfig" format=3 uid="uid://bugjf47qh5v2k"]
+
+[ext_resource type="PackedScene" uid="uid://b7e1pf1u14j7q" path="res://scenes/Enemies/Orcs/Orc_Archer.tscn" id="1_1sqeb"]
+[ext_resource type="Script" uid="uid://culnirg0sur72" path="res://scripts/Waves/EnemyConfig.cs" id="2_5ci2u"]
+
+[resource]
+script = ExtResource("2_5ci2u")
+EnemyName = "Orc Archer"
+EnemyScene = ExtResource("1_1sqeb")
+Role = 1
+SpawnCost = 38
+MinWave = 4
+metadata/_custom_type_script = "uid://culnirg0sur72"

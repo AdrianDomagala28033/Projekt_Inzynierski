@@ -4,6 +4,14 @@ using System.Collections.Generic;
 
 public partial class AiGridManager : Node
 {
+    [Signal]
+    public delegate void ThreatMapUpdatedEventHandler();
+
+    [Signal]
+    public delegate void GridInitializedEventHandler();
+
+    public bool IsInitialized { get; private set; } = false;
+
     private WorldMap _worldMap;
     public int[,] Heatmap { get; private set; }
     public bool[,] OccupiedCells { get; private set; } 
@@ -15,6 +23,11 @@ public partial class AiGridManager : Node
     private bool _isTestMode = false;
     private bool[,] _testObstacles;
 
+    public override void _EnterTree()
+    {
+        AddToGroup("GridManager");
+    }
+
     public void Initialize(WorldMap map)
     {
         _worldMap = map;
@@ -24,6 +37,9 @@ public partial class AiGridManager : Node
         Heatmap = new int[_width, _height];
         OccupiedCells = new bool[_width, _height];
         ObstaclePenalties = new int[_width, _height];
+
+        IsInitialized = true;
+        EmitSignal(SignalName.GridInitialized);
         GD.Print($"[AI] AIGridManager gotowy! Wymiary siatki: {_width}x{_height}");    
     }
 
@@ -37,10 +53,15 @@ public partial class AiGridManager : Node
         Heatmap = new int[_width, _height];
         OccupiedCells = new bool[_width, _height];
         ObstaclePenalties = new int[_width, _height];
+
+        IsInitialized = true;
+        EmitSignal(SignalName.GridInitialized);
     }
 
     public void SetObstaclePenalty(Vector2I gridPos, int penalty)
     {
+        if (ObstaclePenalties == null) return;
+
         if (gridPos.X >= 0 && gridPos.X < _width && gridPos.Y >= 0 && gridPos.Y < _height)
         {
             ObstaclePenalties[gridPos.X, gridPos.Y] = penalty;
@@ -96,19 +117,35 @@ public partial class AiGridManager : Node
 
     public void AddHeat(Vector2I center, int radius, int heatValue)
     {
-        for (int x = center.X - radius; x <= center.X + radius; x++)
+        ModifyTurretHeat(center, radius, heatValue, true);
+    }
+
+    public void ModifyTurretHeat(Vector2I center, float radiusInTiles, int heatValue, bool addHeat)
+    {
+        if (Heatmap == null) return;
+
+        int ceilRadius = Mathf.CeilToInt(radiusInTiles);
+        int modifier = addHeat ? heatValue : -heatValue;
+
+        for (int x = center.X - ceilRadius; x <= center.X + ceilRadius; x++)
         {
-            for (int y = center.Y - radius; y <= center.Y + radius; y++)
+            for (int y = center.Y - ceilRadius; y <= center.Y + ceilRadius; y++)
             {
                 if (x >= 0 && x < _width && y >= 0 && y < _height)
                 {
-                    Heatmap[x, y] += heatValue;
+                    Vector2I currentCell = new Vector2I(x, y);
+                    if (center.DistanceTo(currentCell) <= radiusInTiles)
+                    {
+                        Heatmap[x, y] = Math.Max(0, Heatmap[x, y] + modifier);
+                    }
                 }
             }
         }
+
+        EmitSignal(SignalName.ThreatMapUpdated);
     }
 
-    // ---  ALGORYTM A* ---
+    // --- ALGORYTM A* ---
     public class PathNode
     {
         public Vector2I Position;
@@ -123,8 +160,7 @@ public partial class AiGridManager : Node
         }
     }
 
-    // TUTAJ POPRAWKA: Dodano int obstacleMultiplier = 1
-    public List<Vector2I> FindPath(Vector2I startPos, Vector2I targetPos, int obstacleMultiplier = 1)
+    public List<Vector2I> FindPath(Vector2I startPos, Vector2I targetPos, int obstacleMultiplier = 1, bool ignoreHeatmap = false)
     {
         if (targetPos.X < 0 || targetPos.X >= _width || targetPos.Y < 0 || targetPos.Y >= _height)
         {
@@ -182,7 +218,6 @@ public partial class AiGridManager : Node
                     bool isCorner1Solid = !IsCellWalkable(x1, y1) || ObstaclePenalties[x1, y1] > 0;
                     bool isCorner2Solid = !IsCellWalkable(x2, y2) || ObstaclePenalties[x2, y2] > 0;
 
-                    // ZMIANA NA || (LUB) - Blokuje skos nawet jeśli tylko jedna kratka obok to mur
                     if (isCorner1Solid || isCorner2Solid)
                     {
                         if (new Vector2I(x1, y1) != targetPos && new Vector2I(x2, y2) != targetPos)
@@ -192,12 +227,11 @@ public partial class AiGridManager : Node
                     }
                 }
 
-                int heatPenalty = Heatmap[neighborPos.X, neighborPos.Y];
+                int heatPenalty = ignoreHeatmap ? 0 : Heatmap[neighborPos.X, neighborPos.Y];
                 int obstaclePenalty = ObstaclePenalties[neighborPos.X, neighborPos.Y];
                 
                 int moveCost = (dir.X != 0 && dir.Y != 0) ? 14 : 10;
                 
-                // MNOŻENIE KARY
                 int newMovementCostToNeighbor = currentNode.GCost + moveCost + heatPenalty + (obstaclePenalty * obstacleMultiplier);
                 
                 PathNode neighborNode = null;

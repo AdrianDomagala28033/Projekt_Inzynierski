@@ -348,8 +348,9 @@ radius = 1.0
 
 [node name="Slime_Small_Blue" type="CharacterBody2D" unique_id=693551524]
 script = ExtResource("1_nvtww")
-AttackDamage = 30
-MaxHealth = 10
+AttackDamage = 6
+MaxHealth = 35
+Speed = 65.0
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=634742972]
 position = Vector2(0, -5)
