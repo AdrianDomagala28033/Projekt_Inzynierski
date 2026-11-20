@@ -9,6 +9,7 @@
 y_sort_enabled = true
 
 [node name="WorldMap" parent="." unique_id=416680859 instance=ExtResource("1_0wfyh")]
+currentBiome = 3
 
 [node name="PlayersManager" parent="." unique_id=2047574068 instance=ExtResource("2_sugp2")]
 
